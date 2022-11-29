@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewColumnBtn() {
-    return (
-        <StyledViewColumnBtn>
-        </StyledViewColumnBtn>
-    );
+  return <StyledViewColumnBtn></StyledViewColumnBtn>;
 }
-const StyledViewColumnBtn = styled.button;
+const StyledViewColumnBtn = styled.button``;

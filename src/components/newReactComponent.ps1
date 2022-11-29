@@ -25,7 +25,6 @@ else
     # in PowerShell if you use double-quotes you can reference the variable directly in the string!
     # Write component tSX file.
     Write-Output "import styled from 'styled-components';" >> ./$ComponentName/$ComponentName.tsx
-    Write-Output "import {} from 'styled-components/cssprop';" >> ./$ComponentName/$ComponentName.tsx
 
     Write-Output "" >> ./$ComponentName/$ComponentName.tsx
     Write-Output "export default function $ComponentName() {" >> ./$ComponentName/$ComponentName.tsx

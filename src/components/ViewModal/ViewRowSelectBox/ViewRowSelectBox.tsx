@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewRowSelectBox() {
-    return (
-        <StyledViewRowSelectBox>
-        </StyledViewRowSelectBox>
-    );
+  return <StyledViewRowSelectBox></StyledViewRowSelectBox>;
 }
-const StyledViewRowSelectBox = styled.input;
+const StyledViewRowSelectBox = styled.input``;

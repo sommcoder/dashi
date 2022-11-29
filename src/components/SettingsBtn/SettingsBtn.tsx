@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function SettingsBtn() {
-    return (
-        <StyledSettingsBtn>
-        </StyledSettingsBtn>
-    );
+  return <StyledSettingsBtn></StyledSettingsBtn>;
 }
-const StyledSettingsBtn = styled.button;
+const StyledSettingsBtn = styled.button``;

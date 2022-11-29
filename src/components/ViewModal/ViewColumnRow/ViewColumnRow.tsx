@@ -1,5 +1,4 @@
 ﻿import styled from "styled-components";
-import {} from "styled-components/cssprop";
 import ViewRowDragDrop from "../ViewRowDragDrop/ViewRowDragDrop";
 import ViewRowSelectBox from "../ViewRowSelectBox/ViewRowSelectBox";
 

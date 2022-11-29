@@ -1,5 +1,4 @@
 ﻿import styled from "styled-components";
-import {} from "styled-components/cssprop";
 import Row from "../Row/Row";
 import Header from "../Header/Header";
 import ViewMenuModal from "../ViewModal/ViewMenuModal/ViewMenuModal";

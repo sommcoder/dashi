@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewGroupBtn() {
-    return (
-        <StyledViewGroupBtn>
-        </StyledViewGroupBtn>
-    );
+  return <StyledViewGroupBtn></StyledViewGroupBtn>;
 }
-const StyledViewGroupBtn = styled.button;
+const StyledViewGroupBtn = styled.button``;

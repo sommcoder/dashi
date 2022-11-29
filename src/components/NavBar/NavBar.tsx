@@ -1,5 +1,4 @@
 ﻿import styled from "styled-components";
-import {} from "styled-components/cssprop";
 import CreateBtn from "../CreateBtn/CreateBtn";
 import SettingsBtn from "../SettingsBtn/SettingsBtn";
 import ViewMenuBtn from "../ViewMenuBtn/ViewMenuBtn";

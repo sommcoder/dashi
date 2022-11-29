@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewSortBtn() {
-    return (
-        <StyledViewSortBtn>
-        </StyledViewSortBtn>
-    );
+  return <StyledViewSortBtn></StyledViewSortBtn>;
 }
-const StyledViewSortBtn = styled.button;
+const StyledViewSortBtn = styled.button``;

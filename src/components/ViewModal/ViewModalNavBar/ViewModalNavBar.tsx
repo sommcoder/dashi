@@ -1,5 +1,4 @@
 ﻿import styled from "styled-components";
-import {} from "styled-components/cssprop";
 
 import ViewColumnBtn from "../ViewColumnBtn/ViewColumnBtn";
 import ViewSortBtn from "../ViewSortBtn/ViewSortBtn";

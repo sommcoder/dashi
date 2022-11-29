@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewFilterBtn() {
-    return (
-        <StyledViewFilterBtn>
-        </StyledViewFilterBtn>
-    );
+  return <StyledViewFilterBtn></StyledViewFilterBtn>;
 }
-const StyledViewFilterBtn = styled.button;
+const StyledViewFilterBtn = styled.button``;

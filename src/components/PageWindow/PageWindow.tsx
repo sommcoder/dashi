@@ -1,7 +1,13 @@
 ﻿import styled from "styled-components";
-import {} from "styled-components/cssprop";
+import Table from "../Table/Table";
+import NavBar from "../NavBar/NavBar";
 
 export default function PageWindow() {
-  return <StyledPageWindow></StyledPageWindow>;
+  return (
+    <StyledPageWindow>
+      <NavBar />
+      <Table />
+    </StyledPageWindow>
+  );
 }
 const StyledPageWindow = styled.div``;

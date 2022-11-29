@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewShowAllBtn() {
-    return (
-        <StyledViewShowAllBtn>
-        </StyledViewShowAllBtn>
-    );
+  return <StyledViewShowAllBtn></StyledViewShowAllBtn>;
 }
-const StyledViewShowAllBtn = styled.button;
+const StyledViewShowAllBtn = styled.button``;

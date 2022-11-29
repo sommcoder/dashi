@@ -1,10 +1,6 @@
-﻿import styled from 'styled-components';
-import {} from 'styled-components/cssprop';
+﻿import styled from "styled-components";
 
 export default function ViewRowDragDrop() {
-    return (
-        <StyledViewRowDragDrop>
-        </StyledViewRowDragDrop>
-    );
+  return <StyledViewRowDragDrop></StyledViewRowDragDrop>;
 }
-const StyledViewRowDragDrop = styled.div;
+const StyledViewRowDragDrop = styled.div``;
