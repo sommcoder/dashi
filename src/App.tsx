@@ -1,9 +1,18 @@
 import PageWindow from "./components/PageWindow/PageWindow";
 
-export default function App() {
+import { css } from "styled-components";
+import React, { FC } from "react";
+
+function App() {
   return (
-    <div className="App">
+    <StyledApp className="App">
       <PageWindow />
-    </div>
+    </StyledApp>
   );
 }
+
+const StyledApp = css`
+  border: 2px solid black;
+`;
+
+export default App;
