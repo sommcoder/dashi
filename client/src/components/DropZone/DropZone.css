@@ -1,4 +1,4 @@
-.dropzone-container {
+#dropzone-container {
   display: grid;
   align-items: center;
   text-align: center;
@@ -6,45 +6,64 @@
   color: rgb(94, 93, 93);
   border: 1px dotted darkgrey;
   width: 300px;
-  padding: 10px;
+  padding: 15px 0 10px 0;
+  margin-top: 20px;
 }
 
-.dropzone-container:hover {
+#dropzone-container:hover {
   border: 1px dotted black;
   background-color: rgb(245, 245, 245);
   cursor: pointer;
 }
 
+#dropzone-container-error {
+  border: 1px dotted #7c2e2e;
+  background-color: rgb(226, 158, 158);
+}
+
 /* children of container: */
-.dropzone-container > * {
+#dropzone-container > * {
   margin: 5px;
   justify-self: center;
   padding: 0.5rem;
 }
 
-.dropzone-text {
-  font-size: 1.5rem;
+#dropzone-text {
+  font-size: 1.2rem;
   text-align: center;
   display: block;
+  content: "Acceps";
 }
 
-.dropzone-text-error-message {
-  font-size: 1.5rem;
+#dropzone-text-error-message {
+  font-size: 1.2rem;
   text-align: center;
   display: block;
-  color: red;
+  color: #7c2e2e;
 }
 
-.submit-file-button {
+#upload-svg-icon {
+  display: block;
+  transform: scale(150%);
+}
+
+#submit-file-button {
   display: block;
   background-color: rgb(225, 244, 250);
   font-size: 1.1rem;
   color: rgb(17, 17, 148);
   border-radius: 5px;
   border: none;
+  padding: 5px;
+  margin: 0 auto;
 }
 
-.upload-svg-icon {
-  display: block;
-  transform: scale(150%);
+/*  invisible input trigger to upload files */
+#hidden {
+  visibility: none;
+}
+
+/* prevents pointer events on children while dragging */
+.dragging {
+  pointer-events: none;
 }

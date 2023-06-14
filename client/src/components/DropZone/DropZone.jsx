@@ -6,15 +6,28 @@ export default function DropZone() {
   const [files, setFiles] = useState(null);
   const inputRef = useRef();
 
-  const [fileState, setFile] = useState(true);
+  const [dragState, setDrag] = useState(false);
+  const [fileValidity, setFile] = useState(true);
 
   const handleDragEnter = (ev) => {
     ev.preventDefault();
-    if (ev.dataTransfer.items[0].type !== "text/csv") setFile(false);
+    // for of works, ev.dataTransfer.items is an iterable object NOT an array
+    for (const item of ev.dataTransfer.items) {
+      if (
+        item.type !== "text/csv" &&
+        item.type !==
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      ) {
+        setDrag(true);
+        setFile(false);
+      }
+      return;
+    }
   };
 
   const handleDragLeave = (ev) => {
     ev.preventDefault();
+    setDrag(false);
     setFile(true);
   };
 
@@ -24,20 +37,43 @@ export default function DropZone() {
 
   return (
     <div
-      className="dropzone-container"
+      id={
+        fileValidity
+          ? "dropzone-container"
+          : "dropzone-container-error dropzone-container"
+      }
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {fileState ? (
-        <h3 className="dropzone-text">Accepts .csv and .xlsx Files</h3>
-      ) : (
-        <h3 className="dropzone-text-error-message">
-          file is not .csv or .xlsx format
-        </h3>
-      )}
-      <FaUpload className="upload-svg-icon" />
-      <button className="submit-file-button">Add files</button>
+      <button
+        id={fileValidity ? "submit-file-button" : "hidden"}
+        className={dragState ? "dragging" : ""}
+      >
+        Add files
+      </button>
+      <input id="hidden" className="dragging" type="file" title=" " hidden />
+      <FaUpload
+        id={fileValidity ? "upload-svg-icon" : "hidden"}
+        className={dragState ? "dragging" : ""}
+      />
+
+      <h3
+        className={dragState ? "dragging" : ""}
+        id={fileValidity ? "dropzone-text" : "dropzone-text-error-message"}
+      >
+        {fileValidity
+          ? "Accepts .csv, .xsl and .xlsx files"
+          : "file is not .csv, .xsl or .xlsx format"}
+      </h3>
     </div>
   );
 }
+
+/*
+ 
+1) drag State
+2) fileValidity State 
+3) these things can happen together or individually
+ 
+*/
