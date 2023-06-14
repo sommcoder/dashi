@@ -1,0 +1,7 @@
+.row-cell {
+  margin: 0.5rem 0.75rem;
+  text-overflow: clip;
+  overflow: hidden; /* hides text */
+  /* max-width: fit-content; */
+  /* resize: horizontal; */
+}

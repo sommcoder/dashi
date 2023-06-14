@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 67.5%; /* 16px is now 10px, therefore 1 REM = 10px */
+  color: black;
+}
+
+.app-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  justify-items: center; /* what actually centers the windows */
+  grid-template-rows: 1fr, 1fr;
+  row-gap: 20px;
+  width: 100%;
+}

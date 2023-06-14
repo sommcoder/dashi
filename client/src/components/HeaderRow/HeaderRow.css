@@ -1,0 +1,5 @@
+.table-header-row {
+  display: grid;
+  background-color: rgb(225, 244, 250);
+  font-size: 1.5rem;
+}

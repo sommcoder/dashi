@@ -1,0 +1,50 @@
+.dropzone-container {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  color: rgb(94, 93, 93);
+  border: 1px dotted darkgrey;
+  width: 300px;
+  padding: 10px;
+}
+
+.dropzone-container:hover {
+  border: 1px dotted black;
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+}
+
+/* children of container: */
+.dropzone-container > * {
+  margin: 5px;
+  justify-self: center;
+  padding: 0.5rem;
+}
+
+.dropzone-text {
+  font-size: 1.5rem;
+  text-align: center;
+  display: block;
+}
+
+.dropzone-text-error-message {
+  font-size: 1.5rem;
+  text-align: center;
+  display: block;
+  color: red;
+}
+
+.submit-file-button {
+  display: block;
+  background-color: rgb(225, 244, 250);
+  font-size: 1.1rem;
+  color: rgb(17, 17, 148);
+  border-radius: 5px;
+  border: none;
+}
+
+.upload-svg-icon {
+  display: block;
+  transform: scale(150%);
+}
