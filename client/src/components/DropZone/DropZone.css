@@ -10,44 +10,25 @@
   margin-top: 20px;
 }
 
-#dropzone-container:hover {
-  border: 1px dotted black;
-  background-color: rgb(245, 245, 245);
-  cursor: pointer;
-}
-
-#dropzone-container-error {
-  border: 1px dotted #7c2e2e;
-  background-color: rgb(226, 158, 158);
-}
-
 /* children of container: */
-#dropzone-container > * {
+.dropzone-container > * {
   margin: 5px;
   justify-self: center;
   padding: 0.5rem;
 }
 
-#dropzone-text {
+.dropzone-text-default {
   font-size: 1.2rem;
   text-align: center;
   display: block;
-  content: "Acceps";
 }
 
-#dropzone-text-error-message {
-  font-size: 1.2rem;
-  text-align: center;
-  display: block;
-  color: #7c2e2e;
-}
-
-#upload-svg-icon {
+.upload-svg-icon {
   display: block;
   transform: scale(150%);
 }
 
-#submit-file-button {
+.submit-file-button {
   display: block;
   background-color: rgb(225, 244, 250);
   font-size: 1.1rem;
@@ -58,12 +39,40 @@
   margin: 0 auto;
 }
 
+/* DropZone Component State Handling CSS*/
 /*  invisible input trigger to upload files */
-#hidden {
+
+.dropzone-container:hover {
+  border: 1px dotted black;
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+}
+
+/* for input element: */
+.hidden {
   visibility: none;
 }
 
-/* prevents pointer events on children while dragging */
-.dragging {
-  pointer-events: none;
+#file-valid-container {
+  background-color: rgb(206, 242, 253);
+  color: rgb(25, 74, 209);
+  border: 1px dotted black;
+}
+
+/* don't need a dragging state... when checking validity, we are always in a dragging state... valid? === dragging */
+#file-valid-children {
+  pointer-events: none; /* prevents trigger setState when dragging */
+}
+
+#file-invalid-container {
+  border: 1px dotted rgb(90, 90, 90);
+  background-color: rgb(226, 158, 158);
+}
+
+#file-invalid-children {
+  pointer-events: none; /* prevents trigger setState when dragging */
+  font-size: 1.2rem;
+  text-align: center;
+  display: block;
+  color: #7c2e2e;
 }
