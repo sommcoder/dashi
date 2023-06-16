@@ -3,11 +3,42 @@ import { FaUpload } from "../../../node_modules/react-icons/fa";
 import "./DropZone.css";
 
 export default function DropZone() {
-  const [files, setFiles] = useState(null);
-  const inputRef = useRef();
+  const inputState = "default";
+
+  const containerState = {
+    default: "dropzone-container",
+    valid: "file-valid",
+    invalid: "file-invalid",
+  };
+
+  const childrenState = {
+    default: "dropzone-container",
+    valid: "file-valid",
+    invalid: "file-invalid",
+  };
+
+  const textState = {
+    default: "Accepts .csv, .xsl and .xlsx files",
+    valid: "Drop file(s) to upload",
+    invalid: "file is not .csv, .xsl or .xlsx format",
+  };
 
   const [dragState, setDrag] = useState(false);
-  const [fileValidity, setFile] = useState(true);
+  const [currInputState, setInputState] = useState(inputState);
+
+  function checkId(currInputState) {
+    if (inputState === "default") return idState.default;
+    if (inputState === "valid") return idState.valid;
+    if (inputState === "invalid") return idState.invalid;
+  }
+
+  function checkText(currInputState) {
+    if (inputState === "default") return textState.default;
+    if (inputState === "valid") return textState.valid;
+    if (inputState === "invalid") return textState.invalid;
+  }
+
+  ///////////////////////////////
 
   const handleDragEnter = (ev) => {
     ev.preventDefault();
@@ -18,9 +49,17 @@ export default function DropZone() {
         item.type !==
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       ) {
-        setDrag(true);
-        setFile(false);
+        setInputState({
+          ...currInputState,
+          state: "invalid",
+        });
+      } else {
+        setInputState({
+          ...currInputState,
+          state: "valid",
+        });
       }
+      setDrag(true);
       return;
     }
   };
@@ -28,7 +67,10 @@ export default function DropZone() {
   const handleDragLeave = (ev) => {
     ev.preventDefault();
     setDrag(false);
-    setFile(true);
+    setInputState({
+      ...currInputState,
+      state: "default",
+    });
   };
 
   const handleDrop = (ev) => {
@@ -37,43 +79,26 @@ export default function DropZone() {
 
   return (
     <div
-      id={
-        fileValidity
-          ? "dropzone-container"
-          : "dropzone-container-error dropzone-container"
-      }
+      className={dragState ? "dragging" : ""}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       <button
-        id={fileValidity ? "submit-file-button" : "hidden"}
+        id={checkId(currInputState)}
         className={dragState ? "dragging" : ""}
       >
         Add files
       </button>
-      <input id="hidden" className="dragging" type="file" title=" " hidden />
+      <input id="hidden dragging" type="file" title=" " hidden />
       <FaUpload
-        id={fileValidity ? "upload-svg-icon" : "hidden"}
+        id={checkId(currInputState)}
         className={dragState ? "dragging" : ""}
       />
 
-      <h3
-        className={dragState ? "dragging" : ""}
-        id={fileValidity ? "dropzone-text" : "dropzone-text-error-message"}
-      >
-        {fileValidity
-          ? "Accepts .csv, .xsl and .xlsx files"
-          : "file is not .csv, .xsl or .xlsx format"}
+      <h3 className={dragState ? "dragging" : ""} id={checkId(currInputState)}>
+        {checkText(currInputState)}
       </h3>
     </div>
   );
 }
-
-/*
- 
-1) drag State
-2) fileValidity State 
-3) these things can happen together or individually
- 
-*/
