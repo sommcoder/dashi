@@ -1,4 +1,4 @@
-#dropzone-container {
+.dropzone-container {
   display: grid;
   align-items: center;
   text-align: center;
@@ -17,15 +17,18 @@
   padding: 0.5rem;
 }
 
-.dropzone-text-default {
+/* text */
+.dropzone-text {
   font-size: 1.2rem;
   text-align: center;
   display: block;
+  pointer-events: none;
 }
 
 .upload-svg-icon {
   display: block;
   transform: scale(150%);
+  pointer-events: none;
 }
 
 .submit-file-button {
@@ -37,11 +40,10 @@
   border: none;
   padding: 5px;
   margin: 0 auto;
+  pointer-events: none;
 }
 
 /* DropZone Component State Handling CSS*/
-/*  invisible input trigger to upload files */
-
 .dropzone-container:hover {
   border: 1px dotted black;
   background-color: rgb(245, 245, 245);
@@ -50,7 +52,8 @@
 
 /* for input element: */
 .hidden {
-  visibility: none;
+  visibility: none; /*  invisible input trigger to upload files */
+  pointer-events: none;
 }
 
 #file-valid-container {
@@ -59,7 +62,6 @@
   border: 1px dotted black;
 }
 
-/* don't need a dragging state... when checking validity, we are always in a dragging state... valid? === dragging */
 #file-valid-children {
   pointer-events: none; /* prevents trigger setState when dragging */
 }

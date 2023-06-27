@@ -1,13 +1,11 @@
 .dashboard-table {
-  display: block;
+  display: grid;
+  text-align: left;
   border: 1px solid black;
-  min-height: 7.5rem;
   min-width: 800px;
-  max-width: 800px;
-  min-height: 800px;
-  border-radius: 5px;
+  max-width: 1200px;
+  border-radius: 10px;
+  margin: 5px 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* .dashboard-table:nth-child(even) {
-  background-color: lightgrey;
-} */

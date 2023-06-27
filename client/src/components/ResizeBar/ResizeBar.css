@@ -1,0 +1,33 @@
+/*
+ 
+- the container allows the user to not have to be so precise when selecting the resize bar line
+
+- by having the background transparent, it does not show up visually
+
+- had to make the resize bar line a pipe operator, therefore future resizing is limited
+ 
+*/
+
+.table-header-resize-bar-container {
+  background-color: transparent;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 20px;
+  height: 50%;
+  margin: 1rem 0;
+}
+
+/* this remove the resize bar divider for the last child in the row */
+.table-header-resize-bar-container:last-child {
+  display: none;
+}
+
+.table-header-resize-bar-container:hover {
+  cursor: col-resize;
+}
+
+.table-header-resize-bar-line {
+  width: 1px;
+  color: black;
+}

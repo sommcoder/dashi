@@ -2,9 +2,25 @@ import { useRef, useState } from "react";
 import { FaUpload } from "../../../node_modules/react-icons/fa";
 import "./DropZone.css";
 
-export default function DropZone() {
-  const inputState = "default";
+function DropZoneText({ dragState, fileValid }) {
+  const textState = {
+    default: "Accepts .csv, .xsl and .xlsx files",
+    valid: "Drop file(s) to upload",
+    invalid: "file is not .csv, .xsl or .xlsx format",
+  };
 
+  return (
+    <>
+      {dragState ? (
+        <h3>{fileValid === true ? textState.valid : textState.invalid}</h3>
+      ) : (
+        <h3>{textState.default}</h3>
+      )}
+    </>
+  );
+}
+
+export default function DropZone() {
   const containerState = {
     default: "dropzone-container",
     valid: "file-valid",
@@ -17,31 +33,32 @@ export default function DropZone() {
     invalid: "file-invalid",
   };
 
-  const textState = {
-    default: "Accepts .csv, .xsl and .xlsx files",
-    valid: "Drop file(s) to upload",
-    invalid: "file is not .csv, .xsl or .xlsx format",
-  };
+  const textState = [
+    "Accepts .csv, .xsl and .xlsx files",
+    "Drop file(s) to upload",
+    "file is not .csv, .xsl or .xlsx format",
+  ];
 
+  /*
+  1) File is Valid, File is NOT valid = determines CSS
+    File is valid
+    Blue Background, dark border, no drag clipping
+
+
+  2) no action = default text/css
+  3) default text, invalid text, valid text
+   
+  */
   const [dragState, setDrag] = useState(false);
-  const [currInputState, setInputState] = useState(inputState);
-
-  function checkId(currInputState) {
-    if (inputState === "default") return idState.default;
-    if (inputState === "valid") return idState.valid;
-    if (inputState === "invalid") return idState.invalid;
-  }
-
-  function checkText(currInputState) {
-    if (inputState === "default") return textState.default;
-    if (inputState === "valid") return textState.valid;
-    if (inputState === "invalid") return textState.invalid;
-  }
+  const [fileValid, setFileValid] = useState(false);
+  // on DragEnd => setFileValidity(null)
 
   ///////////////////////////////
 
-  const handleDragEnter = (ev) => {
+  const handleDragOver = (ev) => {
     ev.preventDefault();
+    console.log("OVER:", ev);
+    setDrag(true);
     // for of works, ev.dataTransfer.items is an iterable object NOT an array
     for (const item of ev.dataTransfer.items) {
       if (
@@ -49,56 +66,41 @@ export default function DropZone() {
         item.type !==
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       ) {
-        setInputState({
-          ...currInputState,
-          state: "invalid",
-        });
+        setFileValid(false);
       } else {
-        setInputState({
-          ...currInputState,
-          state: "valid",
-        });
+        setFileValid(true);
       }
-      setDrag(true);
-      return;
     }
   };
 
   const handleDragLeave = (ev) => {
     ev.preventDefault();
+    console.log("LEAVE:", ev);
     setDrag(false);
-    setInputState({
-      ...currInputState,
-      state: "default",
-    });
+    setFileValid(false); // if we throw no arguments, will the state set to the original empty state??
   };
 
   const handleDrop = (ev) => {
     ev.preventDefault();
+    console.log("ev:", ev);
+    setDrag(false);
   };
 
   return (
     <div
-      className={dragState ? "dragging" : ""}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
+      className="dropzone-container"
+      onDragStart={handleDragOver}
+      onDragEnd={handleDragLeave}
       onDrop={handleDrop}
     >
-      <button
-        id={checkId(currInputState)}
-        className={dragState ? "dragging" : ""}
-      >
-        Add files
-      </button>
-      <input id="hidden dragging" type="file" title=" " hidden />
-      <FaUpload
-        id={checkId(currInputState)}
-        className={dragState ? "dragging" : ""}
+      <button className="submit-file-button">Add files</button>
+      <input id="hidden" type="file" title=" " hidden />
+      <FaUpload className="upload-svg-icon" />
+      <DropZoneText
+        fileValid={fileValid}
+        dragState={dragState}
+        className="dropzone-text"
       />
-
-      <h3 className={dragState ? "dragging" : ""} id={checkId(currInputState)}>
-        {checkText(currInputState)}
-      </h3>
     </div>
   );
 }

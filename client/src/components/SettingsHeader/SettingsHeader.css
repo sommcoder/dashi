@@ -1,0 +1,40 @@
+.table-settings-header {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+
+  align-items: center;
+  background-color: rgb(225, 244, 250);
+  color: rgb(32, 44, 48);
+  font-size: 1.5rem;
+  border-radius: 10px 10px 0px 0px;
+}
+
+#table-header-grab-icon {
+  justify-self: left;
+  display: inline;
+  margin: 0.5rem 0 0 1rem;
+  height: 2.25rem;
+}
+
+#table-header-grab-icon:hover {
+  cursor: grab;
+}
+
+#table-header-grab-icon:active {
+  cursor: grabbing;
+}
+
+#table-header-minimize-icon {
+  justify-self: right;
+  display: inline;
+  margin: 0.5rem 1rem 0 0.5rem;
+  height: 2rem;
+}
+
+#table-header-minimize-icon {
+  height: 20px;
+}
+
+#table-header-minimize-icon:hover {
+  cursor: pointer;
+}
