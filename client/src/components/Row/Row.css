@@ -1,6 +1,7 @@
 .table-row {
   display: grid;
   align-items: center;
+  animation: fadeInAnimation ease 1.25s;
 }
 
 .table-row:nth-child(even) {
@@ -9,4 +10,16 @@
 
 .table-row:last-child {
   border-radius: 0 0 10px 10px;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 50;
+  }
+  100% {
+    opacity: 100;
+  }
 }

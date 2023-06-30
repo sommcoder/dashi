@@ -24,17 +24,31 @@
   cursor: grabbing;
 }
 
-#table-header-minimize-icon {
+.table-header-icon {
   justify-self: right;
   display: inline;
   margin: 0.5rem 1rem 0 0.5rem;
   height: 2rem;
+  animation: fadeInAnimation ease 0.5s;
 }
 
-#table-header-minimize-icon {
-  height: 20px;
+.table-header-icon:active {
+  transform: translateY(-2px);
 }
 
-#table-header-minimize-icon:hover {
+.table-header-icon:hover {
   cursor: pointer;
+  filter: brightness(300%);
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 50;
+  }
+  100% {
+    opacity: 100;
+  }
 }

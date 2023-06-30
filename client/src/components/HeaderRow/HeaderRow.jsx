@@ -8,6 +8,7 @@ export default function HeaderRow({ headers, tableDisplay }) {
   the rowCells are generated in the headerRow based on the headers prop and repeat with a 20px space for the resize bar's container to fit. this is hard-coded
    
   */
+
   const minimizedStyle = {
     borderRadius: " 10px",
   };
