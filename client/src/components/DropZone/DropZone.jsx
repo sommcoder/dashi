@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { FaUpload } from "../../../node_modules/react-icons/fa";
 import "./DropZone.css";
 
@@ -39,6 +40,21 @@ export default function DropZone() {
     "file is not .csv, .xsl or .xlsx format",
   ];
 
+  const queryClient = useQueryClient(); // Now, at the component level, we call useQueryClient
+
+  // queries:
+  // const query = useQuery({ queryKey: "query-key", queryFn: () => {} });
+  // queryFn MUST return a promise to either be resolved or throw an error
+  // queryFn is the function that the query will use to request data
+
+  // mutations:
+  // const mutation = useMutation("", {
+  //   onSuccess: () => {
+  //     // invalidate & refresh
+  //     queryClient.invalidateQueries("");
+  //   },
+  // });
+
   /*
   1) File is Valid, File is NOT valid = determines CSS
     File is valid
@@ -49,6 +65,7 @@ export default function DropZone() {
   3) default text, invalid text, valid text
    
   */
+
   const [dragState, setDrag] = useState(false);
   const [fileValid, setFileValid] = useState(false);
   // on DragEnd => setFileValidity(null)
@@ -63,6 +80,7 @@ export default function DropZone() {
     for (const item of ev.dataTransfer.items) {
       if (
         item.type !== "text/csv" &&
+        item.type !== "pdf" &&
         item.type !==
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       ) {

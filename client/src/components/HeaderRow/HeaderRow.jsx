@@ -1,4 +1,5 @@
-﻿import "./HeaderRow.css";
+﻿import { Fragment } from "react";
+import "./HeaderRow.css";
 import RowCell from "../RowCell/RowCell";
 import ResizeBar from "../ResizeBar/ResizeBar";
 
@@ -22,10 +23,10 @@ export default function HeaderRow({ headers, tableDisplay }) {
       }}
     >
       {headers.map((val, i) => (
-        <>
+        <Fragment key={`frag-${i}`}>
           <RowCell className="header-row-cell" key={`cell-${i}`} value={val} />
           <ResizeBar key={`bar-${i}`} />
-        </>
+        </Fragment>
       ))}
     </div>
   );
