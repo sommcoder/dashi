@@ -5,7 +5,7 @@ export const router = express.Router();
 // get a table
 router.get("/tables", (req, res) => {
   try {
-    res.status(200).json({ message: "Got Table!" });
+    res.status(200).json({ message: "Got Tables!" });
   } catch (err) {
     console.log("error:", err.message);
   }

@@ -10,14 +10,14 @@ dotenv.config();
 // const clusterName = encodeURIComponent(process.env.CLUSTER);
 // const URI = `mongodb+srv://${username}:${password}@${clusterName}.mluyyks.mongodb.net/?retryWrites=true&w=majority`;
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use("/api/tables", tableRoutes);
+app.use("/tables", tableRoutes);
 
 // mongoose
 //   .connect(URI)
 //   .then(() => {
-app.listen(port, () => console.log(`server is running on port ${port}`));
+app.listen(PORT, () => console.log(`server is running on PORT ${PORT}`));
 // })
 // .catch((err) => console.log(err));

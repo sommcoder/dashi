@@ -1,5 +1,8 @@
-import { useRef, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+// libraries:
+import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+
+// styling:
 import { FaUpload } from "../../../node_modules/react-icons/fa";
 import "./DropZone.css";
 
@@ -40,20 +43,28 @@ export default function DropZone() {
     "file is not .csv, .xsl or .xlsx format",
   ];
 
+  const { isLoading, switchLoading } = useState(true);
+
+  // const URL = "http://localhost:3000/";
+
   const queryClient = useQueryClient(); // Now, at the component level, we call useQueryClient
 
   // queries:
-  // const query = useQuery({ queryKey: "query-key", queryFn: () => {} });
+  const query = useQuery({
+    queryKey: "table-data", // this is the key to reference the fetched data
+    queryFn: () => {
+      fetch(`${import.meta.env.VITE_URL}/tables`, {
+        method: "GET",
+        mode: "no-cors",
+      }).then((res) => {
+        console.log("res:", res);
+        const tableData = res.json();
+        console.log("tableData:", tableData);
+      });
+    },
+  });
   // queryFn MUST return a promise to either be resolved or throw an error
   // queryFn is the function that the query will use to request data
-
-  // mutations:
-  // const mutation = useMutation("", {
-  //   onSuccess: () => {
-  //     // invalidate & refresh
-  //     queryClient.invalidateQueries("");
-  //   },
-  // });
 
   /*
   1) File is Valid, File is NOT valid = determines CSS
