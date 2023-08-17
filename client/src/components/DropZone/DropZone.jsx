@@ -45,8 +45,6 @@ export default function DropZone() {
 
   const { isLoading, switchLoading } = useState(true);
 
-  // const URL = "http://localhost:3000/";
-
   const queryClient = useQueryClient(); // Now, at the component level, we call useQueryClient
 
   // queries:

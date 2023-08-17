@@ -1,12 +1,32 @@
 ﻿import "./Table.css";
-import data from "../../data.json";
 import Row from "../Row/Row";
 import HeaderRow from "../HeaderRow/HeaderRow";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
+import { useQuery, useQueryClient } from "react-query";
 
 import { useState } from "react";
 
 export default function Table() {
+  const queryClient = useQueryClient(); // Now, at the component level, we call useQueryClient
+
+  // queries:
+  const query = useQuery({
+    queryKey: "table-data", // this is the key to reference the fetched data
+    queryFn: () => {
+      fetch(`${import.meta.env.VITE_URL}/tables`, {
+        method: "GET",
+        // mode: "cors",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          err.message;
+        });
+    },
+  });
+
   /*
   1) Data is fetched from server
   2) Data is rendered based on default settings
@@ -29,11 +49,11 @@ export default function Table() {
   // always have = for visual cue that table is grabbable and - x to indicate
 
   // eventually this will be controlled by the user when they select which columns they want to view:
-  const initColStateSeq = Object.keys(data[0]);
+  // const initColStateSeq = Object.keys(data[0]);
 
   const columnWidthObj = {};
   // populate the column width based on the data
-  initColStateSeq.forEach((el) => (columnWidthObj[el] = 3));
+  // initColStateSeq.forEach((el) => (columnWidthObj[el] = 3));
   // 3 is the default rem width for columns
   // declare the state hook:
   const [columnWidth, setColumnWidth] = useState(columnWidthObj);
@@ -49,7 +69,7 @@ export default function Table() {
   // how to get icons onto the header whilst keeping the columns aligned
 
   const [tableDisplay, setTableDisplay] = useState(true);
-  const [currColState, adjustColumnState] = useState(initColStateSeq);
+  // const [currColState, adjustColumnState] = useState(initColStateSeq);
   // the quick thought is that the icons need to be agnostic/independent of the actual table
 
   // the "rows" for the tables should just be 3 things: the top adjustment header, the headerRow and then the table content itself
@@ -69,8 +89,8 @@ export default function Table() {
         tableDisplay={tableDisplay}
         setTableDisplay={setTableDisplay}
       />
-      <HeaderRow tableDisplay={tableDisplay} headers={initColStateSeq} />
-      {data.map((el, i) =>
+      {/* <HeaderRow tableDisplay={tableDisplay} headers={initColStateSeq} /> */}
+      {/* {data.map((el, i) =>
         tableDisplay ? (
           <Row
             columnWidth={columnWidth}
@@ -81,8 +101,8 @@ export default function Table() {
           />
         ) : (
           ""
-        )
-      )}
+        ) */}
+      {/* )} */}
     </div>
   );
 }

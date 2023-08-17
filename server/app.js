@@ -1,5 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
+import cors from "cors";
+
 // import mongoose from "mongoose";
 
 import { router as tableRoutes } from "./routes/table-routes.js";
@@ -13,7 +15,8 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use("/tables", tableRoutes);
+// MOunts the specified middleware FUNCTION(s) at the specified PATH
+app.use(cors("/tables", tableRoutes));
 
 // mongoose
 //   .connect(URI)
