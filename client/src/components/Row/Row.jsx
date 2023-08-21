@@ -1,10 +1,10 @@
 ﻿import "./Row.css";
 import RowCell from "../RowCell/RowCell";
+import RowCellGap from "../RowCellGap/RowCellGap";
+
 import { useEffect, useState } from "react";
 
-export default function Row({ el, headers, tableDisplay }) {
-  // const col = { gridTemplateColumns: `repeat(${headers.length}, 1fr)` };
-
+export default function Row({ data, colStyleString, tableDisplay }) {
   const [show, setShow] = useState(false);
 
   const delay = 1;
@@ -19,16 +19,33 @@ export default function Row({ el, headers, tableDisplay }) {
     };
   });
 
+  /*
+   
+  Ultimately, we want a string or array of the sizes of each header element and their size in rems to 
+  `repeat(${colSizingSeq.length}, 1fr)` can be the default setup. However we're going to want to determine if there's been a columns adjustment and then generate header/column widths depending on that new state
+   
+  */
+
+  console.log("ROW: colStyleString:", colStyleString);
+  console.log("data:", data);
+
   return (
     <div
       className="table-row"
       style={{
-        gridTemplateColumns: `repeat(${headers.length}, 1fr)`,
-        borderRadius: `${tableDisplay} ? "" : "0 0 10px 10px`,
+        gridTemplateColumns: `${colStyleString}`,
+        borderRadius: `${tableDisplay ? "" : "0 0 10px 10px"}`,
       }}
     >
-      {Object.keys(el).map((val, i) => {
-        return show ? <RowCell key={i} value={el[val]} /> : "";
+      {Object.keys(data).map((val, i) => {
+        return show ? (
+          <>
+            <RowCell key={i} value={data[val]} />{" "}
+            <RowCellGap colStyleString={colStyleString} />
+          </>
+        ) : (
+          ""
+        );
       })}
     </div>
   );

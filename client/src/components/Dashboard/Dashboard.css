@@ -1,6 +1,8 @@
 .dashboard-main {
   display: grid;
-  grid-template-rows: 1fr 1fr; /* 2 tables */
+  grid-template-rows: 1fr 1fr; /* 
+  2 tables. This ought to be generated based on the data tables the user actually selects 
+  */
   align-items: center;
   row-gap: 5px;
   width: 100%;

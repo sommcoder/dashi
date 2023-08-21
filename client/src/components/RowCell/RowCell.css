@@ -7,7 +7,6 @@
   margin-right: 0.75rem;
   text-overflow: clip;
   border-radius: 10px;
-  overflow: hidden; /* hides text */
   /* max-width: fit-content; */
 }
 

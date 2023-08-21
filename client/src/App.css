@@ -11,6 +11,7 @@ html {
 .app-container {
   display: grid;
   grid-template-columns: 15% 85%; /* SideNav / Dashboard area */
+  gap: 2rem;
   justify-content: left;
   align-items: center;
   justify-items: center; /* what actually centers the windows */
