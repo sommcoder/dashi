@@ -10,10 +10,12 @@ html {
 
 .app-container {
   display: grid;
-  justify-content: center;
+  grid-template-columns: 15% 85%; /* SideNav / Dashboard area */
+  justify-content: left;
   align-items: center;
   justify-items: center; /* what actually centers the windows */
-  grid-template-rows: 1fr, 1fr;
   row-gap: 20px;
-  width: 100%;
+  width: auto;
+  min-height: 100vh;
+  overflow-x: hidden;
 }

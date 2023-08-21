@@ -8,12 +8,6 @@ export const router = express.Router();
 // get a table
 router.get("/", (req, res, next) => {
   try {
-    // console.log("req.params:", req.params);
-    // console.log("req.query:", req.query);
-    // console.log("req.url:", req.url);
-    // console.log("req.ip:", req.ip);
-    // console.log("req.path:", req.path);
-    // res.send("we're connected on tables");
     res.json(data); //res.json also sends
   } catch (err) {
     console.log("error:", err.message);

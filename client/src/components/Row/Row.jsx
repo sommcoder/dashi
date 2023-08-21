@@ -2,8 +2,8 @@
 import RowCell from "../RowCell/RowCell";
 import { useEffect, useState } from "react";
 
-export default function Row({ el, headers }) {
-  const col = { gridTemplateColumns: `repeat(${headers.length}, 1fr)` };
+export default function Row({ el, headers, tableDisplay }) {
+  // const col = { gridTemplateColumns: `repeat(${headers.length}, 1fr)` };
 
   const [show, setShow] = useState(false);
 
@@ -20,7 +20,13 @@ export default function Row({ el, headers }) {
   });
 
   return (
-    <div className="table-row" style={col}>
+    <div
+      className="table-row"
+      style={{
+        gridTemplateColumns: `repeat(${headers.length}, 1fr)`,
+        borderRadius: `${tableDisplay} ? "" : "0 0 10px 10px`,
+      }}
+    >
       {Object.keys(el).map((val, i) => {
         return show ? <RowCell key={i} value={el[val]} /> : "";
       })}

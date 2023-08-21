@@ -48,19 +48,19 @@ export default function DropZone() {
   const queryClient = useQueryClient(); // Now, at the component level, we call useQueryClient
 
   // queries:
-  const query = useQuery({
-    queryKey: "table-data", // this is the key to reference the fetched data
-    queryFn: () => {
-      fetch(`${import.meta.env.VITE_URL}/tables`, {
-        method: "GET",
-        mode: "no-cors",
-      }).then((res) => {
-        console.log("res:", res);
-        const tableData = res.json();
-        console.log("tableData:", tableData);
-      });
-    },
-  });
+  // const query = useQuery({
+  //   queryKey: "table-data", // this is the key to reference the fetched data
+  //   queryFn: () => {
+  //     fetch(`${import.meta.env.VITE_URL}/tables`, {
+  //       method: "GET",
+  //       mode: "no-cors",
+  //     }).then((res) => {
+  //       console.log("res:", res);
+  //       const tableData = res.json();
+  //       console.log("tableData:", tableData);
+  //     });
+  //   },
+  // });
   // queryFn MUST return a promise to either be resolved or throw an error
   // queryFn is the function that the query will use to request data
 

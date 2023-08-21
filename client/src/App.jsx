@@ -1,5 +1,7 @@
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import DropZone from "./components/DropZone/DropZone.jsx";
+import NavSideBar from "./components/NavSideBar/NavSideBar.jsx";
+
 import "./App.css";
 
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -12,7 +14,10 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <div className="app-container">
-        <DropZone />
+        <NavSideBar />
+        {/* <DropZone /> 
+        // We should move DropZone to a new page so user can load data elsewhere
+        */}
         <Dashboard />
       </div>
     </QueryClientProvider>
