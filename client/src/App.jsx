@@ -16,7 +16,7 @@ export default function App() {
       <div className="app-container">
         <NavSideBar />
         {/* <DropZone /> 
-        // We should move DropZone to a new page so user can load data elsewhere
+        // We should move DropZone to a new page so user can load data elsewhere and not interfere with the data tables
         */}
         <Dashboard />
       </div>

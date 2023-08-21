@@ -6,16 +6,16 @@ import { useQuery, useQueryClient } from "react-query";
 
 import { useEffect, useState, Suspense } from "react";
 
+const fetchTables = async () => {
+  const data = await fetch(`${import.meta.env.VITE_SERVER_URL}/tables`).then(
+    (res) => res.json()
+  );
+  console.log("data:", data);
+  return data;
+};
+
 export default function Table() {
   const colSizingSeqObj = {};
-
-  const fetchTables = async () => {
-    const data = await fetch(`${import.meta.env.VITE_SERVER_URL}/tables`).then(
-      (res) => res.json()
-    );
-    console.log("data:", data);
-    return data;
-  };
 
   // fetch data from server:
   const { data, isInitialLoading } = useQuery("table-data", fetchTables, {
@@ -24,14 +24,17 @@ export default function Table() {
 
   // this is an initial number of columns based on the users selected columns they'd like to view and what the headers will be named:
   let headers = Object.keys(data[0]);
-  determineAvgColWidth(data, headers);
-  // assign each el in array to 3 as a default column width:
   const initColSizingSeq = []; // this is an array of the size of each column
 
+  determineAvgColWidth(data, headers);
+  // assign each el in array to 3 as a default column width:
+
   // maybe we just having header sizing be initially determined by hard-coded values. User doesn't need to adjust this, too much control and this way... MAYBE we have the system determine the width of the columns onLoad based on the average CHAR length of the incoming data?
-  function getMedian(valArr) {
+  function getAverage(valArr) {
+    // console.log("valArr:", valArr);
     if (valArr.length === 0) throw new Error("No inputs");
-    return valArr.sort((a, b) => a - b);
+    let sum = valArr.reduce((prev, curr) => prev + curr);
+    return Math.trunc(sum / valArr.length, 0);
   }
 
   function determineAvgColWidth(dataArr, headers) {
@@ -40,9 +43,10 @@ export default function Table() {
       let lengthTracker = [];
       // extract the data from each obj with the corresponding header
       dataArr.forEach((el) => {
-        lengthTracker.push(el[header].length);
+        lengthTracker.push(el[header].toString().length);
       });
-      initColSizingSeq.push(getMedian(lengthTracker));
+      // after each pass of the data by Header:
+      initColSizingSeq.push(getAverage(lengthTracker));
     });
   }
 
@@ -55,19 +59,26 @@ export default function Table() {
    
   */
 
-  console.log("initColSizingSeq:", initColSizingSeq);
+  // console.log("initColSizingSeq:", initColSizingSeq);
   // assign each element in Array to 3 as a default column width:
 
+  // from the state array, we update this string which our rows get generated from. This accounts for the length of the resize container
+  const colStyleString =
+    initColSizingSeq
+      .map((el) => {
+        if (el <= 8) return (el += 3);
+        else return (el *= 0.75);
+      })
+      .join("rem 20px ") + "rem";
+
   // set state based on incoming data:
-  const [colSizingSeq, adjustColSizingSeq] = useState(initColSizingSeq);
+  const [colSizingSeq, adjustColSizingSeq] = useState(colStyleString);
 
   // minimize and view tables:
   const [tableDisplay, setTableDisplay] = useState(true);
 
-  // from the state array, we update this string which our rows get generated from. This accounts for the length of the resize container
-  const colStyleString = colSizingSeq.join("rem 20px ") + "rem";
   // header and rows need to be generated from the same style sizing data/state
-  console.log("colStyleString:", colStyleString);
+  // console.log("colStyleString:", colStyleString);
 
   /*
   Header = Flex?

@@ -1,23 +1,15 @@
-.row-cell-container {
-  display: grid;
-  height: 100%;
-  align-self: center;
-  align-content: center;
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-  text-overflow: clip;
-  border-radius: 10px;
-  /* max-width: fit-content; */
-}
-
-.row-cell-container:hover {
-  background-color: rgb(234, 242, 245);
-  cursor: pointer;
-}
-
 .row-cell-content {
+  background-color: transparent;
   padding: 2px;
   padding-left: 5px;
   align-self: center;
   align-content: center;
+  border-radius: 5px;
+  border: none;
+  width: auto;
+}
+
+.row-cell-content:hover {
+  cursor: pointer;
+  background-color: rgba(170, 231, 231, 0.39);
 }

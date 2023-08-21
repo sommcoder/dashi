@@ -10,7 +10,6 @@ html {
 
 .app-container {
   display: grid;
-  grid-template-columns: 15% 85%; /* SideNav / Dashboard area */
   gap: 2rem;
   justify-content: left;
   align-items: center;
@@ -19,4 +18,20 @@ html {
   width: auto;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+/* Smallest mobile: */
+@media screen and (min-width: 320px) {
+  .app-container {
+    grid-template-columns: 50px auto; /* SideNav / Dashboard area */
+    gap: 0.5rem;
+  }
+}
+
+/* Smallest Desktop: */
+@media screen and (min-width: 900px) {
+  .app-container {
+    grid-template-columns: minmax(100px, 150px) auto; /* SideNav / Dashboard area */
+    gap: 0.5rem;
+  }
 }

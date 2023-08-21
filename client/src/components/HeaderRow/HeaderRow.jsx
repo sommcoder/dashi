@@ -1,6 +1,6 @@
 ﻿import { Fragment } from "react";
 import "./HeaderRow.css";
-import RowCell from "../RowCell/RowCell";
+import HeaderRowCell from "../HeaderRowCell/HeaderRowCell";
 import ResizeBar from "../ResizeBar/ResizeBar";
 
 export default function HeaderRow({
@@ -32,7 +32,7 @@ export default function HeaderRow({
     >
       {headers.map((el, i) => (
         <Fragment key={`frag-${i}`}>
-          <RowCell className="header-row-cell" key={`cell-${i}`} value={el} />
+          <HeaderRowCell key={`cell-${i}`} value={el} />
           <ResizeBar
             key={`bar-${i}`}
             data={i}

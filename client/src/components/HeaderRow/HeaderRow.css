@@ -7,8 +7,12 @@
   color: rgb(32, 44, 48);
   font-size: 1.5rem;
   font-weight: 600;
+  animation: headerRowBorderRadiusDelay ease-in-out;
 }
 
 /* .table-header-row:hover > div {
   background-color: rgb(225, 244, 250);
 } */
+
+@keyframes headerRowBorderRadiusDelay {
+}
