@@ -1,11 +1,10 @@
 .dashboard-main {
   display: grid;
   grid-template-rows: 1fr 1fr; /* 
-  2 tables. This ought to be generated based on the data tables the user actually selects 
+  2 tables. This ought to be generated based on the data tables the user actually selects at a later stage in development
   */
   align-items: center;
   row-gap: 5px;
-  width: 100%;
-  height: 100%;
+  width: auto;
   padding: 2px;
 }

@@ -1,3 +1,8 @@
+.footer-container {
+  align-self: end;
+  margin-bottom: 2rem;
+}
+
 .footer-element {
   color: white;
   font-size: 1.2rem;

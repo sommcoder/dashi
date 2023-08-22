@@ -66,8 +66,8 @@ export default function Table() {
   const colStyleString =
     initColSizingSeq
       .map((el) => {
-        if (el <= 8) return (el += 3);
-        else return (el *= 0.75);
+        if (el <= 8) return (el += 3.25);
+        else return (el *= 0.9);
       })
       .join("rem 20px ") + "rem";
 
