@@ -2,6 +2,7 @@
 import "./HeaderRow.css";
 import HeaderRowCell from "../HeaderRowCell/HeaderRowCell";
 import ResizeBar from "../ResizeBar/ResizeBar";
+import RowCellGap from "../RowCellGap/RowCellGap";
 
 export default function HeaderRow({
   colSizingSeq,
@@ -30,6 +31,7 @@ export default function HeaderRow({
         borderRadius: `${tableDisplay ? "" : "0 0 10px 10px"}`,
       }}
     >
+      <RowCellGap />
       {headers.map((el, i) => (
         <Fragment key={`frag-${i}`}>
           <HeaderRowCell key={`cell-${i}`} value={el} />

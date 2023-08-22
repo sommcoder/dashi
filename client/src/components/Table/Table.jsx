@@ -64,12 +64,14 @@ export default function Table() {
 
   // from the state array, we update this string which our rows get generated from. This accounts for the length of the resize container
   const colStyleString =
+    "20px " +
     initColSizingSeq
       .map((el) => {
         if (el <= 8) return (el += 3.25);
         else return (el *= 0.9);
       })
-      .join("rem 20px ") + "rem";
+      .join("rem 20px ") +
+    "rem";
 
   // set state based on incoming data:
   const [colSizingSeq, adjustColSizingSeq] = useState(colStyleString);

@@ -1,6 +1,7 @@
 ﻿import "./Row.css";
 import RowCell from "../RowCell/RowCell";
 import RowCellGap from "../RowCellGap/RowCellGap";
+import RowCellCheckbox from "../RowCellCheckbox/RowCellCheckbox";
 
 import { useEffect, useState } from "react";
 
@@ -37,6 +38,7 @@ export default function Row({ data, colStyleString, tableDisplay }) {
         borderRadius: `${tableDisplay ? "" : "0 0 10px 10px"}`,
       }}
     >
+      <RowCellCheckbox />
       {Object.keys(data).map((val, i) => {
         return show ? (
           <>
