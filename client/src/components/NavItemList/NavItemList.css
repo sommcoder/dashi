@@ -1,0 +1,14 @@
+.nav-side-bar-list {
+  list-style-type: none;
+}
+
+.nav-side-bar-items {
+  margin-top: 1rem;
+  color: rgb(231, 231, 231);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.nav-side-bar-items:hover {
+  cursor: pointer;
+}

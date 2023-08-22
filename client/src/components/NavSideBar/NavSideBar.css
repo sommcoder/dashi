@@ -1,5 +1,6 @@
 .nav-side-bar-container {
   display: grid;
+  grid-template-rows: 10% 70% 20%;
   height: 100%;
   width: 100%;
   justify-items: center;
@@ -7,19 +8,4 @@
   background-image: linear-gradient(rgb(62, 91, 100), rgb(73, 100, 109));
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
     0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
-}
-
-.nav-side-bar-list {
-  list-style-type: none;
-}
-
-.nav-side-bar-items {
-  margin-top: 1rem;
-  color: rgb(231, 231, 231);
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.nav-side-bar-items:hover {
-  cursor: pointer;
 }

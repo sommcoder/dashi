@@ -1,0 +1,28 @@
+.app-title-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.app-logo {
+  height: 6rem;
+}
+
+.app-title {
+  color: white;
+  font-size: 2rem;
+  margin: 0.25rem 0rem 0.25rem 0rem;
+}
+
+/* have slogan text wrap */
+.app-title-slogan {
+  color: white;
+  font-size: 1.5rem;
+  text-overflow: wrap;
+  font-style: italic;
+}
+
+.app-title-container:hover {
+  cursor: pointer;
+}

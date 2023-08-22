@@ -1,13 +1,6 @@
-.row-cell-container {
-  display: grid;
-  height: 100%;
-  align-self: center;
-  align-content: center;
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-  text-overflow: clip;
-  border-radius: 10px;
-  /* max-width: fit-content; */
+.header-row-cell {
+  padding: 2px;
+  padding-left: 5px;
 }
 
 .row-cell-container:hover {
