@@ -1,11 +1,19 @@
+// src:
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import DropZone from "./components/DropZone/DropZone.jsx";
-import NavSideBar from "./components/NavSideBar/NavSideBar.jsx";
+import NavSideBarMenu from "./components/NavSideBarMenu/NavSideBarMenu.jsx";
+import RouteLoader from "./components/RouteLoader/RouteLoader";
 
 import "./App.css";
 
-import { ReactQueryDevtools } from "react-query/devtools";
+// react
+import { useState } from "react";
 
+// react router:
+import { Routes, Route } from "react-router-dom";
+
+// react query:
+import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
@@ -14,11 +22,19 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <div className="app-container">
-        <NavSideBar />
-        {/* <DropZone /> 
-        // We should move DropZone to a new page so user can load data elsewhere and not interfere with the data tables
-        */}
-        <Dashboard />
+        <NavSideBarMenu />
+        <Routes>
+          <Route
+            index
+            path="/"
+            element={<Dashboard />}
+            lazy={() => <RouteLoader />}
+          />
+          <Route path="/sales" element={<div>sales!</div>} />
+          <Route path="/products" element={<div>products!</div>} />
+          <Route path="/purchasing" element={<div>purchasing!</div>} />
+          <Route path="/setup" element={<DropZone />} />
+        </Routes>
       </div>
     </QueryClientProvider>
   );

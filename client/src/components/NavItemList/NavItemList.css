@@ -1,15 +1,33 @@
 .nav-side-bar-list {
-  list-style-type: none;
+  align-self: self-start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-rows: fit-content(100%);
+  justify-content: stretch;
+
   margin-top: 3rem;
 }
 
-.nav-side-bar-items {
-  margin-top: 1rem;
+.nav-side-bar-item {
+  display: list-item;
+  width: 100%;
+}
+
+.nav-side-bar-item:hover {
+  cursor: pointer;
+  background-color: rgb(27, 64, 75);
+}
+
+.link-label {
+  list-style: none;
+  text-decoration: none;
   color: rgb(231, 231, 231);
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-.nav-side-bar-items:hover {
-  cursor: pointer;
-}
+/*
+ 
+CREATE A HIGHLIGHT when user hovers over the menu list item
+ 
+*/

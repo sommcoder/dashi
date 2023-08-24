@@ -2,9 +2,9 @@
 import NavItemList from "../NavItemList/NavItemList";
 import SideNavBarFooter from "../SideNavBarFooter/SideNavBarFooter";
 
-import "./NavSideBar.css";
+import "./NavSideBarMenu.css";
 
-export default function NavSideBar() {
+export default function NavSideBarMenu() {
   return (
     <nav className="nav-side-bar-container">
       <AppTitleArea />
