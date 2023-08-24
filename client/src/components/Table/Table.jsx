@@ -2,9 +2,11 @@
 import Row from "../Row/Row";
 import HeaderRow from "../HeaderRow/HeaderRow";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
+import RouteLoader from "../RouteLoader/RouteLoader";
+
 import { useQuery, useQueryClient } from "react-query";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 
 const fetchTables = async () => {
   const data = await fetch(`${import.meta.env.VITE_SERVER_URL}/tables`).then(
@@ -18,7 +20,7 @@ export default function Table() {
   const colSizingSeqObj = {};
 
   // fetch data from server:
-  const { data, isInitialLoading } = useQuery("table-data", fetchTables, {
+  const { data, isLoading } = useQuery(["table-data"], fetchTables, {
     suspense: true,
   });
 
@@ -109,35 +111,32 @@ export default function Table() {
 
   // based on the sequence will determine which keys we access from our JSON data as we iterate through it
 
-  if (isInitialLoading) {
-    return <div>loading...</div>;
-  } else {
-    return (
-      <div style={rows} draggable={true} className="dashboard-table">
-        <SettingsHeader
-          tableDisplay={tableDisplay}
-          setTableDisplay={setTableDisplay}
-        />
-        <HeaderRow
-          tableDisplay={tableDisplay}
-          adjustColSizingSeq={adjustColSizingSeq}
-          colSizingSeq={colSizingSeq}
-          headers={headers}
-          colStyleString={colStyleString}
-        />
-        {data.map((el, i) =>
-          tableDisplay ? (
-            <Row
-              colStyleString={colStyleString}
-              tableDisplay={tableDisplay}
-              key={`row-${i}`}
-              data={el}
-            />
-          ) : (
-            ""
-          )
-        )}
-      </div>
-    );
-  }
+  return (
+    <div style={rows} draggable={true} className="dashboard-table">
+      <SettingsHeader
+        tableDisplay={tableDisplay}
+        setTableDisplay={setTableDisplay}
+      />
+      <HeaderRow
+        tableDisplay={tableDisplay}
+        adjustColSizingSeq={adjustColSizingSeq}
+        colSizingSeq={colSizingSeq}
+        headers={headers}
+        colStyleString={colStyleString}
+      />
+
+      {data.map((el, i) =>
+        tableDisplay ? (
+          <Row
+            colStyleString={colStyleString}
+            tableDisplay={tableDisplay}
+            key={`row-${i}`}
+            data={el}
+          />
+        ) : (
+          ""
+        )
+      )}
+    </div>
+  );
 }

@@ -2,7 +2,6 @@
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import DropZone from "./components/DropZone/DropZone.jsx";
 import NavSideBarMenu from "./components/NavSideBarMenu/NavSideBarMenu.jsx";
-import RouteLoader from "./components/RouteLoader/RouteLoader";
 
 import "./App.css";
 
@@ -24,12 +23,7 @@ export default function App() {
       <div className="app-container">
         <NavSideBarMenu />
         <Routes>
-          <Route
-            index
-            path="/"
-            element={<Dashboard />}
-            lazy={() => <RouteLoader />}
-          />
+          <Route index path="/" element={<Dashboard />} />
           <Route path="/sales" element={<div>sales!</div>} />
           <Route path="/products" element={<div>products!</div>} />
           <Route path="/purchasing" element={<div>purchasing!</div>} />

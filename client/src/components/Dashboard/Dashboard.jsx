@@ -1,10 +1,10 @@
 import "./Dashboard.css";
 import Table from "../Table/Table.jsx";
-import { useState } from "react";
+import RouteLoader from "../RouteLoader/RouteLoader";
+import { useState, Suspense } from "react";
 
 export default function Dashboard() {
   /*
-   
  - Dashboard requests tables from server and passes down props to child components
    
   */
@@ -19,9 +19,11 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-main">
-      {tableArr.map((el, i) => (
-        <Table key={i} />
-      ))}
+      <Suspense fallback={<RouteLoader />}>
+        {tableArr.map((el, i) => (
+          <Table key={i} />
+        ))}
+      </Suspense>
     </div>
   );
 }

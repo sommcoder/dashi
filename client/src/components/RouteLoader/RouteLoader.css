@@ -1,5 +1,7 @@
 .route-loader-container {
   font-size: 2rem;
+  background-color: black;
+  opacity: 40%;
 }
 
 .route-loader-squiggle {
