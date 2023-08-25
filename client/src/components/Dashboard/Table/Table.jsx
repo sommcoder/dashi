@@ -2,7 +2,7 @@
 import Row from "../Row/Row";
 import HeaderRow from "../HeaderRow/HeaderRow";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
-import RouteLoader from "../RouteLoader/RouteLoader";
+import RouteLoader from "../../RouteLoader/RouteLoader";
 
 import { useQuery, useQueryClient } from "react-query";
 

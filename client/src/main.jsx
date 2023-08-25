@@ -1,12 +1,11 @@
-// React:
+// react:
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-// Src:
+// src:
 import App from "./App.jsx";
 // import ErrorPage from "./pages/error-page/error-page.jsx";
 
-// React Router:
+// react router:
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 export default function Row({ data, colStyleString, tableDisplay }) {
   const [show, setShow] = useState(false);
-
   const delay = 1;
+
   useEffect(() => {
     let timer1 = setTimeout(() => setShow(true), delay * 1000);
 

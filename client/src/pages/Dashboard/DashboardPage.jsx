@@ -1,6 +1,6 @@
-import "./Dashboard.css";
-import Table from "../Table/Table.jsx";
-import RouteLoader from "../RouteLoader/RouteLoader";
+import "./DashboardPage.css";
+import Table from "../../components/Dashboard/Table/Table.jsx";
+import RouteLoader from "../../components/RouteLoader/RouteLoader";
 import { useState, Suspense } from "react";
 
 export default function Dashboard() {

@@ -1,30 +1,19 @@
 // libraries:
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-
 // styling:
-import { FaUpload } from "../../../node_modules/react-icons/fa";
+import { FaUpload } from "../../../../node_modules/react-icons/fa";
 import "./DropZone.css";
+// components:
+import ValidationText from "../ValidationText/ValidationText";
+import DropZoneText from "../DropZoneText/DropZoneText";
+import FileTally from "../FileTally/FileTally";
 
-function DropZoneText({ dragState, fileValid }) {
-  const textState = {
-    default: "Accepts .csv, .xsl and .xlsx files",
-    valid: "Drop file(s) to upload",
-    invalid: "file is not .csv, .xsl or .xlsx format",
-  };
-
-  return (
-    <>
-      {dragState ? (
-        <h3>{fileValid === true ? textState.valid : textState.invalid}</h3>
-      ) : (
-        <h3>{textState.default}</h3>
-      )}
-    </>
-  );
-}
+const MAX_SIZE = 500000; // in bytes
 
 export default function DropZone() {
+  const { fileCount, addFile } = useState(0);
+
   const containerState = {
     default: "dropzone-container",
     valid: "file-valid",
@@ -44,25 +33,6 @@ export default function DropZone() {
   ];
 
   const { isLoading, switchLoading } = useState(true);
-
-  const queryClient = useQueryClient(); // Now, at the component level, we call useQueryClient
-
-  // queries:
-  // const query = useQuery({
-  //   queryKey: "table-data", // this is the key to reference the fetched data
-  //   queryFn: () => {
-  //     fetch(`${import.meta.env.VITE_URL}/tables`, {
-  //       method: "GET",
-  //       mode: "no-cors",
-  //     }).then((res) => {
-  //       console.log("res:", res);
-  //       const tableData = res.json();
-  //       console.log("tableData:", tableData);
-  //     });
-  //   },
-  // });
-  // queryFn MUST return a promise to either be resolved or throw an error
-  // queryFn is the function that the query will use to request data
 
   /*
   1) File is Valid, File is NOT valid = determines CSS
@@ -114,20 +84,25 @@ export default function DropZone() {
   };
 
   return (
-    <div
-      className="dropzone-container"
-      onDragStart={handleDragOver}
-      onDragEnd={handleDragLeave}
-      onDrop={handleDrop}
-    >
-      <button className="submit-file-button">Add files</button>
-      <input id="hidden" type="file" title=" " hidden />
-      <FaUpload className="upload-svg-icon" />
-      <DropZoneText
-        fileValid={fileValid}
-        dragState={dragState}
-        className="dropzone-text"
-      />
-    </div>
+    <>
+      <ValidationText />
+      <div
+        className="dropzone-container"
+        onDragStart={handleDragOver}
+        onDragEnd={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        <button className="add-file-button">Add files</button>
+        <input id="hidden" type="file" title=" " hidden />
+        <FaUpload className="upload-svg-icon" />
+        <DropZoneText
+          fileValid={fileValid}
+          dragState={dragState}
+          className="dropzone-text"
+        />
+        <FileTally fileCount={fileCount} />
+      </div>
+      <button className="dropzone-submit-button">Submit</button>
+    </>
   );
 }

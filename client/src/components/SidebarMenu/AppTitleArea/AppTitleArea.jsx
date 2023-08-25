@@ -1,5 +1,5 @@
 ﻿import "./AppTitleArea.css";
-import DashiLogo from "../../assets/Dashi Logo.svg";
+import DashiLogo from "../../../assets/Dashi Logo.svg";
 
 import { Link } from "react-router-dom";
 

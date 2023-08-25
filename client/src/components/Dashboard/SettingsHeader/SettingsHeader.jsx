@@ -1,8 +1,8 @@
 ﻿import "./SettingsHeader.css";
 import TableTitle from "../TableTitle/TableTitle";
-import { GoGrabber } from "../../../node_modules/react-icons/go";
-import { TbArrowsDiagonalMinimize2 } from "../../../node_modules/react-icons/tb";
-import { TbMaximize } from "../../../node_modules/react-icons/tb";
+import { GoGrabber } from "react-icons/go";
+import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
+import { TbMaximize } from "react-icons/tb";
 
 export default function SettingsHeader({ setTableDisplay, tableDisplay }) {
   function displayTable(ev) {
