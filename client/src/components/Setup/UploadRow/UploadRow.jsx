@@ -37,7 +37,7 @@ export default function UploadRow({
       headerArr.forEach((header) => {
         console.log("newSeqTrackerObj[header]:", newSeqTrackerObj[header]);
         if (newSeqTrackerObj[header] > valueDeactivated) {
-          newSeqTrackerObj[header] -= 1;
+          --newSeqTrackerObj[header];
         }
       });
       // reduce tally by 1. Can only ever reduce tally by 1
@@ -52,7 +52,7 @@ export default function UploadRow({
         switchActivity(true); // updates UI
         newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
         setSeqTrackerObj(newSeqTrackerObj);
-        adjustCount(nextCount++); // increase tally by 1
+        adjustCount(++nextCount); // increase tally by 1
       }
     }
   }
