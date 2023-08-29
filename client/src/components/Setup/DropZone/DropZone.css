@@ -1,4 +1,8 @@
 .dropzone-container {
+  margin-top: 5rem;
+}
+
+.dropzone {
   display: grid;
   align-items: center;
   text-align: center;
@@ -11,7 +15,7 @@
 }
 
 /* children of container: */
-.dropzone-container > * {
+.dropzone > * {
   margin: 5px;
   justify-self: center;
   padding: 0.5rem;
@@ -60,7 +64,7 @@
 }
 
 /* DropZone Component State Handling CSS*/
-.dropzone-container:hover {
+.dropzone:hover {
   border: 1px dotted black;
   background-color: rgb(245, 245, 245);
   cursor: pointer;

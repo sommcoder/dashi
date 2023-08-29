@@ -11,8 +11,8 @@ import FileTally from "../FileTally/FileTally";
 
 const MAX_SIZE = 500000; // in bytes
 
-export default function DropZone() {
-  const { fileCount, addFile } = useState(0);
+export default function DropZone({ setHeaders }) {
+  const [fileCount, addFile] = useState(0);
 
   const containerState = {
     default: "dropzone-container",
@@ -42,6 +42,9 @@ export default function DropZone() {
 
   2) no action = default text/css
   3) default text, invalid text, valid text
+
+
+  ** dropzone should REMOVE duplicate Headers as part of it's validation process **
    
   */
 
@@ -64,6 +67,7 @@ export default function DropZone() {
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       ) {
         setFileValid(false);
+        setHeaders();
       } else {
         setFileValid(true);
       }
@@ -84,10 +88,10 @@ export default function DropZone() {
   };
 
   return (
-    <>
+    <div className="dropzone-container">
       <ValidationText />
       <div
-        className="dropzone-container"
+        className="dropzone"
         onDragStart={handleDragOver}
         onDragEnd={handleDragLeave}
         onDrop={handleDrop}
@@ -102,7 +106,7 @@ export default function DropZone() {
         />
         <FileTally fileCount={fileCount} />
       </div>
-      <button className="dropzone-submit-button">Submit</button>
-    </>
+      {/* <button className="dropzone-submit-button">Submit</button> */}
+    </div>
   );
 }

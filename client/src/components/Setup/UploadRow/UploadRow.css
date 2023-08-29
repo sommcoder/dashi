@@ -1,0 +1,88 @@
+.setup-header-row {
+  position: relative;
+  align-items: center;
+  width: auto;
+}
+
+.setup-headers {
+  /* child: header-sequence-number is based on this parent element */
+  justify-self: center;
+  align-self: center;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  display: block;
+  text-align: center;
+  border-radius: 15px;
+  width: 150px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.16);
+  border: 1px solid black;
+}
+.setup-headers:hover {
+  cursor: pointer;
+  border: 1px solid green;
+  background-color: rgb(225, 252, 225);
+}
+
+.selected {
+  border: 1px solid green;
+  background-color: rgb(184, 255, 184);
+}
+
+.disable {
+  background-color: darkgrey;
+  opacity: 50%;
+  border: 1px solid transparent;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.header-sequence-number {
+  position: absolute;
+  font-size: 1rem;
+  left: 5%;
+  top: 28%;
+}
+
+.header-x-container {
+  position: absolute;
+  font-size: 1.5rem;
+  text-align: center;
+  /* border: 1px black solid; */
+  transform: translate(900%, -200%);
+  height: 10px;
+  width: 10px;
+}
+
+.header-x-line {
+  position: absolute;
+  background-color: black;
+  transform: translate(100%, 15%);
+  left: 42.5%;
+  width: 1px;
+  height: 10px;
+}
+
+.header-x-line-right {
+  transform: rotate(45deg);
+}
+
+.header-x-line-left {
+  transform: rotate(-45deg);
+}
+
+.header-x-container:hover > .header-x-line {
+  background-color: grey;
+}
+
+.header-x-container:hover {
+  cursor: pointer;
+}
+
+.header-enter {
+}
+
+.header-leave {
+}

@@ -1,6 +1,6 @@
 ﻿import "./DropZoneText.css";
 
-function DropZoneText({ dragState, fileValid }) {
+export default function DropZoneText({ dragState, fileValid }) {
   const textState = {
     default: "Accepts .csv, .xsl and .xlsx files",
     valid: "Drop file(s) to upload",

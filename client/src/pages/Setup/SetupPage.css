@@ -1,0 +1,9 @@
+.setup-page-container {
+  display: grid;
+  grid-template-rows: 1fr 8fr;
+  align-items: baseline;
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
