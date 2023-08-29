@@ -3,10 +3,11 @@ import "./UploadRow.css";
 
 export default function UploadRow({
   headerName,
+  headerArr,
   seqTrackerObj,
   setSeqTrackerObj,
-  adjustTally,
-  currTally,
+  adjustCount,
+  nextCount,
 }) {
   /*
      
@@ -25,18 +26,34 @@ export default function UploadRow({
     - Loop through headerArr and reduce each value in the trackerObj by 1 if the index + 1 that is deleted is GREATER than the value of the key's value in the TrackerObj
      
     */
+    const newSeqTrackerObj = seqTrackerObj;
 
     if (active) {
       // already active, turns off active
-      switchActivity(false);
-
-      return;
+      switchActivity(false); // updates UI
+      const valueDeactivated = newSeqTrackerObj[headerName];
+      newSeqTrackerObj[headerName] = 0; // set current header to 0
+      // loop through all header keys, checking if their value is greater than the header value that was deactivated and reducing them by 1
+      headerArr.forEach((header) => {
+        console.log("newSeqTrackerObj[header]:", newSeqTrackerObj[header]);
+        if (newSeqTrackerObj[header] > valueDeactivated) {
+          newSeqTrackerObj[header] -= 1;
+        }
+      });
+      // reduce tally by 1. Can only ever reduce tally by 1
+      adjustCount(nextCount--);
+      // update with new Object:
+      setSeqTrackerObj(newSeqTrackerObj);
     } else {
       if (disable) {
+        // onClick: not active and disabled = enabled!
         toggleDisable(false);
-        return;
+      } else {
+        switchActivity(true); // updates UI
+        newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
+        setSeqTrackerObj(newSeqTrackerObj);
+        adjustCount(nextCount++); // increase tally by 1
       }
-      switchActivity(true);
     }
   }
 
@@ -48,6 +65,10 @@ export default function UploadRow({
       toggleDisable(true);
     }
   }
+
+  console.log("seqTrackerObj:", seqTrackerObj);
+  console.log("seqTrackerObj[headerName] :", seqTrackerObj[headerName]);
+  console.log("nextCount:", nextCount);
 
   /*
  onClick:
@@ -66,7 +87,9 @@ export default function UploadRow({
           disable ? "setup-headers disable" : "setup-headers"
         }`}
       >
-        <span className="header-sequence-number">{order ? order + 1 : ""}</span>
+        <span className="header-sequence-number">
+          {setSeqTrackerObj[headerName] ? setSeqTrackerObj[headerName] + 1 : ""}
+        </span>
         <span className="header-text">{headerName}</span>
       </span>
       <span

@@ -8,7 +8,7 @@ export default function HeaderSection({ headerArr, headerSeqTracker }) {
   const [seqTrackerObj, setSeqTrackerObj] = useState(headerSeqTracker);
 
   // know which number is NEXT if a new header is clicked
-  const [currTally, adjustTally] = useState(0);
+  const [nextCount, adjustCount] = useState(1);
 
   /*
 1) user drops a file
@@ -46,10 +46,11 @@ export default function HeaderSection({ headerArr, headerSeqTracker }) {
         <UploadRow
           key={i}
           headerName={headerName}
+          headerArr={headerArr}
           seqTrackerObj={seqTrackerObj}
           setSeqTrackerObj={setSeqTrackerObj}
-          currTally={currTally}
-          adjustTally={adjustTally}
+          nextCount={nextCount}
+          adjustCount={adjustCount}
         />
       ))}
     </div>
