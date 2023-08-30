@@ -15,10 +15,18 @@ export default function UploadRow({
      
     */
 
+  // UI State:
   const [active, switchActivity] = useState();
   const [disable, toggleDisable] = useState();
 
   function handleHeaderClick() {
+    console.log("START nextCount:", nextCount);
+    if (disable && !active) {
+      // onClick: not active and disabled = enabled!
+      toggleDisable(false);
+      return;
+    }
+
     // console.log("ev.target.dataset:", ev.target.dataset);
 
     /*
@@ -36,33 +44,43 @@ export default function UploadRow({
       // loop through all header keys, checking if their value is greater than the header value that was deactivated and reducing them by 1
       headerArr.forEach((header) => {
         console.log("newSeqTrackerObj[header]:", newSeqTrackerObj[header]);
+        // each header that has a value > than, gets reduced by 1
         if (newSeqTrackerObj[header] > valueDeactivated) {
           --newSeqTrackerObj[header];
+          adjustCount(--nextCount);
         }
+        // adjustCount(--nextCount);
       });
       // reduce tally by 1. Can only ever reduce tally by 1
       adjustCount(nextCount--);
       // update with new Object:
       setSeqTrackerObj(newSeqTrackerObj);
     } else {
-      if (disable) {
-        // onClick: not active and disabled = enabled!
-        toggleDisable(false);
-      } else {
-        switchActivity(true); // updates UI
-        newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
-        setSeqTrackerObj(newSeqTrackerObj);
-        adjustCount(++nextCount); // increase tally by 1
-      }
+      switchActivity(true); // updates UI
+      console.log("nextCount:", nextCount);
+      newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
+      setSeqTrackerObj(newSeqTrackerObj);
+      adjustCount(++nextCount); // increase tally by 1
     }
   }
 
   function handleCloseClick() {
+    const newSeqTrackerObj = seqTrackerObj;
+
     if (disable) {
       toggleDisable(false);
       return;
     } else {
       toggleDisable(true);
+      const valueDeactivated = newSeqTrackerObj[headerName];
+      newSeqTrackerObj[headerName] = 0; // set current header to 0
+      // loop through all header keys, checking if their value is greater than the header value that was deactivated and reducing them by 1
+      headerArr.forEach((header) => {
+        console.log("newSeqTrackerObj[header]:", newSeqTrackerObj[header]);
+        if (newSeqTrackerObj[header] > valueDeactivated) {
+          --newSeqTrackerObj[header];
+        }
+      });
     }
   }
 
@@ -88,7 +106,7 @@ export default function UploadRow({
         }`}
       >
         <span className="header-sequence-number">
-          {setSeqTrackerObj[headerName] ? setSeqTrackerObj[headerName] + 1 : ""}
+          {seqTrackerObj[headerName] ? seqTrackerObj[headerName] + 1 : ""}
         </span>
         <span className="header-text">{headerName}</span>
       </span>

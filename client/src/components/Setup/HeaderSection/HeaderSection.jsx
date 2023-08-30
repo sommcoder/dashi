@@ -4,9 +4,11 @@ import "./HeaderSection.css";
 import UploadRow from "../UploadRow/UploadRow";
 
 export default function HeaderSection({ headerArr, headerSeqTracker }) {
+  // Header State:
   // tracks which headers have which values:
   const [seqTrackerObj, setSeqTrackerObj] = useState(headerSeqTracker);
 
+  // Count State:
   // know which number is NEXT if a new header is clicked
   const [nextCount, adjustCount] = useState(1);
 
