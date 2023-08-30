@@ -36,6 +36,14 @@ export default function UploadRow({
     */
     const newSeqTrackerObj = seqTrackerObj;
 
+    if (!active) {
+      switchActivity(true); // updates UI
+      newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
+      setSeqTrackerObj(newSeqTrackerObj); // update header trackerObj
+      adjustCount(++nextCount); // increment count, update state by 1
+      return;
+    }
+
     if (active) {
       // already active, turns off active
       switchActivity(false); // updates UI
@@ -55,12 +63,6 @@ export default function UploadRow({
       adjustCount(nextCount--);
       // update with new Object:
       setSeqTrackerObj(newSeqTrackerObj);
-    } else {
-      switchActivity(true); // updates UI
-      console.log("nextCount:", nextCount);
-      newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
-      setSeqTrackerObj(newSeqTrackerObj);
-      adjustCount(++nextCount); // increase tally by 1
     }
   }
 
