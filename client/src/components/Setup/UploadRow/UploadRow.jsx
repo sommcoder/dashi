@@ -9,106 +9,73 @@ export default function UploadRow({
   adjustCount,
   nextCount,
 }) {
-  /*
-     
-    -not active nor inactive. Needs initial user input to start header sequencing
-     
-    */
-
   // UI State:
-  const [active, switchActivity] = useState();
+  const [selected, toggleSelection] = useState();
   const [disable, toggleDisable] = useState();
 
-  function handleHeaderClick() {
+  // sets clicked header to 0
+  // decrements selected headers if header > current header
+  function decrementSelectedHeaders(newSeqTrackerObj) {
+    const valueDeactivated = newSeqTrackerObj[headerName];
+    newSeqTrackerObj[headerName] = 0;
+
+    headerArr.forEach((key) => {
+      if (newSeqTrackerObj[key] > valueDeactivated) newSeqTrackerObj[key]--;
+    });
+
+    toggleSelection(false);
+    adjustCount(--nextCount);
+    setSeqTrackerObj(newSeqTrackerObj);
+  }
+
+  function handleHeaderClick(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
     console.log("START nextCount:", nextCount);
-    if (disable && !active) {
-      // onClick: not active and disabled = enabled!
-      toggleDisable(false);
-      return;
-    }
 
-    // console.log("ev.target.dataset:", ev.target.dataset);
+    if (disable && !selected) return toggleDisable(false);
 
-    /*
-     
-    - Loop through headerArr and reduce each value in the trackerObj by 1 if the index + 1 that is deleted is GREATER than the value of the key's value in the TrackerObj
-     
-    */
     const newSeqTrackerObj = seqTrackerObj;
 
-    if (!active) {
-      switchActivity(true); // updates UI
+    if (!selected) {
+      toggleSelection(true); // updates UI
       newSeqTrackerObj[headerName] = nextCount; // update curr header w. nextCount
       setSeqTrackerObj(newSeqTrackerObj); // update header trackerObj
       adjustCount(++nextCount); // increment count, update state by 1
       return;
-    }
-
-    if (active) {
-      // already active, turns off active
-      switchActivity(false); // updates UI
-      const valueDeactivated = newSeqTrackerObj[headerName];
-      newSeqTrackerObj[headerName] = 0; // set current header to 0
-      // loop through all header keys, checking if their value is greater than the header value that was deactivated and reducing them by 1
-      headerArr.forEach((header) => {
-        console.log("newSeqTrackerObj[header]:", newSeqTrackerObj[header]);
-        // each header that has a value > than, gets reduced by 1
-        if (newSeqTrackerObj[header] > valueDeactivated) {
-          --newSeqTrackerObj[header];
-          adjustCount(--nextCount);
-        }
-        // adjustCount(--nextCount);
-      });
-      // reduce tally by 1. Can only ever reduce tally by 1
-      adjustCount(nextCount--);
-      // update with new Object:
-      setSeqTrackerObj(newSeqTrackerObj);
-    }
-  }
-
-  function handleCloseClick() {
-    const newSeqTrackerObj = seqTrackerObj;
-
-    if (disable) {
-      toggleDisable(false);
-      return;
     } else {
-      toggleDisable(true);
-      const valueDeactivated = newSeqTrackerObj[headerName];
-      newSeqTrackerObj[headerName] = 0; // set current header to 0
-      // loop through all header keys, checking if their value is greater than the header value that was deactivated and reducing them by 1
-      headerArr.forEach((header) => {
-        console.log("newSeqTrackerObj[header]:", newSeqTrackerObj[header]);
-        if (newSeqTrackerObj[header] > valueDeactivated) {
-          --newSeqTrackerObj[header];
-        }
-      });
+      return decrementSelectedHeaders(newSeqTrackerObj);
     }
   }
 
-  console.log("seqTrackerObj:", seqTrackerObj);
-  console.log("seqTrackerObj[headerName] :", seqTrackerObj[headerName]);
-  console.log("nextCount:", nextCount);
+  function handleCloseClick(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    toggleDisable(true); // updates UI
 
-  /*
- onClick:
-1) push header to sequence up to UploadHeader
-2) 
- 
-*/
+    // was the header selected when disabled?
+    if (!selected) return toggleSelection(false); // updates UI
 
-  // with this we have to look up the value:
+    const newSeqTrackerObj = seqTrackerObj;
+    decrementSelectedHeaders(newSeqTrackerObj);
+  }
 
   return (
     <div className="setup-header-row">
       <span
         onClick={(ev) => handleHeaderClick(ev)}
-        className={`${active ? "setup-headers selected" : "setup-headers"} ${
+        className={`${selected ? "setup-headers selected" : "setup-headers"} ${
           disable ? "setup-headers disable" : "setup-headers"
         }`}
       >
-        <span className="header-sequence-number">
-          {seqTrackerObj[headerName] ? seqTrackerObj[headerName] + 1 : ""}
+        <span
+          className={`${
+            selected ? "header-sequence-number-wrapper" : "removed"
+          }`}
+        >
+          <h5 className="header-sequence-number">
+            {seqTrackerObj[headerName] ? seqTrackerObj[headerName] : " "}
+          </h5>
         </span>
         <span className="header-text">{headerName}</span>
       </span>

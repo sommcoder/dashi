@@ -39,11 +39,26 @@
   visibility: hidden;
 }
 
-.header-sequence-number {
+.removed {
+  display: none;
+}
+
+.header-sequence-number-wrapper {
   position: absolute;
-  font-size: 1rem;
-  left: 5%;
-  top: 28%;
+  font-size: 1.25rem;
+  border: 1px solid rgb(112, 112, 112);
+  padding: 0.2rem;
+  border-radius: 15px 0px 0px 15px;
+  left: 0%;
+  top: 0%;
+  height: 80%;
+  width: 10%;
+  background-color: white;
+  text-align: center;
+}
+
+.header-sequence-number {
+  margin-top: 37.5%;
 }
 
 .header-x-container {
