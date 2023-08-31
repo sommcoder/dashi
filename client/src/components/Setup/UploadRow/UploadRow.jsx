@@ -13,21 +13,6 @@ export default function UploadRow({
   const [selected, toggleSelection] = useState();
   const [disable, toggleDisable] = useState();
 
-  // sets clicked header to 0
-  // decrements selected headers if header > current header
-  function decrementSelectedHeaders(newSeqTrackerObj) {
-    const valueDeactivated = newSeqTrackerObj[headerName];
-    newSeqTrackerObj[headerName] = 0;
-
-    headerArr.forEach((key) => {
-      if (newSeqTrackerObj[key] > valueDeactivated) newSeqTrackerObj[key]--;
-    });
-
-    toggleSelection(false);
-    adjustCount(--nextCount);
-    setSeqTrackerObj(newSeqTrackerObj);
-  }
-
   function handleHeaderClick(ev) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -44,20 +29,16 @@ export default function UploadRow({
       adjustCount(++nextCount); // increment count, update state by 1
       return;
     } else {
-      return decrementSelectedHeaders(newSeqTrackerObj);
+      const valueDeactivated = newSeqTrackerObj[headerName];
+      newSeqTrackerObj[headerName] = 0;
+      headerArr.forEach((key) => {
+        if (newSeqTrackerObj[key] > valueDeactivated) newSeqTrackerObj[key]--;
+      });
+      toggleSelection(false);
+      adjustCount(--nextCount);
+      setSeqTrackerObj(newSeqTrackerObj);
+      return;
     }
-  }
-
-  function handleCloseClick(ev) {
-    ev.preventDefault();
-    ev.stopPropagation();
-    toggleDisable(true); // updates UI
-
-    // was the header selected when disabled?
-    if (!selected) return toggleSelection(false); // updates UI
-
-    const newSeqTrackerObj = seqTrackerObj;
-    decrementSelectedHeaders(newSeqTrackerObj);
   }
 
   return (
@@ -78,15 +59,6 @@ export default function UploadRow({
           </h5>
         </span>
         <span className="header-text">{headerName}</span>
-      </span>
-      <span
-        onClick={(ev) => handleCloseClick(ev)}
-        className={`${
-          disable ? "header-x-container hidden" : "header-x-container"
-        }`}
-      >
-        <div className="header-x-line header-x-line-left"></div>
-        <div className="header-x-line header-x-line-right"></div>
       </span>
     </div>
   );
