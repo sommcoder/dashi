@@ -1,7 +1,13 @@
 ﻿import "./TableTitle.css";
 
-export default function TableTitle() {
-  // get the table title
-
-  return <h4 className="table-title">Table Title</h4>;
+export default function TableTitle({ tableName }) {
+  return (
+    <>
+      {tableName ? (
+        <h4 className="table-title">${tableName}</h4>
+      ) : (
+        <input className="table-title table-title-input" />
+      )}
+    </>
+  );
 }

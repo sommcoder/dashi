@@ -16,3 +16,29 @@
   font-style: italic;
   margin-bottom: 1rem;
 }
+
+.header-template-name-container {
+  margin-top: 1rem;
+}
+
+.header-template-name-input {
+  display: block;
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 2rem;
+  font-size: 1.6rem;
+  width: 16rem;
+  padding: 0.25rem;
+  text-align: center;
+}
+
+.header-template-save-btn {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.header-template-save-btn:hover {
+  cursor: pointer;
+}

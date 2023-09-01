@@ -1,0 +1,50 @@
+[
+  {
+    "2023-05-28": {
+      "venue": {
+        "outlet": {
+          "biltmore": {
+            "family": {
+              "wine": {
+                "class": {
+                  "red wine": {
+                    "sales": 1054,
+                    "taxes": 123
+                  },
+                  "white wine": {
+                    "sales": 1054,
+                    "taxes": 123
+                  }
+                }
+              },
+              "liquor": {
+                "sales": 3254,
+                "taxes": 247
+              }
+            }
+          },
+          "rialto": {
+            "family": {
+              "wine": {
+                "class": {
+                  "red wine": {
+                    "sales": 1054,
+                    "taxes": 123
+                  },
+                  "white wine": {
+                    "sales": 1054,
+                    "taxes": 123
+                  }
+                }
+              },
+              "liquor": {
+                "sales": 3254,
+                "taxes": 247
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

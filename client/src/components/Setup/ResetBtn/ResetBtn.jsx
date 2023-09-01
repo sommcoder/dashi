@@ -1,8 +1,10 @@
-﻿import './ResetBtn.css';
+﻿import "./ResetBtn.css";
 
 export default function ResetBtn() {
-    return (
-        <div>
-        </div>
-    );
+  /*
+     
+    reset button can go at the top of the list of headers
+     
+    */
+  return <div></div>;
 }

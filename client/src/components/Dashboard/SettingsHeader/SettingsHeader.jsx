@@ -4,7 +4,11 @@ import { GoGrabber } from "react-icons/go";
 import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
 import { TbMaximize } from "react-icons/tb";
 
-export default function SettingsHeader({ setTableDisplay, tableDisplay }) {
+export default function SettingsHeader({
+  setTableDisplay,
+  tableDisplay,
+  tableName,
+}) {
   function displayTable(ev) {
     ev.preventDefault();
     tableDisplay ? setTableDisplay(false) : setTableDisplay(true);
@@ -13,7 +17,7 @@ export default function SettingsHeader({ setTableDisplay, tableDisplay }) {
   return (
     <div className="table-settings-header">
       <GoGrabber id="table-header-grab-icon" />
-      <TableTitle />
+      <TableTitle tableName={tableName} />
       {tableDisplay ? (
         <TbArrowsDiagonalMinimize2
           onClick={displayTable}

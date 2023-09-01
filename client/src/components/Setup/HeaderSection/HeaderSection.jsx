@@ -55,6 +55,10 @@ export default function HeaderSection({ headerArr, headerSeqTracker }) {
           adjustCount={adjustCount}
         />
       ))}
+      <div className="header-template-name-container">
+        <input className="header-template-name-input"></input>
+        <button className="header-template-save-btn">save</button>
+      </div>
     </div>
   );
 }

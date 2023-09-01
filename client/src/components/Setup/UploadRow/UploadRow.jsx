@@ -16,7 +16,6 @@ export default function UploadRow({
   function handleHeaderClick(ev) {
     ev.preventDefault();
     ev.stopPropagation();
-    console.log("START nextCount:", nextCount);
 
     if (disable && !selected) return toggleDisable(false);
 
@@ -41,6 +40,13 @@ export default function UploadRow({
     }
   }
 
+  /*
+   
+  Do we make the row an INPUT field as part of a form...?
+  the benefit would be that we can use focus() and FormData, right?
+
+   
+  */
   return (
     <div className="setup-header-row">
       <span
@@ -54,9 +60,10 @@ export default function UploadRow({
             selected ? "header-sequence-number-wrapper" : "removed"
           }`}
         >
-          <h5 className="header-sequence-number">
-            {seqTrackerObj[headerName] ? seqTrackerObj[headerName] : " "}
-          </h5>
+          <input
+            className="header-sequence-number"
+            value={seqTrackerObj[headerName] ? seqTrackerObj[headerName] : " "}
+          />
         </span>
         <span className="header-text">{headerName}</span>
       </span>
