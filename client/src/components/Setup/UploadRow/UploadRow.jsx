@@ -40,13 +40,6 @@ export default function UploadRow({
     }
   }
 
-  /*
-   
-  Do we make the row an INPUT field as part of a form...?
-  the benefit would be that we can use focus() and FormData, right?
-
-   
-  */
   return (
     <div className="setup-header-row">
       <span
@@ -60,10 +53,9 @@ export default function UploadRow({
             selected ? "header-sequence-number-wrapper" : "removed"
           }`}
         >
-          <input
-            className="header-sequence-number"
-            value={seqTrackerObj[headerName] ? seqTrackerObj[headerName] : " "}
-          />
+          <h5 className="header-sequence-number">
+            {seqTrackerObj[headerName] ? seqTrackerObj[headerName] : " "}
+          </h5>
         </span>
         <span className="header-text">{headerName}</span>
       </span>

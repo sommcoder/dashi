@@ -5,7 +5,6 @@ import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import RouteLoader from "../../RouteLoader/RouteLoader";
 
 import { useQuery, useQueryClient } from "react-query";
-
 import { useEffect, useState, Suspense } from "react";
 
 const fetchTables = async (type) => {
@@ -21,6 +20,8 @@ const fetchTables = async (type) => {
 export default function Table({ tableType }) {
   /*
 - Trying to make Table component REUSABLE across Pages. 
+- SO IT IS THE PAGE THAT SHOULD FETCH THE DATA, the table is data agnostic
+- ALSO the table could be a DISPLAY or a SETUP table
 - Either it fetches data from the API OR simply provides blank table data 
 - we must rely on the "tableType" prop to determine how the table will render
 */

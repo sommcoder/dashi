@@ -4,6 +4,10 @@
   width: auto;
 }
 
+.setup-header-row:last-child {
+  margin-bottom: 1rem;
+}
+
 .setup-headers {
   /* child: header-sequence-number is based on this parent element */
   justify-self: center;

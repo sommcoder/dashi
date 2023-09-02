@@ -41,9 +41,6 @@ export default function HeaderSection({ headerArr, headerSeqTracker }) {
 
   return (
     <div className="setup-header-container">
-      <h5 className="setup-header-instructions">
-        select the headers you <br /> want for your template
-      </h5>
       {headerArr.map((headerName, i) => (
         <UploadRow
           key={i}
@@ -55,10 +52,6 @@ export default function HeaderSection({ headerArr, headerSeqTracker }) {
           adjustCount={adjustCount}
         />
       ))}
-      <div className="header-template-name-container">
-        <input className="header-template-name-input"></input>
-        <button className="header-template-save-btn">save</button>
-      </div>
     </div>
   );
 }
