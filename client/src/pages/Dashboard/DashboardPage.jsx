@@ -5,6 +5,13 @@ import { useState } from "react";
 
 export default function Dashboard() {
   /*
+WHAT IS THE DASHBOARD PAGE? 
+
+- a combination of all the things the users wishes to see 
+- it's a snapshot of the businesses health
+
+
+
  - Dashboard requests tables from server and passes down props to child components
    
   */
@@ -12,6 +19,7 @@ export default function Dashboard() {
   // dashboard GETS tables from server
 
   // dummy data, dashboard generates 2 tables:
+
   const tableArr = [1, 2];
   // should provide Loading components to indicate that the component is being generated / requested from the server
 

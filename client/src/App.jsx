@@ -1,8 +1,8 @@
 // Pages:
-import Dashboard from "./pages/Dashboard/DashboardPage.jsx";
-import SetupPage from "./pages/Setup/SetupPage.jsx";
+import Dashboard from "./pages/Dashboard/DashboardPage";
+import SetupPage from "./pages/Setup/SetupPage";
 // Menu:
-import NavSideBarMenu from "./components/SidebarMenu/NavSideBarMenu/NavSideBarMenu.jsx";
+import NavSideBarMenu from "./components/SidebarMenu/NavSideBarMenu/NavSideBarMenu";
 import "./App.css";
 // react:
 import { useState } from "react";

@@ -39,6 +39,11 @@ export default function Table({ tableType }) {
 
   let headers = Object.keys(data[0]);
 
+  /*
+   
+ - Table component will determine it's styling based on the incoming data from the Page!
+   
+  */
   const initColSizingSeq = []; // this is an array of the size of each column
 
   function getAverage(valArr) {
@@ -96,6 +101,7 @@ export default function Table({ tableType }) {
           tableName={tableName}
           tableDisplay={tableDisplay}
           setTableDisplay={setTableDisplay}
+          tableType={tableType}
         />
         <HeaderRow
           tableDisplay={tableDisplay}

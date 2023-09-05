@@ -8,11 +8,21 @@ export default function SettingsHeader({
   setTableDisplay,
   tableDisplay,
   tableName,
+  tableType,
 }) {
   function displayTable(ev) {
     ev.preventDefault();
     tableDisplay ? setTableDisplay(false) : setTableDisplay(true);
   }
+
+  /*
+   
+  1) table grabber should only be present/grabbable if Tabletype === 'dashboard'. All other instances of 
+  2) tables should only be grabbable 
+  3) if tableType === 'setup' an input field is present so user can name the table 
+  4) user is required to assign the table to a CATEGORY (ie. products, sales, purchasing)
+   
+  */
 
   return (
     <div className="table-settings-header">
