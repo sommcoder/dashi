@@ -1,0 +1,15 @@
+.header-bar-item-list-container {
+  display: flex;
+  justify-items: right;
+}
+
+.header-save-btn {
+  width: 50px;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: none;
+}
+
+.header-save-btn:last-child {
+  margin-right: 5rem;
+}
