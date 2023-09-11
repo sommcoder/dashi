@@ -1,16 +1,17 @@
 .nav-side-bar-list {
   align-self: self-start;
   display: grid;
-  gap: 1.5rem;
   grid-template-rows: fit-content(100%);
   justify-content: stretch;
   list-style: none;
   margin-top: 3rem;
+  width: 100%;
 }
 
 .nav-side-bar-item {
   display: list-item;
-  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 0rem 0.5rem 2rem;
 }
 
 .nav-side-bar-item:hover {

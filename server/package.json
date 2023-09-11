@@ -5,17 +5,18 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gcloud app deploy"
   },
   "author": "Brian Davies",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^7.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
-    "mongodb": "^5.5.0",
-    "mongoose": "^7.2.1",
     "nodemon": "^2.0.22",
     "pdf-parse": "^1.1.1"
   }

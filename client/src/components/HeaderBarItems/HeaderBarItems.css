@@ -8,6 +8,14 @@
   border-radius: 5px;
   padding: 0.5rem;
   border: none;
+  min-width: 75px;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.header-save-btn:hover {
+  cursor: pointer;
+  filter: brightness(95%);
 }
 
 .header-save-btn:last-child {
