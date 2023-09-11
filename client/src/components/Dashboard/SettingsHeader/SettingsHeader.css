@@ -1,7 +1,5 @@
 .table-settings-header {
   display: grid;
-  grid-template-columns: 5% 90% 5%;
-
   align-items: center;
   background-color: rgb(225, 244, 250);
   color: rgb(32, 44, 48);

@@ -5,7 +5,6 @@ import { useQuery, useQueryClient } from "react-query";
 import { FaUpload } from "../../../../node_modules/react-icons/fa";
 import "./DropZone.css";
 // components:
-import ValidationText from "../ValidationText/ValidationText";
 import DropZoneText from "../DropZoneText/DropZoneText";
 import FileTally from "../FileTally/FileTally";
 
@@ -89,7 +88,6 @@ export default function DropZone({ setHeaders }) {
 
   return (
     <div className="dropzone-container">
-      <ValidationText />
       <div
         className="dropzone"
         onDragStart={handleDragOver}

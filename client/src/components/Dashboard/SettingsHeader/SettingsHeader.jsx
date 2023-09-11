@@ -1,5 +1,7 @@
 ﻿import "./SettingsHeader.css";
 import TableTitle from "../TableTitle/TableTitle";
+import TableInputMsg from "../TableInputMsg/TableInputMsg";
+
 import { GoGrabber } from "react-icons/go";
 import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
 import { TbMaximize } from "react-icons/tb";
@@ -24,11 +26,26 @@ export default function SettingsHeader({
    
   */
 
+  // display headerStyle:
+  const headerStyle = { "grid-template-columns": "5% 90% 5%" };
+
+  // setup headerStyle:
+  const setupHeaderStyle = { "grid-template-columns": "15% 85%" };
+
   return (
-    <div className="table-settings-header">
-      <GoGrabber id="table-header-grab-icon" />
+    <div
+      className="table-settings-header"
+      style={tableType === "setup" ? setupHeaderStyle : headerStyle}
+    >
+      {tableType === "setup" ? (
+        <TableInputMsg />
+      ) : (
+        <GoGrabber id="table-header-grab-icon" />
+      )}
       <TableTitle tableName={tableName} />
-      {tableDisplay ? (
+      {tableType === "setup" ? (
+        ""
+      ) : tableDisplay ? (
         <TbArrowsDiagonalMinimize2
           onClick={displayTable}
           className="table-header-icon"

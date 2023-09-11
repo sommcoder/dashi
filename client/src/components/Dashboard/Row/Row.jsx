@@ -27,8 +27,8 @@ export default function Row({ data, colStyleString, tableDisplay }) {
    
   */
 
-  console.log("ROW: colStyleString:", colStyleString);
-  console.log("data:", data);
+  // console.log("ROW: colStyleString:", colStyleString);
+  // console.log("data:", data);
 
   return (
     <div

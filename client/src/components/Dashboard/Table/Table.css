@@ -1,5 +1,6 @@
 .dashboard-table {
   display: grid;
+  min-width: 500px;
   text-align: left;
   align-self: baseline;
   border: 1px solid black;

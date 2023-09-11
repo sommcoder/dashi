@@ -24,6 +24,8 @@ export default function SetupPage() {
    
   */
 
+  const tableType = "setup";
+
   return (
     <div className="setup-page-container">
       <DropZone setHeaders={setHeaders} />
@@ -31,7 +33,7 @@ export default function SetupPage() {
         headerArr={headerArr}
         headerSeqTracker={headerSeqTracker}
       />
-      <Table />
+      <Table tableType={tableType} />
     </div>
   );
 }

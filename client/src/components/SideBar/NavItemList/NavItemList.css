@@ -6,12 +6,13 @@
   list-style: none;
   margin-top: 3rem;
   width: 100%;
+  align-items: center;
 }
 
 .nav-side-bar-item {
-  display: list-item;
-  min-height: 2.5rem;
-  padding: 0.5rem 0rem 0.5rem 2rem;
+  display: grid;
+  align-items: center;
+  min-height: 3.5rem;
 }
 
 .nav-side-bar-item:hover {
@@ -20,11 +21,15 @@
 }
 
 .link-label {
-  list-style: none;
+  margin-left: 1.5rem;
   text-decoration: none;
   color: rgb(231, 231, 231);
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+#link-logo {
+  margin-left: 0;
 }
 
 /*

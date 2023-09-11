@@ -8,7 +8,7 @@ export default function AppNameLogo() {
 
   return (
     <div className="app-title-container">
-      <Link className="link-label" to="/">
+      <Link id="link-logo" className="link-label" to="/">
         <img className="app-logo" src={DashiLogo} />
         <h1 className="app-title">Dashi</h1>
         <h5 className="app-title-slogan">your F&B sales dashboard &</h5>

@@ -68,7 +68,7 @@ export default function Table({ tableType }) {
 
   if (tableType === "display") determineAvgColWidth(data, headers);
 
-  console.log("initColSizingSeq:", initColSizingSeq);
+  // console.log("initColSizingSeq:", initColSizingSeq);
 
   const colStyleString =
     "20px " +
@@ -93,6 +93,8 @@ export default function Table({ tableType }) {
   // based on the sequence will determine which keys we access from our JSON data as we iterate through it
 
   const tableName = "";
+
+  console.log("tableType:", tableType);
 
   return (
     <Suspense fallback={<RouteLoader />}>

@@ -21,7 +21,7 @@ export default function HeaderRow({
     borderRadius: " 10px",
   };
 
-  console.log("colStyleString:", colStyleString);
+  // console.log("colStyleString:", colStyleString);
 
   return (
     <div

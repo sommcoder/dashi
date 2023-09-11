@@ -41,6 +41,7 @@ export default function HeaderSection({ headerArr, headerSeqTracker }) {
 
   return (
     <div className="setup-header-container">
+      <h5>File Name</h5>
       {headerArr.map((headerName, i) => (
         <UploadRow
           key={i}
