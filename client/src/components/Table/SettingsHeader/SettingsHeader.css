@@ -5,6 +5,7 @@
   color: rgb(32, 44, 48);
   font-size: 1.5rem;
   border-radius: 10px 10px 0px 0px;
+  position: relative;
 }
 
 #table-header-grab-icon {

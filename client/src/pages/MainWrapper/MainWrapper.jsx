@@ -4,7 +4,7 @@ import Dashboard from "../Dashboard/DashboardPage";
 import SetupPage from "../Setup/SetupPage";
 
 // components:
-import HeaderBarMenu from "../../navigation/HeaderBarMenu/HeaderBarMenu";
+import HeaderBarMenu from "../../navigation/Header/HeaderBarMenu/HeaderBarMenu";
 // react:
 import { useState } from "react";
 // react router:
@@ -24,8 +24,9 @@ export default function MainWrapper() {
       <Routes>
         <Route index path="/" element={<Dashboard />} />
         <Route path="/sales" element={<div>sales!</div>} />
-        <Route path="/products" element={<div>products!</div>} />
-        <Route path="/purchasing" element={<div>purchasing!</div>} />
+        <Route path="/items" element={<div>items!</div>} />
+        <Route path="/orders" element={<div>Orders!</div>} />
+        <Route path="/reports" element={<div>reports!</div>} />
         <Route path="/setup" element={<SetupPage />} />
       </Routes>
     </div>

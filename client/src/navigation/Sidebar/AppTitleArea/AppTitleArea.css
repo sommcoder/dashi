@@ -1,16 +1,19 @@
 .app-title-container {
   margin-top: 4rem;
-  padding: 1.25rem 2.5rem;
+  border-bottom: 1px solid gray;
+  width: 100%;
 }
 
 .app-logo {
   height: 6rem;
+  margin-left: 2rem;
 }
 
 .app-title {
   color: white;
   font-size: 2rem;
   margin: 0.25rem 0rem 0.25rem 0rem;
+  margin-left: 2rem;
 }
 
 /* have slogan text wrap */

@@ -1,0 +1,33 @@
+.side-menu-dropdown-icon-container {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  animation: dropdown;
+}
+
+.side-menu-dropdown-arrow {
+  position: absolute;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-radius: 15px;
+  margin-right: 1rem;
+  width: 20px;
+  height: 20px;
+  left: 25%;
+}
+
+.top-arrow-line {
+  transform: rotateY(45deg);
+}
+
+.bottom-arrow-line {
+  transform: rotateY(-45deg);
+}
+
+@keyframes dropdown {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(45deg);
+  }
+}

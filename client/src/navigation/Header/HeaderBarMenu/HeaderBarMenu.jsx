@@ -1,5 +1,5 @@
 ﻿import "./HeaderBarMenu.css";
-import HeaderBarItems from "../../components/HeaderBarItems/HeaderBarItems";
+import HeaderBarItems from "../HeaderBarItems/HeaderBarItems";
 
 export default function HeaderBarMenu() {
   /*

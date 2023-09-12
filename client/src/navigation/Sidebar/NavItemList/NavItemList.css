@@ -1,0 +1,18 @@
+.nav-side-bar-list {
+  align-self: self-start;
+  display: grid;
+  list-style: none;
+  margin-top: 3rem;
+  width: 100%;
+  align-items: center;
+}
+
+#link-logo {
+  margin-left: 0;
+}
+
+/*
+ 
+CREATE A HIGHLIGHT when user hovers over the menu list item
+ 
+*/

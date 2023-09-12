@@ -1,3 +1,5 @@
 .table-input-message {
   text-wrap: nowrap;
+  font-style: italic;
+  text-align: right;
 }

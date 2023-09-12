@@ -1,6 +1,6 @@
 .nav-side-bar-container {
   display: grid;
-  grid-template-rows: 1fr 2fr 1fr; /* 6 fr height */
+  grid-template-rows: 0.75fr 2fr 1fr; /* 6 fr height */
   justify-items: left;
 
   width: 100%;

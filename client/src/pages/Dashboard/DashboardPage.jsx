@@ -1,9 +1,24 @@
 import "./DashboardPage.css";
-import Table from "../../components/Dashboard/Table/Table.jsx";
+import Table from "../../components/Table/Table/Table.jsx";
 import RouteLoader from "../../components/RouteLoader/RouteLoader";
 import { useState } from "react";
 
+const fetchTables = async (type) => {
+  if (type === "display") {
+    const data = await fetch(`${import.meta.env.VITE_SERVER_URL}/tables`).then(
+      (res) => res.json()
+    );
+    console.log("data:", data);
+    return data;
+  }
+};
+
 export default function Dashboard() {
+  // fetch data from server:
+  // let { data, isLoading } = useQuery(["table-data"], fetchTables(tableType), {
+  //   suspense: true,
+  // });
+
   /*
 WHAT IS THE DASHBOARD PAGE? 
 

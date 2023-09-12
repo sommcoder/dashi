@@ -11,8 +11,6 @@ export default function AppNameLogo() {
       <Link id="link-logo" className="link-label" to="/">
         <img className="app-logo" src={DashiLogo} />
         <h1 className="app-title">Dashi</h1>
-        <h5 className="app-title-slogan">your F&B sales dashboard &</h5>
-        <h5 className="app-title-slogan">product hub</h5>
       </Link>
     </div>
   );

@@ -3,7 +3,7 @@ import RowCell from "../RowCell/RowCell";
 import RowCellGap from "../RowCellGap/RowCellGap";
 import RowCellCheckbox from "../RowCellCheckbox/RowCellCheckbox";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 export default function Row({ data, colStyleString, tableDisplay }) {
   const [show, setShow] = useState(false);
@@ -41,10 +41,10 @@ export default function Row({ data, colStyleString, tableDisplay }) {
       <RowCellCheckbox />
       {Object.keys(data).map((val, i) => {
         return show ? (
-          <>
-            <RowCell key={i} value={data[val]} />{" "}
-            <RowCellGap colStyleString={colStyleString} />
-          </>
+          <Fragment key={`frag-${i}`}>
+            <RowCell key={`cell-${i}`} value={data[val]} />{" "}
+            <RowCellGap key={`gap-${i}`} colStyleString={colStyleString} />
+          </Fragment>
         ) : (
           ""
         );

@@ -1,6 +1,6 @@
-﻿import AppTitleArea from "../../components/SideBar/AppTitleArea/AppTitleArea";
-import NavItemList from "../../components/SideBar/NavItemList/NavItemList";
-import SideNavBarFooter from "../../components/SideBar/SideNavBarFooter/SideNavBarFooter";
+﻿import AppTitleArea from "../AppTitleArea/AppTitleArea";
+import NavItemList from "../NavItemList/NavItemList";
+import SideNavBarFooter from "../SideNavBarFooter/SideNavBarFooter";
 
 import "./NavSideBarMenu.css";
 

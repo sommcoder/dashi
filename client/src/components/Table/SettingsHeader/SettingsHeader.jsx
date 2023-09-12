@@ -27,10 +27,10 @@ export default function SettingsHeader({
   */
 
   // display headerStyle:
-  const headerStyle = { "grid-template-columns": "5% 90% 5%" };
+  const headerStyle = { gridTemplateColumns: "5% 90% 5%" };
 
   // setup headerStyle:
-  const setupHeaderStyle = { "grid-template-columns": "15% 85%" };
+  const setupHeaderStyle = { gridTemplateColumns: "30% 40% 30%" };
 
   return (
     <div
