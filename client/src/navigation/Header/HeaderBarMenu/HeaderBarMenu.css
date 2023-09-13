@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 6rem;
   justify-content: flex-end;
   box-shadow: 10px 0 5px 4px rgba(0, 0, 0, 0.12),
     10px 0 5px 4px rgba(0, 0, 0, 0.16), 10px 0 5px 4px rgba(0, 0, 0, 0.2);
   background-color: rgb(62, 91, 100);
-
   background-image: linear-gradient(
     to right,
     rgb(62, 91, 100),

@@ -1,6 +1,6 @@
 // Menu:
-import NavSideBarMenu from "./navigation/Sidebar/NavSideBarMenu/NavSideBarMenu";
-import MainWrapper from "./pages/MainWrap per/MainWrapper";
+import NavSideBarMenu from "./navigation/Sidebar/SideBar/SideBar";
+import MainWrapper from "./pages/MainWrapper/MainWrapper";
 
 import "./App.css";
 

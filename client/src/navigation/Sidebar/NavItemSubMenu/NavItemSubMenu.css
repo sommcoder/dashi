@@ -1,0 +1,30 @@
+.link-label {
+  /* margin-left: 1rem; */
+  text-decoration: none;
+  color: transparent;
+  font-size: 1.5rem;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.submenu-item:hover {
+  cursor: pointer;
+  background-color: rgb(27, 64, 75);
+}
+
+.submenu-item {
+  z-index: 1; /* needs to slide UNDER the Menus */
+  height: 0;
+  display: grid;
+  align-items: center;
+}
+
+.submenu-link {
+  z-index: 1; /* needs to slide UNDER the Menus */
+  height: 0;
+}
+
+.active {
+  color: rgb(231, 231, 231);
+  transition: color ease-in-out;
+}

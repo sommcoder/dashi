@@ -1,15 +1,15 @@
 ﻿import AppTitleArea from "../AppTitleArea/AppTitleArea";
 import NavItemList from "../NavItemList/NavItemList";
-import SideNavBarFooter from "../SideNavBarFooter/SideNavBarFooter";
+import SideBarFooter from "../SideBarFooter/SideBarFooter";
 
-import "./NavSideBarMenu.css";
+import "./SideBar.css";
 
-export default function NavSideBarMenu() {
+export default function SideBar() {
   return (
     <nav className="nav-side-bar-container">
       <AppTitleArea />
       <NavItemList />
-      <SideNavBarFooter />
+      <SideBarFooter />
     </nav>
   );
 }

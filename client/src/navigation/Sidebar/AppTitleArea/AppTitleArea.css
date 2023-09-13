@@ -1,5 +1,6 @@
 .app-title-container {
   margin-top: 4rem;
+  padding-bottom: 2rem;
   border-bottom: 1px solid gray;
   width: 100%;
 }

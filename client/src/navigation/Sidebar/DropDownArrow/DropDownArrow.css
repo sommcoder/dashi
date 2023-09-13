@@ -2,7 +2,8 @@
   width: 100%;
   position: relative;
   height: 100%;
-  animation: dropdown;
+  transform: rotate(-90deg);
+  transition: transform 200ms ease-in-out;
 }
 
 .side-menu-dropdown-arrow {
@@ -16,18 +17,14 @@
 }
 
 .top-arrow-line {
-  transform: rotateY(45deg);
+  transform: rotateY(40deg);
 }
 
 .bottom-arrow-line {
-  transform: rotateY(-45deg);
+  transform: rotateY(-40deg);
 }
 
-@keyframes dropdown {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(45deg);
-  }
+.rotate {
+  transform: rotateY(0deg);
+  transition: transform 200ms ease-in-out;
 }
