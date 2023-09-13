@@ -1,8 +1,7 @@
 .nav-side-bar-container {
   display: grid;
-  grid-template-rows: auto auto 1fr; /* 6 fr height */
+  grid-template-rows: auto auto 1fr;
   justify-items: left;
-
   width: 100%;
   height: 100%;
   background-image: linear-gradient(
@@ -14,9 +13,4 @@
   box-shadow: 10px 0 5px -8px rgba(0, 0, 0, 0.12),
     10px 0 5px -8px rgba(0, 0, 0, 0.16), 10px 0 5px -6px rgba(0, 0, 0, 0.2);
   z-index: 2;
-}
-
-.nav-side-bar-container > li {
-  padding-left: 0rem;
-  width: 100%;
 }
