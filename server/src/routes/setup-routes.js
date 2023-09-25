@@ -1,11 +1,8 @@
 import express from "express";
 
-// temporary testing solution until we hook up the DB:
-import data from "../db.json" assert { type: "json" };
-
 export const router = express.Router();
 
-// get a table
+// get a template
 router.get("/", (req, res, next) => {
   try {
     res.json(data); //res.json also sends
@@ -14,28 +11,28 @@ router.get("/", (req, res, next) => {
   }
 });
 
-// add a table
+// add a template
 router.post("/", (req, res) => {
   try {
-    res.status(200).json({ message: "Added a Table!" });
+    res.status(200).json({ message: "Added a Template!" });
   } catch (err) {
     console.log("error:", err.message);
   }
 });
 
-// update a table
+// update a template
 router.put("/:id", (req, res) => {
   try {
-    res.status(200).json({ message: `Updated Table ${req.params.id}!` });
+    res.status(200).json({ message: `Updated Template ${req.params.id}!` });
   } catch (err) {
     console.log("error:", err.message);
   }
 });
 
-// remove a table
+// delete a template
 router.delete("/:id", (req, res) => {
   try {
-    res.status(200).json({ message: `Updated Table ${req.params.id}` });
+    res.status(200).json({ message: `Updated Template ${req.params.id}` });
   } catch (err) {
     console.log("error:", err.message);
   }
