@@ -1,15 +1,15 @@
 .link-label {
   text-decoration: none;
-  color: transparent;
+  color: rgb(231, 231, 231);
   font-size: 1.5rem;
   font-weight: 600;
   z-index: 1;
 }
 
 .submenu-item-row {
+  opacity: 0;
   z-index: 1; /* needs to slide UNDER the Menus */
   color: rgb(231, 231, 231);
-  opacity: 0;
   display: grid;
   align-items: center;
   padding-left: 4rem;
@@ -26,10 +26,10 @@
 .submenu-link {
   width: 100%;
   z-index: 1; /* needs to slide UNDER the Menus */
+  opacity: 0;
 }
 
 .active {
   opacity: 1;
-  color: rgb(231, 231, 231);
-  transition: opacity 600ms ease-in-out;
+  transition: opacity 1000ms 200ms ease-in-out;
 }

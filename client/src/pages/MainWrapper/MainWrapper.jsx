@@ -1,16 +1,26 @@
 ﻿import "./MainWrapper.css";
-// Pages:
+//////////////////////////////////////////////////////////////////
+// Main:
 import Dashboard from "../Dashboard/DashboardPage";
-import Setup from "../Setup/SetupPage";
-import Families from "../Families/Families";
-import Invoices from "../Invoices/Invoices";
-import Items from "../Items/Items";
-import PurchaseOrders from "../PurchaseOrders/PurchaseOrders";
-import Reports from "../Reports/Reports";
-import Requisitions from "../Requisitions/Requisitions";
+// Sales:
 import Sales from "../Sales/Sales";
+// Items:
+import Items from "../Items/Items";
+import Families from "../Families/Families";
 import Vendors from "../Vendors/Vendors";
-
+// Inventories:
+import Inventories from "../Inventories/Inventories";
+import Areas from "../Areas/Areas";
+import Transfers from "../Transfers/Transfers";
+import Depletions from "../Depletions/Depletions";
+// Orders:
+import Orders from "../Orders/Orders";
+import Invoices from "../Invoices/Invoices";
+// Reports:
+import Reports from "../Reports/Reports";
+// Setup:
+import Setup from "../Setup/SetupPage";
+//////////////////////////////////////////////////////////////////
 // components:
 import HeaderBarMenu from "../../navigation/Header/HeaderBarMenu/HeaderBarMenu";
 // react:
@@ -21,7 +31,7 @@ import { Routes, Route } from "react-router-dom";
 export default function MainWrapper() {
   /*
   - MainWrapper houses our ROUTES.
-  - State is controlled here and is pushed up from the HeaderBarMenu and passed down to Routes.
+  - State is controlled here and can be pushed up from the HeaderBarMenu and passed down to Routes.
   - HeaderBarMenu provides some consistent functionality across the Pages/Routes
   */
   return (
@@ -33,8 +43,11 @@ export default function MainWrapper() {
         <Route path="/items" element={<Items />} />
         <Route path="/families" element={<Families />} />
         <Route path="/vendors" element={<Vendors />} />
-        <Route path="/requisitions" element={<Requisitions />} />
-        <Route path="/purchase-orders" element={<PurchaseOrders />} />
+        <Route path="/inventories" element={<Inventories />} />
+        <Route path="/areas" element={<Areas />} />
+        <Route path="/depletions" element={<Depletions />} />
+        <Route path="/transfers" element={<Transfers />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/invoices" element={<Invoices />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/setup" element={<Setup />} />

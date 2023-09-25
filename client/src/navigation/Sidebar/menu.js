@@ -8,6 +8,7 @@ export const navMenuList = [
       },
     ],
   },
+
   {
     menu: "Items",
     subMenus: [
@@ -16,7 +17,7 @@ export const navMenuList = [
         path: "/items",
       },
       {
-        subMenu: "Families",
+        subMenu: "Families & Categories",
         path: "/families",
       },
       {
@@ -26,15 +27,32 @@ export const navMenuList = [
     ],
   },
   {
+    menu: "Inventories",
+    subMenus: [
+      {
+        subMenu: "Inventories",
+        path: "/inventories",
+      },
+      {
+        subMenu: "Areas",
+        path: "/areas",
+      },
+      {
+        subMenu: "Transfers",
+        path: "/transfers",
+      },
+      {
+        subMenu: "Depletions",
+        path: "/depletions",
+      },
+    ],
+  },
+  {
     menu: "Orders",
     subMenus: [
       {
-        subMenu: "Requisitions",
-        path: "/requisitions",
-      },
-      {
         subMenu: "Purchase Orders",
-        path: "/purchase-orders",
+        path: "/orders",
       },
       {
         subMenu: "Invoices",
