@@ -13,6 +13,7 @@
   "author": "Brian Davies",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.9.3",
     "@google-cloud/storage": "^7.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
