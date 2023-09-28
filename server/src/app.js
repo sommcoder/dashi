@@ -2,9 +2,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import cors from "cors";
-import { typeDefs } from "./models/typeDefs.js";
-import * as db from "./models/users.json" assert { type: "json" };
+import { typeDefs } from "./models/schema.js";
+// import * as db from "./models/users.json" assert { type: "json" };
 import { resolvers } from "./controllers/resolver.js";
 
 const PORT = process.env.PORT || 3000;

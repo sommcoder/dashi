@@ -33,7 +33,8 @@
 
 */
 
-import * as mw from "../middleware/middleware";
+import * as mw from "../middleware/middleware.js";
+console.log("mw:", mw);
 /*
  
  Except they resolve all the way down. What does that mean? Well therefore, resolvers resolving a type, and a type has a field that's referring to another type, and then that type has a field that's referring to another type.
