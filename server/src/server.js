@@ -2,17 +2,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "./models/schema.js";
-// import * as db from "./models/users.json" assert { type: "json" };
-import { resolvers } from "./controllers/resolver.js";
+import { typeDefs } from "./graphql/typeDefs/index.js";
+import { resolvers } from "./graphql/resolvers/index.js";
 
 const PORT = process.env.PORT || 3000;
 
 const server = new ApolloServer({
-  // typeDefs -> how to compose a schema
   typeDefs,
   resolvers,
-  // resolvers -> functions for how we respond to queries. Ie fetch data from a database!
 });
 
 const { url } = await startStandaloneServer(server, {

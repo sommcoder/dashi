@@ -1,6 +1,6 @@
-import * as pg from "./index.js";
+// import * as pg from "./index.js";
 
-console.log("pg:", pg);
+// console.log("pg:", pg);
 
 /*
 
@@ -9,5 +9,11 @@ console.log("pg:", pg);
 - authorization
 - logging
 - rate-limiting
+
+
+0Auth -> google for authentication
+
  
 */
+
+// server side validation:

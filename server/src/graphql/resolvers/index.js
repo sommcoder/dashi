@@ -1,3 +1,32 @@
+// import { mergeResolvers } from "@graphql-tools/merge";
+
+// const resolvers = [
+//   // import above and put resolvers here
+// ];
+
+// export default mergeResolvers(resolvers);
+
+export const resolvers = {
+  Query: {
+    account() {
+      return db.account;
+    },
+    venue() {
+      return db.account;
+    },
+    area() {
+      return db.account;
+    },
+  },
+  Mutations: {
+    updateAccount() {
+      return db.account;
+    },
+  },
+};
+
+// Resolvers are responsible for LINKING the schema field to the data source.
+
 // graphql requests are parsed and validated against the schema
 // graphql receives the request to determine WHAT the request even says because it's just a STRING essentially that requires a schema to be parsed and validated against.
 
@@ -33,8 +62,6 @@
 
 */
 
-import * as mw from "../middleware/middleware.js";
-console.log("mw:", mw);
 /*
  
  Except they resolve all the way down. What does that mean? Well therefore, resolvers resolving a type, and a type has a field that's referring to another type, and then that type has a field that's referring to another type.
@@ -43,17 +70,10 @@ You have to have a resolver for every single type all the way down, so it resolv
  
 */
 
-export const resolvers = {
-  Query: {
-    account() {
-      return db.account;
-    },
-    venue() {
-      return db.account;
-    },
-    area() {
-      return db.account;
-    },
-  },
-  // Mutation: {}
-};
+/*
+ 
+1) Every query and mutations your schema has MUST have a resolver that returns the specified type.
+
+2) 
+ 
+*/
