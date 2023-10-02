@@ -1,25 +1,37 @@
 // export schemas here so they can be imported into app.js as a single import
 import gql from "graphql-tag";
-// import { makeExecutableSchema } from "@graphql-tools/schema";
+// import { makeExecuReportSchema } from "@graphql-tools/schema";
 // other schemas:
 // import { typeDefs as settings } from "./settings.js";
-// import { typeDefs as tables } from "./tables.js";
+// import { typeDefs as Reports } from "./Reports.js";
 
 export const typeDefs = gql`
-  ###### ROOT
+  ################# ROOT ###################
+  # essentially we GET data for components
+  # pages are all sent to the client and then JS handles what gets rendered
+  # Does Report need to persist?
+  # or is Report just a component, a shell to be filled with data
   type Query {
-    account: [Account]
-    venue: [Venue]
-    area: [Area]
-    user: [User]
-    item: [Item]
+    account: Account
+    venue: Venue
+    venues: [Venue]
+    area: Area
+    areas: [Area]
+    user: User
+    users: [User]
+    dashiItem: DashiItem
+    dashiItems: [DashiItem]
   }
   type Mutation {
-    account: [Account]
-    venue: [Venue]
-    area: [Area]
-    user: [User]
-    item: [Item]
+    account: Account
+    venue: Venue
+    venues: [Venue]
+    area: Area
+    areas: [Area]
+    user: User
+    users: [User]
+    dashiItem: DashiItem
+    dashiItems: [DashiItem]
   }
   ######## Account Settings
   type Account {
@@ -31,6 +43,9 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     areas: [Area!]!
+    users: [User!]!
+    families: [Family!]!
+    categories: [Category!]!
   }
   type Area {
     id: ID!
@@ -67,30 +82,26 @@ export const typeDefs = gql`
     week: OperationWeek!
     period: OperationPeriod!
   }
-  type Family {
-    id: ID!
-    name: String!
-    categories: [Category!]!
-  }
-  type Category {
-    id: ID!
-    name: String!
-  }
+  #### Dashboard / Report
   type Dashboard {
     id: ID!
-    table: [Table!]!
+    Reports: [Report!]!
   }
-  type TableType {
+  type ReportType {
     id: ID!
     name: [String!]!
   }
-  type Table {
+  type Report {
     id: ID!
     name: String!
-    # view(name: View = DefaultTable): String!
-    type: String!
+    # view(name: View = DefaultReport): String!
+    type: ReportType!
   }
-  type DefaultTable {
+  enum ReportType {
+    DISPLAY
+    SETUP
+  }
+  type DefaultReport {
     id: ID!
   }
   type Columns {
@@ -104,15 +115,46 @@ export const typeDefs = gql`
     columns: Columns!
     filters: Filters!
   }
-  type Item {
+  ###### Item
+  type Family {
+    id: ID!
+    name: String!
+    categories: [Category!]!
+  }
+  type Category {
+    id: ID!
+    name: String!
+  }
+  type DashiItem {
     id: ID!
     title: String!
     family: Family!
     category: Category!
     cost: Int!
+    costUnitOfMeasurement: String!
+    measurement: Float!
+    unitOfMeasurement: String!
+    caseSize: Int!
+    areas: [Area!]!
+    excludeFromVariance: Boolean!
+    inventoriable: Boolean!
+    inventoriableAsCase: Boolean!
+    barcodes: [Int!]!
+    customFields: [customField!]!
+  }
+  type customField {
+    id: ID!
+    type: FieldType
+  }
+
+  enum FieldType {
+    DROPDOWN
+    CHECKBOX
+    SHORT_TEXT
+    LONG_TEXT
   }
 `;
 
-// export const typeDefs = makeExecutableSchema({
-//   typeDefs: [root, settings, tables],
+// export const typeDefs = makeExecuReportSchema({
+//   typeDefs: [root, settings, Reports],
 // });

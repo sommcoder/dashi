@@ -1,35 +1,21 @@
 import pg from "../../db/db-instance.js";
 
-export const resolvers = {
-  Query: {
-    account() {
-      return db.account;
-    },
-    venue() {
-      return db.account;
-    },
-    venues() {
-      return db.account;
-    },
-    area() {
-      return db.account;
-    },
-    areas() {
-      return db.account;
-    },
-    report(id) {
-      return getReport(id);
-    },
-    reports(id) {
-      return getReports(id);
-    },
-  },
-  // Mutations: {
-  //   updateAccount() {
-  //     return db.account;
-  //   },
-  // },
-};
+// QUERIES:
+async function getReport(id) {
+  const report = await sql`
+    SELECT * from report
+    WHERE id = ${id}
+    `;
+  return report;
+}
+async function getReports() {
+  const report = await sql`
+    SELECT * from report
+    `;
+  return report;
+}
+
+// MUTATIONS:
 
 // Resolvers are responsible for LINKING the schema field to the data source.
 
