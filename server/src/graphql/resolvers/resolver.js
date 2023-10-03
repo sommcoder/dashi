@@ -1,21 +1,196 @@
 import pg from "../../db/db-instance.js";
 
 // QUERIES:
-async function getReport(id) {
+export async function getReport(id) {
+  // server selects new
   const report = await sql`
-    SELECT * from report
-    WHERE id = ${id}
+    SELECT * FROM report
+    WHERE id = ${id};
     `;
   return report;
 }
-async function getReports() {
-  const report = await sql`
-    SELECT * from report
-    `;
-  return report;
+export async function getReports() {
+  // user wants to view all of their reports in the Venue menu OR as a shortcut on a particular submenu page for editing purposes.
+  try {
+    const report = await sql`
+        SELECT * FROM report;
+        `;
+    return report;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
 }
 
+/*
+ 
+- We're going to want a GENERAL database instance to collect data on accounts
+
+- Collect product, usage data
+- Account Credit Card 
+ 
+*/
+
 // MUTATIONS:
+export async function addAccount(name, id) {
+  try {
+    const account = await sql`CREATE DATABASE ${name};`;
+    const schema = await sql`
+          CREATE SCHEMA [IF NOT EXISTS] dashi-user-schema-${id};
+          `;
+
+    const tables = await sql`
+          CREATE TABLE account (
+            account_id INT PRIMARY KEY,
+            business_name varchar(25) NOT NULL,
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+          CREATE TABLE user (
+            user_id INT PRIMARY KEY,
+            account REFERENCES account(account_id),
+            role REFERENCES role(role_id),
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            username VARCHAR(30) NOT NULL,
+            password VARCHAR(30) NOT NULL,
+            email VARCHAR(40) NOT NULL,
+            phone VARCHAR(10),
+          );
+
+          CREATE TABLE role (
+            role_id INT PRIMARY KEY,
+            permissions
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+          CREATE TABLE venue (
+            venue_id INT PRIMARY KEY,
+            account REFERENCES account(account_id)
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+          CREATE TABLE venues_areas (
+            venue_id INT REFERENCES venue(venue_id),
+            area_id INT REFERENCES area(area_id),
+            UNIQUE (venue_id, area_id)
+          );
+
+          CREATE TABLE area (
+            area_id INT PRIMARY KEY,
+            venue REFERENCES account_id
+          );
+
+          CREATE TABLE dashi_items_areas (
+            area_id INT REFERENCES area(area_id),
+            dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+            UNIQUE (venue_id, area_id)
+          );
+
+          CREATE TABLE family (
+            family_id INT PRIMARY KEY,
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+          CREATE TABLE category (
+            category_id INT PRIMARY KEY,
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+          CREATE TYPE order_format_enum AS ENUM('unit', 'case')
+
+          CREATE TABLE dashi_item (
+            dashi_item_id INT PRIMARY KEY,
+            category_id INT REFERENCES category(category_id),
+            family_id INT REFERENCES family(family_id),
+            unit_cost FLOAT NOT NULL,
+            case_size INT NOT NULL,
+            unit_of_measurement VARCHAR(15) NOT NULL,
+            item_measurement FLOAT NOT NULL,
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            order_format order_format_enum NOT NULL,
+            inventoriable BOOLEAN NOT NULL,
+            inventoriable_as_case BOOLEAN NOT NULL,
+            gl_account VARCHAR(10),
+            stock FLOAT,
+            last_count FLOAT,
+            avg_price FLOAT,
+            barcode INT,
+          );
+
+          CREATE TABLE vendors_dashi_items (
+            vendor_id INT REFERENCES vendor(vendor_id),
+            dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            UNIQUE (vendor_id, dashi_item_id)
+          );
+
+          CREATE TABLE vendor (
+            vendor_id INT PRIMARY KEY,
+            dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+           CREATE TABLE report (
+            report_id INT PRIMARY KEY,
+           
+
+            // columns, groupings, filters, sort
+            // also, should we persist the sequence of each of these object? We SHOULD if we want to make this an improvement.
+            // There should be a default sequence for NEW reports, however, yes we should UPDATE the DB once the user closes the modal not while they're fiddling, fiddling should show dynamically on the client but only send MUTATION to server once done.
+
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+          );
+
+          CREATE TYPE order_status_enum AS ENUM ('NOT_RECEIVED', 'RECEIVED')
+          CREATE TYPE email_status_enum AS ENUM ('SENT', 'NOT SENT')
+
+          CREATE TABLE purchase_orders  (
+            po_id INT PRIMARY KEY,
+            area_id INT REFERENCES area(area_id) NOT NULL,
+            created_by INT REFERENCES user(user_id) NOT NULL,
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            ordered_status order_status_enum NOT NULL,
+            email_status email_status_enum NOT NULL,
+            po_total FLOAT NOT NULL, 
+            sent_date TIMESTAMP WITHOUT TIME ZONE,
+            received_date TIMESTAMP WITHOUT TIME ZONE,
+          );
+
+          CREATE TYPE custom_field_enum AS ENUM ('DROPDOWN', 'CHECKBOX', 'TEXT', 'NUMBER');
+
+          CREATE TABLE custom_item_fields (
+            custom_field_id INT PRIMARY KEY,
+            dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            field_name VARCHAR(25) NOT NULL,
+            field_type custom_field_enum NOT NULL
+          );
+
+          CREATE TABLE custom_po_fields (
+            custom_field_id INT PRIMARY KEY,
+            dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+            created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            field_name VARCHAR(25) NOT NULL,
+            field_type custom_field_enum NOT NULL
+          );
+
+
+          `;
+    return { account, schema };
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+}
+
+export async function dropAccount(id) {
+  try {
+    const report = await sql`
+          DROP DATABASE ${id};
+          `;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+  return report;
+}
 
 // Resolvers are responsible for LINKING the schema field to the data source.
 

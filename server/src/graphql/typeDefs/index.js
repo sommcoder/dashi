@@ -23,7 +23,8 @@ export const typeDefs = gql`
     dashiItems: [DashiItem]
   }
   type Mutation {
-    account: Account
+    createAccount: Account
+    deleteAccount: Account
     venue: Venue
     venues: [Venue]
     area: Area
@@ -54,7 +55,7 @@ export const typeDefs = gql`
   }
   type User {
     id: ID!
-    roles: [String!]!
+    role: Role! # 1:1
     firstName: String!
     lastName: String!
     name: String!
@@ -62,6 +63,60 @@ export const typeDefs = gql`
     email: String!
     dateCreated: String!
   }
+  type Role {
+    id: ID!
+    name: String!
+    permission: Permissions! #1
+  }
+
+  type Permissions {
+    id: ID!
+    userPermission: UserPermissions!
+    venuePermission: VenuePermissions!
+    itemPermission: ItemPermissions!
+    orderPermission: OrderPermissions!
+    inventoryPermission: InventoryPermissions!
+  }
+
+  type VenuePermissions {
+    id: ID!
+    viewVenueSettings: Boolean!
+    updateVenueSettings: Boolean!
+  }
+
+  type ItemPermissions {
+    id: ID!
+    viewItems: Boolean!
+    addItems: Boolean!
+    mergeItems: Boolean!
+    archiveItems: Boolean!
+  }
+
+  type OrderPermissions {
+    id: ID!
+    receiving: Boolean!
+    addOrdering: Boolean!
+    addInvoicing: Boolean!
+    archiveOrdering: Boolean!
+    archiveInvoicing: Boolean!
+  }
+
+  type UserPermissions {
+    id: ID!
+    inviteUsers: Boolean!
+    changeUsersRole: Boolean!
+    archiveUsers: Boolean!
+  }
+
+  type InventoryPermissions {
+    id: ID!
+    viewInventory: Boolean!
+    startInventory: Boolean!
+    editInventory: Boolean!
+    approveInventory: Boolean!
+    archiveInventory: Boolean!
+  }
+
   ###### Venue Settings:
   type OperationYear {
     id: ID!
@@ -124,6 +179,8 @@ export const typeDefs = gql`
   type Category {
     id: ID!
     name: String!
+    defaultDeposit: Float!
+    defaultGLCode: Int! # not required
   }
   type DashiItem {
     id: ID!
@@ -150,8 +207,28 @@ export const typeDefs = gql`
   enum FieldType {
     DROPDOWN
     CHECKBOX
-    SHORT_TEXT
-    LONG_TEXT
+    TEXT
+    NUMBER
+  }
+
+  ### Ordering / Invoices
+  type PurchaseOrder {
+    id: ID! # is the PO number as well
+    vendor: Vendor! # 1:1
+    area: Area! # 1:1
+    created: String!
+    ordered: String! # sent to vendor
+    orderStatus: OrderStatus!
+    emailStatus: EmailStatus!
+    createdBy: User!
+  }
+  enum OrderStatus {
+    NOT_RECEIVED
+    RECEIVED
+  }
+  enum EmailStatus {
+    SENT
+    NOT_SENT
   }
 `;
 

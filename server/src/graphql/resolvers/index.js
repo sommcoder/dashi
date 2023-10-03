@@ -1,5 +1,17 @@
 import pg from "../../db/db-instance.js";
 
+import * as mw from "../../middleware/middleware";
+
+import * as db from "../resolvers/resolver.js";
+
+/*
+ 1         1          1
+Account -> Schema -> Database
+
+- Accounts information is isolated into their own DB instance on Google Cloud
+ 
+*/
+
 export const resolvers = {
   Query: {
     account() {
@@ -18,17 +30,21 @@ export const resolvers = {
       return db.account;
     },
     report(id) {
-      return getReport(id);
+      return db.getReport(id);
     },
     reports(id) {
-      return getReports(id);
+      return db.getReports(id);
     },
   },
-  // Mutations: {
-  //   updateAccount() {
-  //     return db.account;
-  //   },
-  // },
+  Mutations: {
+    createAccount(name) {
+      const id = mw.createId();
+      return db.addAccount(name, id); // pass id
+    },
+    deleteAccount(id) {
+      return db.dropAccount(id); // pass id
+    },
+  },
 };
 
 // Resolvers are responsible for LINKING the schema field to the data source.
