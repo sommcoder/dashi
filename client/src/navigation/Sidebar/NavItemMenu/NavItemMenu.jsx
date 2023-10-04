@@ -22,7 +22,7 @@ export default function NavItemMenu({
         newNavBarObj[key] = false;
       });
     }
-    console.log("newNavBarObj:", newNavBarObj);
+    // console.log("newNavBarObj:", newNavBarObj);
     adjustNavBar((navBarObj) => ({ ...navBarObj, newNavBarObj }));
   }
 
@@ -35,8 +35,8 @@ onClick :
     gridTemplateRows: `repeat(${subMenus.length}, auto)`,
   };
 
-  console.log("subMenuRows:", subMenuRows);
-  console.log("navBarObj[menu]:", navBarObj);
+  // console.log("subMenuRows:", subMenuRows);
+  // console.log("navBarObj[menu]:", navBarObj);
 
   return (
     <li className="nav-side-bar-menu-header-container">

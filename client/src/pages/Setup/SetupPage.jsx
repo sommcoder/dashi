@@ -1,7 +1,6 @@
 ﻿import "./SetupPage.css";
 import { useState } from "react";
 
-import DropZone from "../../components/Setup/DropZone/DropZone";
 import HeaderSection from "../../components/Setup/HeaderSection/HeaderSection";
 import Table from "../../components/Table/Table/Table";
 
@@ -28,7 +27,6 @@ export default function SetupPage() {
 
   return (
     <div className="setup-page-container">
-      <DropZone setHeaders={setHeaders} />
       <HeaderSection
         headerArr={headerArr}
         headerSeqTracker={headerSeqTracker}

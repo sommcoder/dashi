@@ -2,11 +2,9 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 // styling:
-import { FaUpload } from "../../../../node_modules/react-icons/fa";
+import { FaUpload } from "react-icons/fa";
 import "./DropZone.css";
 // components:
-import DropZoneText from "../DropZoneText/DropZoneText";
-import FileTally from "../FileTally/FileTally";
 
 const MAX_SIZE = 500000; // in bytes
 
@@ -97,12 +95,6 @@ export default function DropZone({ setHeaders }) {
         <button className="add-file-button">Add files</button>
         <input id="hidden" type="file" title=" " hidden />
         <FaUpload className="upload-svg-icon" />
-        <DropZoneText
-          fileValid={fileValid}
-          dragState={dragState}
-          className="dropzone-text"
-        />
-        <FileTally fileCount={fileCount} />
       </div>
       {/* <button className="dropzone-submit-button">Submit</button> */}
     </div>

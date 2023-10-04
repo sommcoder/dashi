@@ -6,7 +6,7 @@ import NavItemMenu from "../NavItemMenu/NavItemMenu";
 import { navMenuList } from "../menu.js";
 
 export default function NavItemList() {
-  console.log("navMenuList:", navMenuList);
+  // console.log("navMenuList:", navMenuList);
 
   // need to add new line here if we add more Menus in the future:
   const [navBarObj, adjustNavBar] = useState({
@@ -23,7 +23,7 @@ export default function NavItemList() {
     gridTemplateRows: `repeat(${navMenuList.length}, auto`,
   };
 
-  console.log("menuRows:", menuRows);
+  // console.log("menuRows:", menuRows);
 
   return (
     <div className="nav-side-bar-list" style={menuRows}>

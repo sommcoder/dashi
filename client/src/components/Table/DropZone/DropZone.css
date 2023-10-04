@@ -1,15 +1,18 @@
 .dropzone-container {
+  display: grid;
+  justify-items: center;
   margin-top: 5rem;
 }
 
 .dropzone {
+  min-height: 500px;
   display: grid;
   align-items: center;
   text-align: center;
   align-content: center;
   color: rgb(94, 93, 93);
   border: 1px dotted darkgrey;
-  width: 300px;
+  width: 95%;
   padding: 15px 0 10px 0;
   margin-top: 20px;
 }
