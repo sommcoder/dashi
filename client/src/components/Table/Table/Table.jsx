@@ -5,6 +5,8 @@ import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import RouteLoader from "../../RouteLoader/RouteLoader";
 import DropZone from "../DropZone/DropZone";
 
+import { Buffer } from "buffer/"; // Buffer library
+
 import { useQuery, useQueryClient } from "react-query";
 import { useEffect, useState, Suspense } from "react";
 
@@ -21,7 +23,8 @@ export default function Table({ tableType }) {
   /*
  
 DATA INPUT / DRAG N DROP:
-- 
+- send data to server
+- can we parse CSV on the client?
  
 */
 
@@ -62,8 +65,7 @@ DATA INPUT / DRAG N DROP:
   */
 
   const [dragState, setDrag] = useState(false);
-  const [fileValid, setFileValid] = useState(false);
-  // on DragEnd => setFileValidity(null)
+  const [fileValid, setFileValid] = useState(null); // null = default,
 
   ///////////////////////////////
   /*
@@ -74,33 +76,144 @@ DATA INPUT / DRAG N DROP:
 */
 
   const handleDragOver = (ev) => {
-    console.log("OVER:", ev);
-    ev.preventDefault();
+    ev.preventDefault(); // NEEDED!
+
     setDrag(true);
-    // for of works, ev.dataTransfer.items is an iterable object NOT an array
-    // for (const item of ev.dataTransfer.items) {
-    // if (
-    //   item.type !== "text/csv" &&
-    //   item.type !== "pdf" &&
-    //   item.type !==
-    //     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    // ) {
-    setFileValid(false);
-    // } else {
-    //   setFileValid(true);
-    // }
+    console.log(ev.dataTransfer.items[0]);
+    // ev.datatransfer.items only exists if there's more than one file dragged
+    if (ev.dataTransfer.items) {
+      console.log("ev.dataTransfer.items:", ev.dataTransfer.items);
+      for (const item of ev.dataTransfer.items) {
+        if (
+          item.type !== "text/csv" &&
+          item.type !== "pdf" &&
+          item.type !== "application/pdf" &&
+          item.type !==
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ) {
+          setFileValid(false);
+          console.log(`file ${item} is NOT a valid file`);
+        } else {
+          setFileValid(true);
+          console.log(`file ${item} is valid file`);
+        }
+      }
+    }
   };
 
   const handleDragLeave = (ev) => {
     ev.preventDefault();
     console.log("LEAVE:", ev);
     setDrag(false);
-    setFileValid(false); // if we throw no arguments, will the state set to the original empty state??
+    // setFileValid(null); // if we throw no arguments, will the state set to the original empty state??
   };
 
+  // function Utf8ArrayToStr(array) {
+  //   var out, i, len, c;
+  //   var char2, char3;
+
+  //   out = "";
+  //   len = array.length;
+  //   i = 0;
+  //   while (i < len) {
+  //     c = array[i++];
+  //     switch (c >> 4) {
+  //       case 0:
+  //       case 1:
+  //       case 2:
+  //       case 3:
+  //       case 4:
+  //       case 5:
+  //       case 6:
+  //       case 7:
+  //         // 0xxxxxxx
+  //         out += String.fromCharCode(c);
+  //         break;
+  //       case 12:
+  //       case 13:
+  //         // 110x xxxx   10xx xxxx
+  //         char2 = array[i++];
+  //         out += String.fromCharCode(((c & 0x1f) << 6) | (char2 & 0x3f));
+  //         break;
+  //       case 14:
+  //         // 1110 xxxx  10xx xxxx  10xx xxxx
+  //         char2 = array[i++];
+  //         char3 = array[i++];
+  //         out += String.fromCharCode(
+  //           ((c & 0x0f) << 12) | ((char2 & 0x3f) << 6) | ((char3 & 0x3f) << 0)
+  //         );
+  //         break;
+  //     }
+  //   }
+  //   return out;
+  // }
+
   const handleDrop = (ev) => {
-    ev.preventDefault();
-    console.log("ev:", ev);
+    ev.stopPropagation();
+    ev.preventDefault(); // prevents file from being opened in the browser
+    console.log("DROP ev:", ev);
+    console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
+
+    // const reader = new FileReader();
+
+    if (ev.dataTransfer.items) {
+      for (const item of ev.dataTransfer.items) {
+        const file = item.getAsFile(); // if Browser supports DataTransferItemList, otherwise dataTransfer
+        // console.log("item.files:", item.files);
+        // a file object is a special kind of Blob and can be used in ANY context that a Blob can
+        console.log("file:", file);
+
+        file.arrayBuffer().then((res) => {
+          let arrayBuffer = new Uint8Array(res);
+          let buffer = Buffer.from(arrayBuffer);
+          console.log("buffer:", buffer);
+          // let rawData = [...arrayBuffer];
+          // console.log("rawData:", rawData);
+
+          // var str = String.fromCharCode.apply(null, arrayBuffer);
+          // console.log("str:", str);
+          // let str = Utf8ArrayToStr(arrayBuffer);
+          // console.log("str:", str);
+          // let blob = new Blob([new Uint8Array(rawData)], { type: "pdf" });
+          // console.log("blob:", blob);
+          // const dataView = new DataView(); // used to edit an array buffer
+        });
+
+        // We want to retrieve the contents of a binary file (PDF, or maybe image file) so we want readAsArrayBuffer();
+
+        // const readableStream = file.stream();
+
+        // const reader = readableStream.getReader(); // gets an instance of ReadableStreamDefaultReader
+        // let string = "";
+
+        // reader
+        //   .read()
+        //   .then(({ value }) => {
+        //     console.log("value:", value);
+        //     console.log("typeof value:", typeof value);
+        //     return value;
+        //   })
+        //   .then((value) => {
+        //     const dataview = new DataView(value);
+        //     console.log("dataview:", dataview);
+        //   });
+        // reader.readAsText(file);
+
+        // if (
+        //   item.type !== "text/csv" &&
+        //   item.type !== "pdf" &&
+        //   item.type !== "application/pdf" &&
+        //   item.type !==
+        //     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        // ) {
+        //   setFileValid(false);
+        //   console.log(`file ${item} is NOT a valid file`);
+        // } else {
+        //   setFileValid(true);
+        //   console.log(`file ${item} is valid file`);
+        // }
+      }
+    }
     setDrag(false);
   };
 
@@ -179,10 +292,10 @@ DATA INPUT / DRAG N DROP:
   return (
     <Suspense fallback={<RouteLoader />}>
       <div
-        className="data-table-dropzone"
-        onDragStart={handleDragOver}
-        // onDragEnd={handleDragLeave}
-        // onDrop={handleDrop}
+        className={`data-table-dropzone ${dragState ? "dragging" : ""}`}
+        onDragOver={(ev) => handleDragOver(ev)}
+        onDragLeave={(ev) => handleDragLeave(ev)}
+        onDrop={(ev) => handleDrop(ev)}
       >
         <div style={rows} draggable={true} className="data-table">
           <SettingsHeader

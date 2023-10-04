@@ -4,15 +4,21 @@
   align-items: center;
   text-align: center;
   align-content: center;
-  color: rgb(94, 93, 93);
-  border: 1px dotted darkgrey;
+
   width: 95%;
   padding: 0.25rem;
   margin-top: 20px;
 }
 
+.data-table-dropzone > * {
+  pointer-events: none;
+}
+
 .dragging {
   /* styling for dragging state of dropzone */
+  background-color: rgb(240, 234, 234);
+  border: 1px dotted rgb(117, 110, 110);
+  border-radius: 10px;
 }
 
 /* DropZone Component State Handling CSS*/
