@@ -1,9 +1,9 @@
 // libraries:
-import { useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useState } from 'react';
+
 // styling:
-import { FaUpload } from "react-icons/fa";
-import "./DropZone.css";
+import { FaUpload } from 'react-icons/fa';
+import './DropZone.css';
 // components:
 
 const MAX_SIZE = 500000; // in bytes
@@ -12,21 +12,21 @@ export default function DropZone({ setHeaders }) {
   const [fileCount, addFile] = useState(0);
 
   const containerState = {
-    default: "dropzone-container",
-    valid: "file-valid",
-    invalid: "file-invalid",
+    default: 'dropzone-container',
+    valid: 'file-valid',
+    invalid: 'file-invalid',
   };
 
   const childrenState = {
-    default: "dropzone-container",
-    valid: "file-valid",
-    invalid: "file-invalid",
+    default: 'dropzone-container',
+    valid: 'file-valid',
+    invalid: 'file-invalid',
   };
 
   const textState = [
-    "Accepts .csv, .xsl and .xlsx files",
-    "Drop file(s) to upload",
-    "file is not .csv, .xsl or .xlsx format",
+    'Accepts .csv, .xsl and .xlsx files',
+    'Drop file(s) to upload',
+    'file is not .csv, .xsl or .xlsx format',
   ];
 
   const { isLoading, switchLoading } = useState(true);
@@ -51,17 +51,17 @@ export default function DropZone({ setHeaders }) {
 
   ///////////////////////////////
 
-  const handleDragOver = (ev) => {
+  const handleDragOver = ev => {
     ev.preventDefault();
-    console.log("OVER:", ev);
+    console.log('OVER:', ev);
     setDrag(true);
     // for of works, ev.dataTransfer.items is an iterable object NOT an array
     for (const item of ev.dataTransfer.items) {
       if (
-        item.type !== "text/csv" &&
-        item.type !== "pdf" &&
+        item.type !== 'text/csv' &&
+        item.type !== 'pdf' &&
         item.type !==
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       ) {
         setFileValid(false);
         setHeaders();
@@ -71,16 +71,16 @@ export default function DropZone({ setHeaders }) {
     }
   };
 
-  const handleDragLeave = (ev) => {
+  const handleDragLeave = ev => {
     ev.preventDefault();
-    console.log("LEAVE:", ev);
+    console.log('LEAVE:', ev);
     setDrag(false);
     setFileValid(false); // if we throw no arguments, will the state set to the original empty state??
   };
 
-  const handleDrop = (ev) => {
+  const handleDrop = ev => {
     ev.preventDefault();
-    console.log("ev:", ev);
+    console.log('ev:', ev);
     setDrag(false);
   };
 

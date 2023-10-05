@@ -1,32 +1,32 @@
-﻿import "./MainWrapper.css";
+﻿import './MainWrapper.css';
 /////////////////////////////////////////////////////////////////
 // Main:
-import Dashboard from "../Dashboard/DashboardPage";
+import Dashboard from '../Dashboard/DashboardPage';
 // Sales:
-import Sales from "../Sales/Sales";
+import Sales from '../Sales/Sales';
 // Items:
-import Items from "../Items/Items";
-import Families from "../Families/Families";
-import Vendors from "../Vendors/Vendors";
+import Items from '../Items/Items';
+import Families from '../Families/Families';
+import Vendors from '../Vendors/Vendors';
 // Inventories:
-import Inventories from "../Inventories/Inventories";
-import Areas from "../Areas/Areas";
-import Transfers from "../Transfers/Transfers";
-import Depletions from "../Depletions/Depletions";
+import Inventories from '../Inventories/Inventories';
+import Areas from '../Areas/Areas';
+import Transfers from '../Transfers/Transfers';
+import Depletions from '../Depletions/Depletions';
 // Orders:
-import Orders from "../Orders/Orders";
-import Invoices from "../Invoices/Invoices";
+import Orders from '../Orders/Orders';
+import Invoices from '../Invoices/Invoices';
 // Reports:
-import Reports from "../Reports/Reports";
+import Reports from '../Reports/Reports';
 // Setup:
-import Setup from "../Setup/SetupPage";
+import Setup from '../Setup/SetupPage';
 /////////////////////////////////////////////////////////////////
 // components:
-import HeaderBarMenu from "../../navigation/Header/HeaderBarMenu/HeaderBarMenu";
+import HeaderBarMenu from '../../navigation/Header/HeaderBarMenu/HeaderBarMenu';
 // react:
-import { useState } from "react";
+import { useState } from 'react';
 // react router:
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
 export default function MainWrapper() {
   /*
