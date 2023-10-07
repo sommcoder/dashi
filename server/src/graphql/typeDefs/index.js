@@ -21,6 +21,7 @@ export const typeDefs = gql`
     users: [User]
     dashiItem: DashiItem
     dashiItems: [DashiItem]
+    getReport: Report
   }
   type Mutation {
     createAccount: Account
@@ -33,6 +34,7 @@ export const typeDefs = gql`
     users: [User]
     dashiItem: DashiItem
     dashiItems: [DashiItem]
+    addTable: Venue # enter through Venue
   }
   ######## Account Settings
   type Account {
@@ -143,14 +145,16 @@ export const typeDefs = gql`
     Reports: [Report!]!
   }
   type ReportType {
-    id: ID!
+    id: ID
     name: [String!]!
   }
   type Report {
+    # there is NO table, Reports save the data, Tables are just a React component, a vessel to house the data from the report
     id: ID!
     name: String!
-    # view(name: View = DefaultReport): String!
     type: ReportType!
+    categories: [Category!]!
+    families: [Family!]!
   }
   enum ReportType {
     DISPLAY
@@ -209,6 +213,14 @@ export const typeDefs = gql`
     CHECKBOX
     TEXT
     NUMBER
+  }
+
+  type Vendor {
+    id: ID!
+  }
+
+  type Report {
+    id: ID!
   }
 
   ### Ordering / Invoices

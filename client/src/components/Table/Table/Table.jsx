@@ -1,12 +1,14 @@
-﻿import './Table.css';
-import Row from '../Row/Row';
-import HeaderRow from '../HeaderRow/HeaderRow';
-import SettingsHeader from '../SettingsHeader/SettingsHeader';
-import RouteLoader from '../../RouteLoader/RouteLoader';
+﻿import "./Table.css";
+import Row from "../Row/Row";
+import HeaderRow from "../HeaderRow/HeaderRow";
+import SettingsHeader from "../SettingsHeader/SettingsHeader";
+import RouteLoader from "../../RouteLoader/RouteLoader";
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql } from "@apollo/client";
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense } from "react";
+
+import { GET_DEFAULT_REPORT } from "./graphql";
 
 export default function Table({ tableType }) {
   // const { loading, error, data } = useQuery();
@@ -31,21 +33,21 @@ DATA INPUT / DRAG N DROP:
   const [fileCount, addFile] = useState(0);
 
   const containerState = {
-    default: 'dropzone-container',
-    valid: 'file-valid',
-    invalid: 'file-invalid',
+    default: "dropzone-container",
+    valid: "file-valid",
+    invalid: "file-invalid",
   };
 
   const childrenState = {
-    default: 'dropzone-container',
-    valid: 'file-valid',
-    invalid: 'file-invalid',
+    default: "dropzone-container",
+    valid: "file-valid",
+    invalid: "file-invalid",
   };
 
   const textState = [
-    'Accepts .csv, .xsl and .xlsx files',
-    'Drop file(s) to upload',
-    'file is not .csv, .xsl or .xlsx format',
+    "Accepts .csv, .xsl and .xlsx files",
+    "Drop file(s) to upload",
+    "file is not .csv, .xsl or .xlsx format",
   ];
 
   const { isLoading, switchLoading } = useState(true);
@@ -75,22 +77,25 @@ DATA INPUT / DRAG N DROP:
  
 */
 
-  const handleDragOver = ev => {
+  const handleDragOver = (ev) => {
     ev.preventDefault(); // NEEDED!
     setDrag(true);
   };
 
-  const handleDragLeave = ev => {
+  const handleDragLeave = (ev) => {
     ev.preventDefault();
-    console.log('LEAVE:', ev);
+    console.log("LEAVE:", ev);
     setDrag(false);
   };
 
-  const handleDrop = ev => {
+  const handleDrop = (ev) => {
     ev.stopPropagation();
     ev.preventDefault(); // prevents file from being opened in the browser
-    console.log('DROP ev:', ev);
-    console.log('ev.dataTransfer.files:', ev.dataTransfer.files);
+    console.log("DROP ev:", ev);
+    console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
+
+    const { loading, error, data } = useQuery(GET_ALL_TABLES);
+
     setDrag(false);
   };
 
@@ -98,7 +103,7 @@ DATA INPUT / DRAG N DROP:
 
   // setup table or display table?
 
-  let dataRow = [' ', ' ', ' '];
+  let dataRow = [" ", " ", " "];
 
   let headers = Object.keys(dataRow[0]);
 
@@ -111,17 +116,17 @@ DATA INPUT / DRAG N DROP:
 
   function getAverage(valArr) {
     // console.log("valArr:", valArr);
-    if (valArr.length === 0) throw new Error('No inputs');
+    if (valArr.length === 0) throw new Error("No inputs");
     let sum = valArr.reduce((prev, curr) => prev + curr);
     return Math.trunc(sum / valArr.length, 0);
   }
 
   function determineAvgColWidth(dataArr, headers) {
     // go through each header
-    headers.forEach(header => {
+    headers.forEach((header) => {
       let lengthTracker = [];
       // extract the data from each obj with the corresponding header
-      dataArr.forEach(el => {
+      dataArr.forEach((el) => {
         lengthTracker.push(el[header].toString().length);
       });
       // after each pass of the data by Header:
@@ -129,26 +134,26 @@ DATA INPUT / DRAG N DROP:
     });
   }
 
-  if (tableType === 'display') determineAvgColWidth(dataRow, headers);
+  if (tableType === "display") determineAvgColWidth(dataRow, headers);
 
   // console.log("initColSizingSeq:", initColSizingSeq);
 
-  let colStyleString = '';
+  let colStyleString = "";
 
   // only compose string if we have headers in the seq Array:
   if (initColSizingSeq.length) {
     colStyleString =
-      '20px ' +
+      "20px " +
       initColSizingSeq
-        .map(el => {
+        .map((el) => {
           if (el <= 8) return (el += 3.25);
           else return (el *= 0.9);
         })
-        .join('rem 20px ') +
-      'rem'; // <-- for the last element in the array
+        .join("rem 20px ") +
+      "rem"; // <-- for the last element in the array
   } else {
     // just the checkbox:
-    colStyleString = '20px';
+    colStyleString = "20px";
   }
 
   // console.log("colStyleString:", colStyleString);
@@ -162,17 +167,17 @@ DATA INPUT / DRAG N DROP:
     gridTemplateRows: `3rem auto 0`,
   };
   // based on the sequence will determine which keys we access from our JSON data as we iterate through it
-  const tableName = '';
+  const tableName = "";
 
   // console.log("tableType:", tableType);
 
   return (
     <Suspense fallback={<RouteLoader />}>
       <div
-        className={`data-table-dropzone ${dragState ? 'dragging' : ''}`}
-        onDragOver={ev => handleDragOver(ev)}
-        onDragLeave={ev => handleDragLeave(ev)}
-        onDrop={ev => handleDrop(ev)}
+        className={`data-table-dropzone ${dragState ? "dragging" : ""}`}
+        onDragOver={(ev) => handleDragOver(ev)}
+        onDragLeave={(ev) => handleDragLeave(ev)}
+        onDrop={(ev) => handleDrop(ev)}
       >
         <div style={rows} draggable={true} className="data-table">
           <SettingsHeader
@@ -197,7 +202,7 @@ DATA INPUT / DRAG N DROP:
                 data={el}
               />
             ) : (
-              ''
+              ""
             )
           )}
         </div>

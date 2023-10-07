@@ -1,6 +1,8 @@
 import pg from "../../db/db-instance.js";
 
-import * as mw from "../../middleware/middleware";
+// import * as mw from "../../middleware/middleware";
+
+import { ApolloServerErrorCode } from "@apollo/server/errors";
 
 import * as db from "../resolvers/resolver.js";
 
@@ -15,36 +17,65 @@ Account -> Schema -> Database
 export const resolvers = {
   Query: {
     account() {
-      return db.account;
+      try {
+        return db.account;
+      } catch (err) {
+        console.log(
+          "error:",
+          err.message,
+          "apollo err:",
+          ApolloServerErrorCode.GRAPHQL_PARSE_FAILED
+        );
+      }
     },
     venue() {
-      return db.account;
+      try {
+        return db.account;
+      } catch (err) {
+        console.log("error:", err.message);
+        throw new ApolloError(err);
+      }
     },
     venues() {
-      return db.account;
+      try {
+        return db.account;
+      } catch (err) {
+        console.log("error:", err.message);
+        throw new ApolloError(err);
+      }
     },
     area() {
-      return db.account;
+      try {
+        return db.account;
+      } catch (err) {
+        console.log("error:", err.message);
+        throw new ApolloError(err);
+      }
     },
     areas() {
-      return db.account;
+      try {
+        return db.account;
+      } catch (err) {
+        console.log("error:", err.message);
+        throw new ApolloError(err);
+      }
     },
-    report(id) {
-      return db.getReport(id);
-    },
-    reports(id) {
-      return db.getReports(id);
-    },
+    // report(id) {
+    //   return db.getReport(id);
+    // },
+    // reports(id) {
+    //   return db.getReports(id);
+    // },
   },
-  Mutations: {
-    createAccount(name) {
-      const id = mw.createId();
-      return db.addAccount(name, id); // pass id
-    },
-    deleteAccount(id) {
-      return db.dropAccount(id); // pass id
-    },
-  },
+  // Mutations: {
+  //   createAccount(name) {
+  //     // const id = mw.createId();
+  //     return db.addAccount(name, id); // pass id
+  //   },
+  //   deleteAccount(id) {
+  //     return db.dropAccount(id); // pass id
+  //   },
+  // },
 };
 
 // Resolvers are responsible for LINKING the schema field to the data source.

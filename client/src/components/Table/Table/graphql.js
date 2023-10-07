@@ -1,12 +1,23 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 /*
- 
 All graphql calls will go here and be imported into our component.jsx file
- 
 */
-export const GET_ALL_TABLES = gql`
-  query GetAllTables {
+
+// Queries:
+export const GET_DEFAULT_REPORT = gql`
+  query getDefaultReport {
+    tables {
+      id
+      type
+      data
+    }
+  }
+`;
+
+// Mutations:
+export const UPLOAD_FILE = gql`
+  mutation UploadFile {
     tables {
       id
       type

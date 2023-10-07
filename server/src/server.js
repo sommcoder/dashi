@@ -5,7 +5,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./graphql/typeDefs/index.js";
 import { resolvers } from "./graphql/resolvers/index.js";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 const server = new ApolloServer({
   typeDefs,
