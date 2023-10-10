@@ -3,7 +3,7 @@ dotenv.config();
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./graphql/typeDefs/index.js";
-import { resolvers } from "./graphql/resolvers/index.js";
+import { resolvers } from "./graphql/resolvers/resolvers.js";
 
 const PORT = process.env.PORT || 4000;
 

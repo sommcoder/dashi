@@ -4,7 +4,7 @@ import pg from "../../db/db-instance.js";
 
 import { ApolloServerErrorCode } from "@apollo/server/errors";
 
-import * as db from "../resolvers/resolver.js";
+import * as db from "./pg.js";
 
 /*
  1         1          1
@@ -70,7 +70,7 @@ export const resolvers = {
   // Mutations: {
   //   createAccount(name) {
   //     // const id = mw.createId();
-  //     return db.addAccount(name, id); // pass id
+  //     return db.createAccount(name, id); // pass id
   //   },
   //   deleteAccount(id) {
   //     return db.dropAccount(id); // pass id

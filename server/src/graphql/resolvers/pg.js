@@ -1,4 +1,4 @@
-import pg from "../../db/db-instance.js";
+import sql from "../../db/db-instance.js";
 
 // QUERIES:
 export async function getReport(id) {
@@ -21,16 +21,6 @@ export async function getReports() {
   }
 }
 
-export async function getTable() {
-  try {
-    const report = await sql`
-        SELECT * FROM report;
-        `;
-    return report;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
 /*
  
 - We're going to want a GENERAL database instance to collect data on accounts
@@ -41,7 +31,11 @@ export async function getTable() {
 */
 
 // MUTATIONS:
-export async function addAccount(name, id) {
+export async function createAccount(name, id) {
+  /**
+   * Add new account via Google Cloud
+   *
+   */
   try {
     // here we're "pipelining" the requests into a single "transaction"
     // a transaction is a set of functions that are triggered by an event
@@ -90,22 +84,22 @@ export async function addAccount(name, id) {
           );`,
       sql`CREATE TYPE order_format_enum AS ENUM('unit', 'case');`,
       sql`CREATE TABLE dashi_item (
-                dashi_item_id INT PRIMARY KEY,
-                category_id INT REFERENCES category(category_id),
-                family_id INT REFERENCES family(family_id),
-                unit_cost FLOAT NOT NULL,
-                case_size INT NOT NULL,
-                unit_of_measurement VARCHAR(15) NOT NULL,
-                item_measurement FLOAT NOT NULL,
-                order_format order_format_enum NOT NULL,
-                inventoriable BOOLEAN NOT NULL,
-                inventoriable_as_case BOOLEAN NOT NULL,
-                gl_account VARCHAR(10),
-                stock FLOAT,
-                last_count FLOAT,
-                avg_price FLOAT,
-                barcode INT
-              );`,
+            dashi_item_id INT PRIMARY KEY,
+            category_id INT REFERENCES category(category_id),
+            family_id INT REFERENCES family(family_id),
+            unit_cost FLOAT NOT NULL,
+            case_size INT NOT NULL,
+            unit_of_measurement VARCHAR(15) NOT NULL,
+            item_measurement FLOAT NOT NULL,
+            order_format order_format_enum NOT NULL,
+            inventoriable BOOLEAN NOT NULL,
+            inventoriable_as_case BOOLEAN NOT NULL,
+            gl_account VARCHAR(10),
+            stock FLOAT,
+            last_count FLOAT,
+            avg_price FLOAT,
+            barcode INT
+          );`,
       sql`CREATE TABLE dashi_items_areas (
             area_id INT REFERENCES area(area_id),
             dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
@@ -157,17 +151,47 @@ export async function addAccount(name, id) {
       sql``,
       sql``,
     ]);
-
-    //
-    setTimeout(() => query.cancel(), 2000);
-
+    setTimeout(() => query.cancel(), 5000);
     return newAccountTransaction;
   } catch (err) {
     console.log("error:", err.message);
   }
 }
 
-export async function addTable(name, id) {}
+export async function createReport(name, id) {
+  try {
+    const newReport = await sql.begin((sql) => [
+      sql``,
+      sql``,
+      sql``,
+      sql``,
+      sql``,
+      sql``,
+    ]);
+    setTimeout(() => query.cancel(), 5000);
+    return newReport;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+}
+
+export async function updateReport(name, id) {
+  try {
+    const newTable = await sql.begin((sql) => [
+      sql``,
+      sql``,
+      sql``,
+      sql``,
+      sql``,
+      sql``,
+    ]);
+    setTimeout(() => query.cancel(), 5000);
+    return newTable;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+}
+
 /*
              
 
