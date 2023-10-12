@@ -8,7 +8,7 @@ import { useQuery, gql } from "@apollo/client";
 
 import { useEffect, useState, Suspense } from "react";
 
-import { GET_DEFAULT_REPORT } from "./graphql";
+import { GET_DEFAULT_REPORT, POST_FILE } from "./graphql";
 
 export default function Table({ tableType }) {
   // const { loading, error, data } = useQuery();

@@ -60,9 +60,9 @@ export const resolvers = {
         throw new ApolloError(err);
       }
     },
-    // report(id) {
-    //   return db.getReport(id);
-    // },
+    getReport(id) {
+      return db.getReport(id);
+    },
     // reports(id) {
     //   return db.getReports(id);
     // },

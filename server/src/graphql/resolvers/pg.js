@@ -3,10 +3,17 @@ import sql from "../../db/db-instance.js";
 // QUERIES:
 export async function getReport(id) {
   // server selects new
-  const report = await sql`
-    SELECT * FROM report
-    WHERE id = ${id};
-    `;
+  if (id) {
+    const report = await sql`
+      SELECT * FROM report
+      WHERE id = ${id};
+      `;
+  } else {
+    const report = await sql`
+      SELECT * FROM report
+      WHERE id = 0;
+      `;
+  }
   return report;
 }
 export async function getReports() {

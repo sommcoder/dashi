@@ -21,7 +21,7 @@ export const typeDefs = gql`
     users: [User]
     dashiItem: DashiItem
     dashiItems: [DashiItem]
-    getReport: Report
+    getTemplate: Template
   }
   type Mutation {
     createAccount: Account
@@ -49,6 +49,10 @@ export const typeDefs = gql`
     users: [User!]!
     families: [Family!]!
     categories: [Category!]!
+  }
+
+  type Template {
+    
   }
   type Area {
     id: ID!
