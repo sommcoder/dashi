@@ -1,41 +1,43 @@
-// export schemas here so they can be imported into app.js as a single import
 import gql from "graphql-tag";
-// import { makeExecuReportSchema } from "@graphql-tools/schema";
-// other schemas:
-// import { typeDefs as settings } from "./settings.js";
-// import { typeDefs as Reports } from "./Reports.js";
+
+/*
+ 
+1) GraphQL types are nullable by default
+2) GraphQL is versionless, no breaking changes
+3) 
+ 
+*/
 
 export const typeDefs = gql`
   ################# ROOT ###################
-  # essentially we GET data for components
-  # pages are all sent to the client and then JS handles what gets rendered
-  # Does Report need to persist?
-  # or is Report just a component, a shell to be filled with data
   type Query {
     account: Account
     venue: Venue
     venues: [Venue]
-    area: Area
-    areas: [Area]
+    outlet: Outlet
+    outlets: [Outlet]
     user: User
     users: [User]
     dashiItem: DashiItem
     dashiItems: [DashiItem]
-    getTemplate: Template
+    getReport: Template
+    getDashboard: [Report] #dashbard contains the reports the user wants on their homepage
   }
   type Mutation {
     createAccount: Account
     deleteAccount: Account
     venue: Venue
     venues: [Venue]
-    area: Area
-    areas: [Area]
+    outlet: Outlet
+    outlets: [Outlet]
     user: User
     users: [User]
     dashiItem: DashiItem
     dashiItems: [DashiItem]
+    postFile: File
     addTable: Venue # enter through Venue
   }
+  ###########################################
   ######## Account Settings
   type Account {
     id: ID!
@@ -45,16 +47,49 @@ export const typeDefs = gql`
   type Venue {
     id: ID!
     name: String!
-    areas: [Area!]!
+    outlets: [outlet!]!
     users: [User!]!
     families: [Family!]!
     categories: [Category!]!
   }
+  type ReportType {
+    id: ID
+    name: [String!]!
+  }
+  type Report {
+    # There is NO "table", table is a component
+    # Report table stores the data
+    # Reports have templates associated with them that also get fetched
+    id: ID!
+    name: String!
+    type: ReportType!
+    categories: [Category!]!
+    families: [Family!]!
+    templates: [Template!]!
+  }
+  enum ReportType {
+    DISPLAY
+    SETUP
+  }
 
   type Template {
-    
+    id: ID!
+    name: String!
   }
-  type Area {
+
+  # a file is a single or multiple row/tuple to be added to a Report Table in our DB
+  type File {
+    id: ID!
+    columns: [String!]!
+    rows: [Row!]!
+  }
+
+  type Row {
+    id: ID!
+    # value: []
+  }
+
+  type Outlet {
     id: ID!
     name: String!
     venue: Venue!
@@ -72,7 +107,7 @@ export const typeDefs = gql`
   type Role {
     id: ID!
     name: String!
-    permission: Permissions! #1
+    permission: Permissions!
   }
 
   type Permissions {
@@ -148,25 +183,7 @@ export const typeDefs = gql`
     id: ID!
     Reports: [Report!]!
   }
-  type ReportType {
-    id: ID
-    name: [String!]!
-  }
-  type Report {
-    # there is NO table, Reports save the data, Tables are just a React component, a vessel to house the data from the report
-    id: ID!
-    name: String!
-    type: ReportType!
-    categories: [Category!]!
-    families: [Family!]!
-  }
-  enum ReportType {
-    DISPLAY
-    SETUP
-  }
-  type DefaultReport {
-    id: ID!
-  }
+
   type Columns {
     id: ID!
   }
@@ -200,7 +217,7 @@ export const typeDefs = gql`
     measurement: Float!
     unitOfMeasurement: String!
     caseSize: Int!
-    areas: [Area!]!
+    outlets: [outlet!]!
     excludeFromVariance: Boolean!
     inventoriable: Boolean!
     inventoriableAsCase: Boolean!
@@ -231,7 +248,7 @@ export const typeDefs = gql`
   type PurchaseOrder {
     id: ID! # is the PO number as well
     vendor: Vendor! # 1:1
-    area: Area! # 1:1
+    outlet: outlet! # 1:1
     created: String!
     ordered: String! # sent to vendor
     orderStatus: OrderStatus!

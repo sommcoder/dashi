@@ -4,14 +4,21 @@ import HeaderRow from "../HeaderRow/HeaderRow";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import RouteLoader from "../../RouteLoader/RouteLoader";
 
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 import { useEffect, useState, Suspense } from "react";
 
-import { GET_DEFAULT_REPORT, POST_FILE } from "./graphql";
+import * as gql from "./table-graphql";
 
-export default function Table({ tableType }) {
-  // const { loading, error, data } = useQuery();
+export default function Table({ tableType, reportId }) {
+  // Reports
+  // reportId gets passed down from the PAGE
+  // add file to a Report
+  const { loading, error, data } = useQuery(gql.GET_REPORT, {
+    variables: {
+      reportId: reportId,
+    },
+  });
 
   /*
   DATA FETCHING:
@@ -29,8 +36,6 @@ DATA INPUT / DRAG N DROP:
 - can we parse CSV on the client?
  
 */
-
-  const [fileCount, addFile] = useState(0);
 
   const containerState = {
     default: "dropzone-container",
@@ -94,7 +99,12 @@ DATA INPUT / DRAG N DROP:
     console.log("DROP ev:", ev);
     console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
 
-    const { loading, error, data } = useQuery(GET_ALL_TABLES);
+    // add file to a Report
+    const { loading, error, data } = useQuery(gql.POST_FILE, {
+      variables: {
+        reportId: reportId,
+      },
+    });
 
     setDrag(false);
   };

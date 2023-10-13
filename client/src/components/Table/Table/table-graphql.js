@@ -1,18 +1,25 @@
 import { gql } from "@apollo/client";
 
 /*
-All graphql calls will go here and be imported into our component.jsx file
+- Accounts contain Venues
+- Venues house our Reports
+- Reports represent our table(s) of data
+- THERE IS NO REPORTS TABLE! Reports are how we refer to the various different Report Tables such as Sales, Labour, Items
+- Views are part of a Report and are the saved settings on how we'd like to view a Report.
+- Templates are saved File Structures
+ 
 */
 
 // Queries /////////////////////////
 // Reports are what we submit files to
 // The columns in the files should MATCH the columns
+// Report Ids are dictated by the submenu/page they are on
 export const GET_REPORT = gql`
-  query getREPORT {
-    REPORT {
-      id
+  query getReport($reportId: ID!) {
+    report(id: $reportId) {
       type
       data
+      templates
     }
   }
 `;
@@ -20,11 +27,8 @@ export const GET_REPORT = gql`
 // Mutations:
 // adds a file to an existing REPORT
 export const POST_FILE = gql`
-  mutation postFile {
-    file {
-      id
-      report
-      type
+  mutation postFile($reportId: ID!) {
+    report(id: $reportId) {
       data
     }
   }

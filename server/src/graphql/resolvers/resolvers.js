@@ -1,18 +1,6 @@
 import pg from "../../db/db-instance.js";
-
-// import * as mw from "../../middleware/middleware";
-
 import { ApolloServerErrorCode } from "@apollo/server/errors";
-
 import * as db from "./pg.js";
-
-/*
- 1         1          1
-Account -> Schema -> Database
-
-- Accounts information is isolated into their own DB instance on Google Cloud
- 
-*/
 
 export const resolvers = {
   Query: {
