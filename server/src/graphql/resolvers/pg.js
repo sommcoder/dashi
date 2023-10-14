@@ -74,14 +74,14 @@ export async function createAccount(name, id) {
             venue_id INT PRIMARY KEY,
             account INT REFERENCES account(account_id)
           );`,
-      sql`CREATE TABLE area (
-                area_id INT PRIMARY KEY,
+      sql`CREATE TABLE outlet (
+                outlet_id INT PRIMARY KEY,
                 venue INT REFERENCES account(account_id)
               );`,
-      sql`CREATE TABLE venues_areas (
+      sql`CREATE TABLE venues_outlets (
             venue_id INT REFERENCES venue(venue_id),
-            area_id INT REFERENCES area(area_id),
-            UNIQUE (venue_id, area_id)
+            outlet_id INT REFERENCES outlet(outlet_id),
+            UNIQUE (venue_id, outlet_id)
           );`,
       sql`CREATE TABLE family (
             family_id INT PRIMARY KEY
@@ -89,11 +89,17 @@ export async function createAccount(name, id) {
       sql`CREATE TABLE category (
             category_id INT PRIMARY KEY
           );`,
+      sql`CREATE TABLE gl_code (
+            gl_code_id INT PRIMARY KEY,
+            gl_code_num VARCHAR(10),
+            gl_code_name VARCHAR(30)
+          );`,
       sql`CREATE TYPE order_format_enum AS ENUM('unit', 'case');`,
       sql`CREATE TABLE dashi_item (
             dashi_item_id INT PRIMARY KEY,
             category_id INT REFERENCES category(category_id),
             family_id INT REFERENCES family(family_id),
+            gl_code_id REFERENCES gl_code(gl_code_id),
             unit_cost FLOAT NOT NULL,
             case_size INT NOT NULL,
             unit_of_measurement VARCHAR(15) NOT NULL,
@@ -101,16 +107,15 @@ export async function createAccount(name, id) {
             order_format order_format_enum NOT NULL,
             inventoriable BOOLEAN NOT NULL,
             inventoriable_as_case BOOLEAN NOT NULL,
-            gl_account VARCHAR(10),
             stock FLOAT,
             last_count FLOAT,
             avg_price FLOAT,
             barcode INT
           );`,
-      sql`CREATE TABLE dashi_items_areas (
-            area_id INT REFERENCES area(area_id),
+      sql`CREATE TABLE dashi_items_outlets (
+            outlet_id INT REFERENCES outlet(outlet_id),
             dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
-            UNIQUE (dashi_item_id, area_id)
+            UNIQUE (dashi_item_id, outlet_id)
           );`,
       sql`CREATE TABLE vendor (
             vendor_id INT PRIMARY KEY,
@@ -128,9 +133,9 @@ export async function createAccount(name, id) {
       sql`CREATE TYPE email_status_enum 
             AS ENUM 
             ('SENT', 'NOT SENT');`,
-      sql`CREATE TABLE purchase_orders  (
+      sql`CREATE TABLE purchase_order  (
             po_id INT PRIMARY KEY,
-            area_id INT REFERENCES area(area_id),
+            outlet_id INT REFERENCES outlet(outlet_id),
             created_by INT REFERENCES userr(user_id) NOT NULL,
             ordered_status order_status_enum NOT NULL,
             email_status email_status_enum NOT NULL,
@@ -138,23 +143,55 @@ export async function createAccount(name, id) {
             sent_date TIMESTAMP WITHOUT TIME ZONE,
             received_date TIMESTAMP WITHOUT TIME ZONE
           );`,
+      sql`CREATE TABLE sale (
+            sale_id INT PRIMARY KEY,
+            dashi_item_id INT REFERENCES dashi_item(dashi_item_id)
+          );`,
+      sql`CREATE TABLE inventory (
+            inventory_id INT PRIMARY KEY,
+          );`,
+      sql`CREATE TABLE transfer (
+            transfer_id INT PRIMARY KEY,
+          );`,
+      sql`CREATE TABLE depletion (
+            depletion_id INT PRIMARY KEY,
+          );`,
       sql`CREATE TYPE custom_field_enum 
             AS ENUM 
             ('DROPDOWN', 'CHECKBOX', 'TEXT', 'NUMBER');
             `,
-      sql`CREATE TABLE custom_item_fields (
-            custom_field_id INT PRIMARY KEY,
+      sql`CREATE TABLE custom_item_field (
+            custom_item_field_id INT PRIMARY KEY,
             dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
             field_name VARCHAR(25) NOT NULL,
             field_type custom_field_enum NOT NULL
           );`,
-      sql`CREATE TABLE custom_po_fields (
-            custom_field_id INT PRIMARY KEY,
-            dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+      sql`CREATE TABLE custom_order_field (
+            custom_order_field_id INT PRIMARY KEY,
+            po_id INT REFERENCES po(po_id),
             field_name VARCHAR(25) NOT NULL,
             field_type custom_field_enum NOT NULL
           );`,
-      sql``,
+      sql`CREATE TABLE custom_sale_field (
+            custom_sale_field_id INT PRIMARY KEY,
+            sale_id INT REFERENCES sale(sale_id),
+            field_name VARCHAR(25) NOT NULL,
+            field_type custom_field_enum NOT NULL
+          );`,
+      sql`CREATE TABLE custom_inventory_field (
+            custom_inventory_field_id INT PRIMARY KEY,
+            inventory_id INT REFERENCES inventory(inventory_id),
+            depletion_id INT REFERENCES depletion(depletion_id),
+            transfer_id INT REFERENCES transfer(transfer_id),
+            field_name VARCHAR(25) NOT NULL,
+            field_type custom_field_enum NOT NULL
+          );`,
+      sql`CREATE TABLE invoice (
+            custom_field_id INT PRIMARY KEY,
+            po_id_id INT REFERENCES purchase_order(dashi_item_id),
+            field_name VARCHAR(25) NOT NULL,
+            field_type custom_field_enum NOT NULL
+          );`,
       sql``,
       sql``,
     ]);
@@ -213,9 +250,9 @@ export async function updateReport(name, id) {
           );
 
 
-            - PO's can be "ONE ORDER -> AREA FOR ORDER"
-            - OR they can be "ONE ORDER -> AREA BY ITEM"
-            - IF "AREA BY ITEM", 
+            - PO's can be "ONE ORDER -> outlet FOR ORDER"
+            - OR they can be "ONE ORDER -> outlet BY ITEM"
+            - IF "outlet BY ITEM", 
              
             */
 
