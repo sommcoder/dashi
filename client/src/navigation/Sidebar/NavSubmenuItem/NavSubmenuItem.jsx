@@ -1,8 +1,8 @@
-﻿import "./NavItemSubMenu.css";
+﻿import "./NavSubmenuItem.css";
 
 import { Link } from "react-router-dom";
 
-export default function NavItemSubMenu({ path, subMenu, navBarObj, menu }) {
+export default function NavSubmenuItem({ path, subMenu, navBarObj, menu }) {
   // console.log("subMenu:", subMenu);
   // console.log("navBarObj:", navBarObj);
   return (

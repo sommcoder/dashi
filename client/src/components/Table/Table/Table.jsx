@@ -20,10 +20,13 @@ export default function Table({ tableType, reportId }) {
     },
   });
 
+  // if error, ie. no prod server, fetch mock.json data to populate app.
+
   /*
   DATA FETCHING:
 - Trying to make Table component REUSABLE across Pages. 
 - SO IT IS THE PAGE THAT SHOULD FETCH THE DATA, the table is data agnostic
+- Or do we just do one large data fetch on site visit? This creates a longer Time To Interactivity.. however would have payoffs in that it would be easier to move through pages smoothly and quickly.
 - ALSO the table could be a DISPLAY or a SETUP table
 - Either it fetches data from the API OR simply provides blank table data 
 - we must rely on the "tableType" prop to determine how the table will render
@@ -36,6 +39,22 @@ DATA INPUT / DRAG N DROP:
 - can we parse CSV on the client?
  
 */
+
+  /*
+  1) File is Valid, File is NOT valid = determines CSS
+    File is valid
+    Blue Background, dark border, no drag clipping
+
+
+  2) no action = default text/css
+  3) default text, invalid text, valid text
+
+
+  ** dropzone should REMOVE duplicate Headers as part of it's validation process **
+   
+  */
+
+  ////////////////// TABLE STATE //////////////////////////////
 
   const containerState = {
     default: "dropzone-container",
@@ -54,33 +73,9 @@ DATA INPUT / DRAG N DROP:
     "Drop file(s) to upload",
     "file is not .csv, .xsl or .xlsx format",
   ];
-
   const { isLoading, switchLoading } = useState(true);
-
-  /*
-  1) File is Valid, File is NOT valid = determines CSS
-    File is valid
-    Blue Background, dark border, no drag clipping
-
-
-  2) no action = default text/css
-  3) default text, invalid text, valid text
-
-
-  ** dropzone should REMOVE duplicate Headers as part of it's validation process **
-   
-  */
-
   const [dragState, setDrag] = useState(false);
   const [fileValid, setFileValid] = useState(null); // null = default,
-
-  ///////////////////////////////
-  /*
- 
-- Why does the dragOver function not work?
-- Is the event not firing?
- 
-*/
 
   const handleDragOver = (ev) => {
     ev.preventDefault(); // NEEDED!
@@ -109,6 +104,9 @@ DATA INPUT / DRAG N DROP:
     setDrag(false);
   };
 
+  ////////////////////////////////////////////////////////////
+  //////////////////// DYNAMIC STYLING ///////////////////////
+  ////////////////////////////////////////////////////////////
   const colSizingSeqObj = {};
 
   // setup table or display table?
@@ -117,11 +115,6 @@ DATA INPUT / DRAG N DROP:
 
   let headers = Object.keys(dataRow[0]);
 
-  /*
-   
- - Table component will determine it's styling based on the incoming data from the Page!
-   
-  */
   const initColSizingSeq = []; // this is an array of the size of each column
 
   function getAverage(valArr) {
@@ -144,7 +137,7 @@ DATA INPUT / DRAG N DROP:
     });
   }
 
-  if (tableType === "display") determineAvgColWidth(dataRow, headers);
+  determineAvgColWidth(dataRow, headers);
 
   // console.log("initColSizingSeq:", initColSizingSeq);
 
@@ -177,9 +170,12 @@ DATA INPUT / DRAG N DROP:
     gridTemplateRows: `3rem auto 0`,
   };
   // based on the sequence will determine which keys we access from our JSON data as we iterate through it
+
+  // tableName needs to be what's sent from the server OR default data
   const tableName = "";
 
   // console.log("tableType:", tableType);
+  ////////////////////////////////////////////////////////////////
 
   return (
     <Suspense fallback={<RouteLoader />}>

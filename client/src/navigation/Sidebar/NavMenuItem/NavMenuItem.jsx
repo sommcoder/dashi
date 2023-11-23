@@ -1,8 +1,8 @@
 ﻿import DropDownArrow from "../DropDownArrow/DropDownArrow";
-import NavItemSubMenu from "../NavItemSubMenu/NavItemSubMenu";
-import "./NavItemMenu.css";
+import NavItemSubMenu from "../NavSubmenuItem/NavSubmenuItem";
+import "./NavMenuItem.css";
 
-export default function NavItemMenu({
+export default function NavMenuItem({
   menu,
   subMenus,
   adjustNavBar,

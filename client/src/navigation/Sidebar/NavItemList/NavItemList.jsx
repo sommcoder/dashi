@@ -1,6 +1,6 @@
 ﻿import "./NavItemList.css";
 import { useState } from "react";
-import NavItemMenu from "../NavItemMenu/NavItemMenu";
+import NavMenuItem from "../NavMenuItem/NavMenuItem";
 
 // menu, submenus and their paths:
 import { navMenuList } from "../menu.js";
@@ -18,7 +18,7 @@ export default function NavItemList() {
   });
 
   // the number of menu rows:
-  // submenus are generated on the NavItemMenu
+  // submenus are generated on the NavMenuItem
   const menuRows = {
     gridTemplateRows: `repeat(${navMenuList.length}, auto`,
   };
@@ -28,7 +28,7 @@ export default function NavItemList() {
   return (
     <div className="nav-side-bar-list" style={menuRows}>
       {navMenuList.map(({ menu, subMenus }, i) => (
-        <NavItemMenu
+        <NavMenuItem
           navBarObj={navBarObj}
           adjustNavBar={adjustNavBar}
           menu={menu}

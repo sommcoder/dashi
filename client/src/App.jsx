@@ -1,19 +1,17 @@
-import NavSideBarMenu from './navigation/Sidebar/SideBar/SideBar';
-import MainWrapper from './pages/MainWrapper/MainWrapper';
+import NavSideBarMenu from "./navigation/Sidebar/SideBar/SideBar";
+import RouteWrapper from "./pages/RouteWrapper/RouteWrapper";
 
-import './App.css';
+import "./App.css";
 
 export default function App() {
   /*
- 
-NavSideBarMenu triggers the Route changes
- 
+NavSideBarMenu triggers the Route changes in the Route Wrapper
 */
 
   return (
     <div className="app-container">
       <NavSideBarMenu />
-      <MainWrapper />
+      <RouteWrapper />
     </div>
   );
 }

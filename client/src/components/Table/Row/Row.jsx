@@ -11,10 +11,6 @@ export default function Row({ data, colStyleString, tableDisplay }) {
 
   useEffect(() => {
     let timer1 = setTimeout(() => setShow(true), delay * 1000);
-
-    // this will clear Timeout
-    // when component unmount like in willComponentUnmount
-    // and show will not change to true
     return () => {
       clearTimeout(timer1);
     };
@@ -54,7 +50,5 @@ export default function Row({ data, colStyleString, tableDisplay }) {
 }
 
 /*
- 
 Row will need to accommodate the size of the resize bar that in the header. otherwise the columns may not line up properly
- 
 */

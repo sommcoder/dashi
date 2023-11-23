@@ -17,7 +17,7 @@ export const navMenuList = [
         path: "/items",
       },
       {
-        subMenu: "Families & Categories",
+        subMenu: "Families",
         path: "/families",
       },
       {
