@@ -1,0 +1,6 @@
+# defines your configuration settings for your runtme as well as general app, network and other resource settings
+
+runtime: nodejs20
+
+env_variables:
+  API_KEY: ""

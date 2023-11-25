@@ -8,23 +8,13 @@ import { useQuery } from "@apollo/client";
 
 import { useEffect, useState, Suspense } from "react";
 
-import * as gql from "./table-graphql";
-
-export default function Table({ tableType, reportId }) {
-  // Reports
-  // reportId gets passed down from the PAGE
-  // add file to a Report
-  const { loading, error, data } = useQuery(gql.GET_REPORT, {
-    variables: {
-      reportId: reportId,
-    },
-  });
-
+export default function Table({ tableData, tableType, reportId }) {
   // if error, ie. no prod server, fetch mock.json data to populate app.
 
   /*
   DATA FETCHING:
 - Trying to make Table component REUSABLE across Pages. 
+- Table is merely a VESSEL for data to be displayed. The particular page the user is viewing is where the data is being fetched from.
 - SO IT IS THE PAGE THAT SHOULD FETCH THE DATA, the table is data agnostic
 - Or do we just do one large data fetch on site visit? This creates a longer Time To Interactivity.. however would have payoffs in that it would be easier to move through pages smoothly and quickly.
 - ALSO the table could be a DISPLAY or a SETUP table
@@ -33,11 +23,9 @@ export default function Table({ tableType, reportId }) {
 */
 
   /*
- 
 DATA INPUT / DRAG N DROP:
 - send data to server
 - can we parse CSV on the client?
- 
 */
 
   /*

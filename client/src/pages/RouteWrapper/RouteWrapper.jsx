@@ -12,12 +12,6 @@ export default function RouteWrapper() {
   return (
     <div className="route-wrapper">
       <HeaderBarMenu />
-      {/* 
-- One big initial fetch/load.
-- Navigation would be immediately sent to client regardless of the URL visited.
-- Each table would have a corresponding "loading component" to indicate progress of the fetch to the user.
-
-      */}
       <Routes>
         <Route index path="/" element={<Page.Dashboard />} />
         <Route path="/sales" element={<Page.Sales />} />

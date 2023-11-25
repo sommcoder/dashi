@@ -4,6 +4,8 @@ import { useState } from "react";
 import HeaderSection from "../../components/Setup/HeaderSection/HeaderSection";
 import Table from "../../components/Table/Table/Table";
 
+// import { useQuery } from "@apollo/client";
+
 export default function SetupPage() {
   // this is a placeholder that we parse from the csv submitted:
   const headerArr = ["title", "label", "price", "location", "store", "venue"];
