@@ -1,0 +1,7 @@
+### send HTTP requests while still in VS Code
+
+### ROOT
+GET http://localhost:5000/api/v1 HTTP/1.1
+
+### Items
+GET http://localhost:5000/api/v1/items HTTP/1.1

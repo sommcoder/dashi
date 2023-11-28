@@ -1,6 +1,5 @@
-import postgres from "postgres";
-// import * as dotenv from "dotenv";
-// dotenv.config();
+const postgres = require("postgres");
+// require("dotenv").config();
 
 const sql = postgres({
   host: process.env.DEV_DB_HOST,
@@ -11,4 +10,4 @@ const sql = postgres({
   idle_timeout: 3,
 });
 
-export default sql;
+module.exports(sql);
