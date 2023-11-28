@@ -6,7 +6,7 @@ const fastify = require("fastify")({ logger: true });
 const PORT = process.env.PORT || 5000;
 // something was constantly sending port 4000 POST requests...???
 
-fastify.register(require("./routes/login"), { prefix: "api/v1" });
+// fastify.register(require("./routes/login"), { prefix: "api/v1" });
 fastify.register(require("./routes/items"), { prefix: "api/v1" });
 
 // Run the server!
