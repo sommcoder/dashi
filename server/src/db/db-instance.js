@@ -1,4 +1,6 @@
 import postgres from "postgres";
+// import * as dotenv from "dotenv";
+// dotenv.config();
 
 const sql = postgres({
   host: process.env.DEV_DB_HOST,
@@ -6,7 +8,7 @@ const sql = postgres({
   database: process.env.DEV_DB,
   username: process.env.DEV_DB_USERNAME,
   password: process.env.DEV_DB_PASSWORD,
-}); // will use psql environment variables
+  idle_timeout: 3,
+});
 
-// our postgreSQL database client instance
 export default sql;

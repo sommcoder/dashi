@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 // queries
 
 // get a specific item:
-export const GET_VENUE_ITEM = gql`
+export const GET_VENUE_ITEMS = gql`
   query getVenueItem($accountId: ID!, $venueId: ID!) {
     account(id: $accountId) {
       venue(id: $venueId) {

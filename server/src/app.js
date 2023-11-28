@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./graphql/typeDefs/index.js";
@@ -15,6 +16,7 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
   listen: { port: PORT },
 });
+
 console.log("url:", url);
 
 console.log("Apollo server is listening with a GraphQL API at port:", PORT);

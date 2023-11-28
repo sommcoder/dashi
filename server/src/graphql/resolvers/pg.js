@@ -16,6 +16,7 @@ export async function getReport(id) {
   }
   return report;
 }
+
 export async function getReports() {
   // user wants to view all of their reports in the Venue menu OR as a shortcut on a particular submenu page for editing purposes.
   try {
@@ -29,18 +30,26 @@ export async function getReports() {
 }
 
 /*
- 
-- We're going to want a GENERAL database instance to collect data on accounts
-
-- Collect product, usage data
-- Account Credit Card 
- 
+- We're going to want a GENERAL database instance to collect data on all accounts
+    - Collect product, usage data, etc.. users would be able to 'look up' existing products
+    - Account Credit Card 
 */
 
+////////////////////////////////////////////
 // MUTATIONS:
-export async function createAccount(name, id) {
+export async function createItem(id) {
+  try {
+    const item = await sql`
+        INSERT INTO dashi_item;
+        `;
+    return item;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+}
+export async function createAccount(name, accountId) {
   /**
-   * Add new account via Google Cloud
+   * Add new account via Google Cloud's Postgres
    *
    */
   try {
@@ -48,7 +57,7 @@ export async function createAccount(name, id) {
     // a transaction is a set of functions that are triggered by an event
     const newAccountTransaction = await sql.begin((sql) => [
       sql`CREATE DATABASE ${name};`,
-      sql`CREATE SCHEMA [IF NOT EXISTS] dashi-user-schema-${id};`,
+      sql`CREATE SCHEMA [IF NOT EXISTS] dashi-account-schema-${accountId};`,
       sql`CREATE TABLE account (
             account_id INT PRIMARY KEY,
             business_name varchar(25) NOT NULL,
@@ -102,11 +111,10 @@ export async function createAccount(name, id) {
             gl_code_id REFERENCES gl_code(gl_code_id),
             unit_cost FLOAT NOT NULL,
             case_size INT NOT NULL,
-            unit_of_measurement VARCHAR(15) NOT NULL,
-            item_measurement FLOAT NOT NULL,
+            uom VARCHAR(15) NOT NULL,
+            unit_size FLOAT NOT NULL,
             order_format order_format_enum NOT NULL,
             inventoriable BOOLEAN NOT NULL,
-            inventoriable_as_case BOOLEAN NOT NULL,
             stock FLOAT,
             last_count FLOAT,
             avg_price FLOAT,
@@ -202,39 +210,38 @@ export async function createAccount(name, id) {
   }
 }
 
-export async function createReport(name, id) {
-  try {
-    const newReport = await sql.begin((sql) => [
-      sql``,
-      sql``,
-      sql``,
-      sql``,
-      sql``,
-      sql``,
-    ]);
-    setTimeout(() => query.cancel(), 5000);
-    return newReport;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
+// export async function addItem() {
+//   try {
+//     // will this populate the table?
+//     item_data_arr.forEach(({id, title, case_size, inventoriable, uom, cost, gl_code, description, created_by, added_on, avg_price, unit_size}) => {
+//       const newReport = await sql`INSERT INTO dashi_item
+//         (id, title, case_size, inventoriable, uom, cost, gl_code, description, created_by, added_on, avg_price, unit_size)
+//         VALUES (${id}, ${title}, ${case_size}, ${inventoriable}, ${uom}, ${cost}, ${gl_code}, ${description}, ${created_by}, ${added_on}, ${avg_price}, ${unit_size});
+//         `;
+//     });
+//     setTimeout(() => query.cancel(), 5000);
+//     return newReport;
+//   } catch (err) {
+//     console.log("error:", err.message);
+//   }
+// }
 
-export async function updateReport(name, id) {
-  try {
-    const newTable = await sql.begin((sql) => [
-      sql``,
-      sql``,
-      sql``,
-      sql``,
-      sql``,
-      sql``,
-    ]);
-    setTimeout(() => query.cancel(), 5000);
-    return newTable;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
+// export async function updateReport(name, id) {
+//   try {
+//     const newTable = await sql.begin((sql) => [
+//       sql``,
+//       sql``,
+//       sql``,
+//       sql``,
+//       sql``,
+//       sql``,
+//     ]);
+//     setTimeout(() => query.cancel(), 5000);
+//     return newTable;
+//   } catch (err) {
+//     console.log("error:", err.message);
+//   }
+// }
 
 /*
              
@@ -263,10 +270,10 @@ export async function updateReport(name, id) {
 
 // )
 
-export async function dropAccount(id) {
+export async function dropAccount(accountId) {
   try {
     const report = await sql`
-          DROP DATABASE ${id};
+          DROP DATABASE ${accountId};
           `;
   } catch (err) {
     console.log("error:", err.message);

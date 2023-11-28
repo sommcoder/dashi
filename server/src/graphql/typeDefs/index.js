@@ -1,15 +1,13 @@
 import gql from "graphql-tag";
 
-/*
- 
+/* 
 1) GraphQL types are nullable by default
 2) GraphQL is versionless, no breaking changes
 3) 
- 
 */
 
 export const typeDefs = gql`
-  ################# ROOT ###################
+  ################# ROOTS ###################
   type Query {
     account: Account
     venue: Venue
@@ -21,7 +19,7 @@ export const typeDefs = gql`
     dashiItem: DashiItem
     dashiItems: [DashiItem]
     getReport: Template
-    getDashboard: [Report] #dashbard contains the reports the user wants on their homepage
+    getDashboard: [Report] #dashboard contains the reports the user wants on their homepage
   }
   type Mutation {
     createAccount: Account
@@ -32,6 +30,7 @@ export const typeDefs = gql`
     outlets: [Outlet]
     user: User
     users: [User]
+    createItem: DashiItem
     dashiItem: DashiItem
     dashiItems: [DashiItem]
     postFile: File
@@ -47,7 +46,7 @@ export const typeDefs = gql`
   type Venue {
     id: ID!
     name: String!
-    outlets: [outlet!]!
+    outlets: [Outlet!]!
     users: [User!]!
     families: [Family!]!
     categories: [Category!]!
@@ -217,7 +216,7 @@ export const typeDefs = gql`
     measurement: Float!
     unitOfMeasurement: String!
     caseSize: Int!
-    outlets: [outlet!]!
+    outlets: [Outlet!]!
     excludeFromVariance: Boolean!
     inventoriable: Boolean!
     inventoriableAsCase: Boolean!
@@ -248,7 +247,7 @@ export const typeDefs = gql`
   type PurchaseOrder {
     id: ID! # is the PO number as well
     vendor: Vendor! # 1:1
-    outlet: outlet! # 1:1
+    outlet: Outlet! # 1:1
     created: String!
     ordered: String! # sent to vendor
     orderStatus: OrderStatus!

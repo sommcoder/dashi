@@ -1,4 +1,3 @@
-import pg from "../../db/db-instance.js";
 import { ApolloServerErrorCode } from "@apollo/server/errors";
 import * as db from "./pg.js";
 
@@ -16,52 +15,43 @@ export const resolvers = {
         );
       }
     },
-    venue() {
-      try {
-        return db.account;
-      } catch (err) {
-        console.log("error:", err.message);
-        throw new ApolloError(err);
-      }
-    },
-    venues() {
-      try {
-        return db.account;
-      } catch (err) {
-        console.log("error:", err.message);
-        throw new ApolloError(err);
-      }
-    },
-    area() {
-      try {
-        return db.account;
-      } catch (err) {
-        console.log("error:", err.message);
-        throw new ApolloError(err);
-      }
-    },
-    areas() {
-      try {
-        return db.account;
-      } catch (err) {
-        console.log("error:", err.message);
-        throw new ApolloError(err);
-      }
-    },
-    getReport(id) {
-      return db.getReport(id);
-    },
-    // reports(id) {
-    //   return db.getReports(id);
-    // },
   },
-  // Mutations: {
-  //   createAccount(name) {
-  //     // const id = mw.createId();
-  //     return db.createAccount(name, id); // pass id
+  Mutations: {
+    createItem(name) {
+      try {
+        // const id = mw.createId();
+        return db.createItem(name);
+      } catch (err) {
+        console.log("error:", err.message);
+      }
+    },
+    // readItem(name) {
+    //   // const id = mw.readId();
+    //   return db.readItem(name);
+    // },
+    // updateItem(name) {
+    //   // const id = mw.updateId();
+    //   return db.updateItem(name);
+    // },
+    // deleteItem(name) {
+    //   // const id = mw.deleteId();
+    //   return db.deleteItem(name);
+    // },
+    createAccount(name) {
+      // const id = mw.createId();
+      return db.createAccount(name);
+    },
+  },
+  //   readAccount(id) {
+  //     return db.dropAccount(id);
   //   },
+  // },
+  //   updateAccount(id) {
+  //     return db.dropAccount(id);
+  //   },
+  // },
   //   deleteAccount(id) {
-  //     return db.dropAccount(id); // pass id
+  //     return db.dropAccount(id);
   //   },
   // },
 };
@@ -78,7 +68,7 @@ export const resolvers = {
 // middleware functions split logic into chunks that handle SINGLE task and can be reused in the same project for different requests.
 
 /*
- 
+
 - Authorization
 - Extraction and storage of metrics
 - Caching
@@ -87,7 +77,7 @@ export const resolvers = {
 - Input Validation
 - Logging
 - Output Manipulation
- 
+
 */
 
 // in GraphQL there is only TWO requests. Query and Mutation.
@@ -96,7 +86,7 @@ export const resolvers = {
 // the JSON that GraphQL converts the request to will then be used to interact with the DB
 
 /*
- 
+
 - with @directives, they provide a ONE-WAY execution flow
 - GraphQL provides some built-in @directives
 -
@@ -104,17 +94,17 @@ export const resolvers = {
 */
 
 /*
- 
+
  Except they resolve all the way down. What does that mean? Well therefore, resolvers resolving a type, and a type has a field that's referring to another type, and then that type has a field that's referring to another type.
 
 You have to have a resolver for every single type all the way down, so it resolves all the way down depending on the query that came in. So if the query asks for those connections, I want this type that refers to this type, that refers to this type, then you have to have resolvers for every single level.
- 
+
 */
 
 /*
- 
+
 1) Every query and mutations your schema has MUST have a resolver that returns the specified type.
 
-2) 
- 
+2)
+
 */
