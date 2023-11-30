@@ -1,7 +1,7 @@
 const postgres = require("postgres");
-// require("dotenv").config();
+require("dotenv").config();
 
-const sql = postgres({
+module.exports = sql = postgres({
   host: process.env.DEV_DB_HOST,
   port: process.env.DEV_DB_PORT,
   database: process.env.DEV_DB,
@@ -9,5 +9,3 @@ const sql = postgres({
   password: process.env.DEV_DB_PASSWORD,
   idle_timeout: 3,
 });
-
-module.exports(sql);

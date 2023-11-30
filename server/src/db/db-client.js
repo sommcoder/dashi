@@ -1,4 +1,4 @@
-const sql = require("../db/db-instance.js");
+const sql = require("./db-instance.js");
 
 /*
 - We're going to want a GENERAL database instance to collect data on all accounts
@@ -211,12 +211,12 @@ async function createItem(id) {
     console.log("error:", err.message);
   }
 }
-async function readItem(id) {
+async function readAllItems(id) {
   try {
-    const item = await sql`
-        INSERT INTO dashi_item;
-        `;
-    return item;
+    const items = await sql`SELECT * FROM dashi_item;`;
+    console.log("items:", items);
+    // did we even get this from the DB?
+    return items;
   } catch (err) {
     console.log("error:", err.message);
   }
@@ -242,13 +242,13 @@ async function deleteItem(id) {
   }
 }
 
-module.exports(
+module.exports = {
   createAccount,
   readAccount,
   updateAccount,
   deleteAccount,
   createItem,
-  readItem,
+  readAllItems,
   updateItem,
-  deleteItem
-);
+  deleteItem,
+};

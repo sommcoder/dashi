@@ -1,0 +1,83 @@
+a Query:
+
+A query is a declarative dependency on an async source of data that is tied to a unique KEY
+
+- A query can be used with any PROMISE-based method (including GET and POST methods) to fetch data from a server. 
+
+- If your method MODIFIES data on the server, use Mutations instead!
+ 
+
+useQuery needs AT LEAST:
+- a unique KEY for the query
+- a function that returns a promise that
+   - resolves the data, or throws an error
+
+
+QUERY KEYS:
+- a Key is used internally for refetching,caching and sharing your queries throughout your App.
+- need to be an Array at the top level. Can be an array of a single string or as complex as an array of MANY strings and nested objects. As long as the query key is serializable, and unique to the query's data, you can use it!
+
+QUERY KEYS WITH VARIABLES:
+- when a query needs more information to uniquely describe its data, you can use an array with a string and any number of seriablizable object o describe it
+- useful for:
+   - Hierarchical or nested resources:
+       - common to pass an ID, index or other primitive to unqiue identify the Item
+
+   - Queries with additional parameters:
+       - it's common to pass an object of additional options
+
+QUery Keys are hashed Deterministically!
+
+If your query FUNCTION depends on a variable, include it in your QUERY KEY. such as:
+
+function Todos({ todoId }) {
+  const result = useQuery({
+    queryKey: ['todos', todoId],
+    queryFn: () => fetchTodoById(todoId),
+  })
+}
+
+NOTE: that query keys act as dependencies for your query functions. Adding dependent variables to your query key will ensure that queries are cached independently, and that any time a variable changes, queries will be refetched automatically (depending on your staleTime settings). See the exhaustive-deps section for more information and examples.
+
+useQuery returns a Result object
+
+Result contains the following important state properties which you can of course destructure:
+- Result.isLoading
+- Result.isError
+- Result.isSuccess
+
+- Result.error
+     if query is in the isError state, the error is available via the 'error' prop 
+- Result.data
+     if query is in an isSuccess state, the data is available via the 'data' prop
+- Result.isFetching
+     in any state, if the query is fetching at any time (including background refetchintg) isFetching will be 'true'
+
+
+You can access the following from the return of useQuery():    
+Result.STATUS property  (isLoading, isError, isSuccess)
+
+Results.data
+Result.error
+Result.isFetching
+Result.FetchStatus property
+
+***** FOR MOST QUERIES, it's usually sufficient to check for the isLoading state, then the isError state, then finally, assume that the data is available and render the successful state and it's respective data
+
+The OTHER state is: FetchStatus
+
+1) fetchStatus === 'fetching'
+2) fetchStatus === 'paused'
+3) fetchStatus === 'idle'
+
+
+**** QUERY FUNCTIONS:
+- 
+
+
+
+*** Network Mode:
+- online, always, offlineFirst
+
+
+*/
