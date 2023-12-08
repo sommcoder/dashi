@@ -19,7 +19,7 @@
 //     queryKey: ["get"],
 //     queryFn: fetchItems(),
 //   });
-};
+// };
 
 // this would be a great way of reducing code on each component/page that needs to make a query or mutation.
 

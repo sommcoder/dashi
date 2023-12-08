@@ -1,4 +1,4 @@
-const readAllItems = require("../db/db-client.js");
+const db = require("../db/db-client.js");
 
 module.exports = function itemRoutes(fastify, options, done) {
   //   fastify.get("/item:id", async (req, reply) => {
@@ -9,9 +9,13 @@ module.exports = function itemRoutes(fastify, options, done) {
   //   });
 
   fastify.get("/items", async (req, reply) => {
-    // get all items by account id
-    console.log("received a request");
-    reply.code(200).send(readAllItems());
+    try {
+      // get all items by account id
+      console.log("received a request on /items");
+      reply.code(200).send(db.readAllItems());
+    } catch (err) {
+      console.log("Fastify error:", err.message);
+    }
   });
   done();
 };

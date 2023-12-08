@@ -9,3 +9,11 @@ module.exports = sql = postgres({
   password: process.env.DEV_DB_PASSWORD,
   idle_timeout: 3,
 });
+
+/*
+
+`postgres://${process.env.DEV_DB_USERNAME}:${process.env.DEV_DB_PASSWORD}@${process.env.DEV_DB_HOST}:${process.env.DEV_DB_PORT}/${process.env.DEV_DB}`
+ 
+
+ 
+*/

@@ -218,7 +218,7 @@ async function readAllItems(id) {
     // did we even get this from the DB?
     return items;
   } catch (err) {
-    console.log("error:", err.message);
+    console.log("postgres.js error:", err.message);
   }
 }
 async function updateItem(id) {
@@ -252,3 +252,16 @@ module.exports = {
   updateItem,
   deleteItem,
 };
+
+/*
+ 
+1) Need to add data to PostgreSQL first before attempting to read anything... obvi
+
+
+OR
+
+2) the actual DB name is 'postgres' not 'dashi-dev'.. 'dashi-dev' may be the db server name? 
+
+Look into both of these!
+ 
+*/
