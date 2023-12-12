@@ -4,6 +4,12 @@
   align-items: center;
   min-height: 3.5rem;
   z-index: 3;
+  /* padding-bottom: 0.5rem; */
+}
+
+/* gives bottom border to last child */
+.nav-side-bar-menu-header-container:last-child {
+  border-bottom: 1px solid rgb(21, 52, 63);
 }
 
 .menu-item {
@@ -11,6 +17,8 @@
   padding-left: 2rem;
   align-self: center;
   z-index: 3;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
 }
 
 .menu-item:hover {
@@ -28,21 +36,35 @@
 
 .nav-side-bar-menu-container {
   display: grid;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background-color: rgb(62, 91, 100);
   grid-template-columns: 70% 30%; /* Link + => */
+  border-top: 1px solid rgb(21, 52, 63);
 }
 
 /* SUB MENU: */
-
 .nav-side-bar-submenu-container {
   display: grid;
   justify-content: left;
-  max-height: 0px;
+  max-height: 0px; /* starts at 0px */
   z-index: 1;
+  transition: z-index 1000ms ease-in-out;
   transition: max-height 500ms ease-in-out;
 }
 
 .active {
+  z-index: 2;
   max-height: 200px;
+  transition: z-index 1000ms ease-in-out;
   transition: max-height 500ms ease-in-out;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -8,7 +8,7 @@ import { navMenuList } from "../menu.js";
 export default function NavItemList() {
   // console.log("navMenuList:", navMenuList);
 
-  // need to add new line here if we add more Menus in the future:
+  // need new key/value here if we add more Menus in the future:
   const [navBarObj, adjustNavBar] = useState({
     Sales: false,
     Items: false,

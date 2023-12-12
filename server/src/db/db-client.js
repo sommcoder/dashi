@@ -219,10 +219,12 @@ async function deleteAccount(accountId) {
 }
 
 // ITEM
-async function createItem(id) {
+async function createItem(itemObj) {
+  console.log("itemObj:", itemObj);
   try {
     const item = await sql`
-        INSERT INTO dashi_item;
+        INSERT INTO dashi_item()
+        VALUES()
         `;
     return item;
   } catch (err) {

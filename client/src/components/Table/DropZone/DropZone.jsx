@@ -1,7 +1,45 @@
 ﻿import "./DropZone.css";
 import { useState } from "react";
+import axios from "axios";
+
+import { useMutation } from "@tanstack/react-query";
+
+async function addItems(files) {
+  console.log("files:", files);
+  const formData = new FormData();
+
+  for (let i = 0; i < files.length; i++) {
+    // add each file to our formData
+    formData.append(files[i].name, files[i]);
+  }
+  console.log("formData:", formData);
+
+  axios
+    .post("http://localhost:5000/api/v1/items", formData)
+    .then((res) => console.log(res))
+    .catch((error) => console.log(error));
+  // await fetch(`http://localhost:5000/api/v1/items`, {
+  //   method: "POST",
+  //   mode: "no-cors",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: formData,
+  // })
+  //   .then(function (res) {
+  //     console.log(res);
+  //   })
+  //   .catch(function (res) {
+  //     console.log(res);
+  //   });
+}
 
 export default function DropZone() {
+  const mutation = useMutation({
+    queryKey: ["addItems"],
+    mutationFn: (fileArr) => addItems(fileArr),
+  });
   /*
     - DropZone needs to get the information and then send it UP to the Table component.
     - Otherwise the rerending of DropZone needs to be isolated in DropZone and not cause a rerending on the entire Table when a file is dragged
@@ -30,6 +68,8 @@ export default function DropZone() {
   const handleDragOver = (ev) => {
     ev.preventDefault();
     setDrag(true);
+
+    // validation:
     for (const item of ev.dataTransfer.items) {
       if (validFileTypes.includes(item.type)) {
         setFileValid(true);
@@ -45,12 +85,15 @@ export default function DropZone() {
     setFileValid("");
   };
 
+  // const fileUploadArr = [];
+
   const handleDrop = (ev) => {
     ev.stopPropagation();
     ev.preventDefault(); // prevents file from being opened in the browser
     console.log("DROP ev:", ev);
     console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
     setDrag(false);
+    mutation.mutate(ev.dataTransfer.files);
   };
   return (
     <div

@@ -1,4 +1,5 @@
-﻿import DropDownArrow from "../DropDownArrow/DropDownArrow";
+﻿import { useEffect, useState } from "react";
+import DropDownArrow from "../DropDownArrow/DropDownArrow";
 import NavItemSubMenu from "../NavSubmenuItem/NavSubmenuItem";
 import "./NavMenuItem.css";
 
@@ -30,13 +31,42 @@ export default function NavMenuItem({
 onClick : 
 - Clicking on the MENU opens up the SUBMENU
 - it also creates a row PER element in the subMenu array to the Grid container
+
+- We should have the ACTIVE menu CLOSE BEFORE we OPEN up the new ACTIVE menu. This would look WAYYYY more clean!
 */
   const subMenuRows = {
     gridTemplateRows: `repeat(${subMenus.length}, auto)`,
   };
 
-  // console.log("subMenuRows:", subMenuRows);
-  // console.log("navBarObj[menu]:", navBarObj);
+  // Handle subMenu render animation logic
+  // revisit this in the future.. not working as desired
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let counter = count;
+    const interval = setInterval(() => {
+      if (counter >= subMenus.length) {
+        clearInterval(interval);
+      } else {
+        setCount((count) => count + 1);
+        counter++; // local variable that this closure will see
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, [subMenus]);
+
+  // slice returns a growing slice of the array each time the interval processes
+  let subMenuList = subMenus.slice(0, count).map(({ path, subMenu }, i) => {
+    return (
+      <NavItemSubMenu
+        path={path}
+        key={`${subMenu}-${i}`}
+        subMenu={subMenu}
+        menu={menu}
+        navBarObj={navBarObj}
+      />
+    );
+  });
 
   return (
     <li className="nav-side-bar-menu-header-container">
@@ -54,15 +84,7 @@ onClick :
         }`}
         style={subMenuRows}
       >
-        {subMenus.map(({ subMenu, path }, i) => (
-          <NavItemSubMenu
-            path={path}
-            key={i}
-            subMenu={subMenu}
-            menu={menu}
-            navBarObj={navBarObj}
-          />
-        ))}
+        {subMenuList}
       </div>
     </li>
   );

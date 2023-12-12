@@ -4,6 +4,8 @@ import Table from "../../components/Table/Table/Table";
 
 import { useQuery } from "@tanstack/react-query";
 
+// Page FETCHES current data
+// DropZone POSTS new data
 async function fetchItems() {
   try {
     const res = await fetch(`http://localhost:5000/api/v1/items`, {
@@ -17,24 +19,6 @@ async function fetchItems() {
   } catch (err) {
     console.log("error:", err.message);
   }
-}
-
-async function addItems(itemsObj) {
-  await fetch(`http://localhost:5000/api/v1/items`, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(itemsObj),
-  })
-    .then(function (res) {
-      console.log(res);
-    })
-    .catch(function (res) {
-      console.log(res);
-    });
 }
 
 export default function Items() {

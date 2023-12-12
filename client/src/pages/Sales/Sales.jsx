@@ -1,8 +1,11 @@
-﻿import './Sales.css';
+﻿import "./Sales.css";
+import Table from "../../components/Table/Table/Table";
 
 export default function Sales() {
-    return (
-        <div>
-        </div>
-    );
+  const tableName = "Sales";
+  return (
+    <div>
+      <Table tableName={tableName} />
+    </div>
+  );
 }
