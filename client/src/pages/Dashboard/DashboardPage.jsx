@@ -15,6 +15,8 @@ import { useState } from "react";
 // };
 
 export default function Dashboard() {
+  // On the dashboard page we're going to have access to ALL of the tableNames and the user will be able to rearrange them as they see fit!
+
   /*
 WHAT IS THE DASHBOARD PAGE? 
 - a combination of all the things the users wishes to see 

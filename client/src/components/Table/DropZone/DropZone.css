@@ -1,103 +1,35 @@
-.dropzone-container {
+.data-table-dropzone {
+  /* the dropzone is absolutely positioned relative to the table wrapper.
+  - the benefit of this is that the dropzone component acts as an OVERLAY over the table and thus doesn't trigger a rerendering of the table onDrag and onDragLeave. This should prove to be more performant than have the dropzone be the tables parent as opposed to it's sibling.
+  */
+  position: absolute;
   display: grid;
-  justify-items: center;
-  margin-top: 5rem;
-}
-
-.dropzone {
-  min-height: 500px;
-  display: grid;
-  align-items: center;
-  text-align: center;
   align-content: center;
-  color: rgb(94, 93, 93);
-  border: 1px dotted darkgrey;
-  width: 95%;
-  padding: 15px 0 10px 0;
-  margin-top: 20px;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
 }
 
-/* children of container: */
-.dropzone > * {
-  margin: 5px;
-  justify-self: center;
-  padding: 0.5rem;
+.dragging {
+  opacity: 0.75;
+  z-index: 2;
+  border: 1px dotted rgb(117, 110, 110);
+  border-radius: 10px;
 }
 
-/* text */
+.valid {
+  background-color: #ddf5da;
+  color: #262e25;
+}
+
+.invalid {
+  color: #312120;
+  background-color: #f5dcda;
+}
+
 .dropzone-text {
-  font-size: 1.2rem;
+  z-index: 5;
   text-align: center;
-  display: block;
-  pointer-events: none;
-}
-
-.upload-svg-icon {
-  display: block;
-  transform: scale(150%);
-  pointer-events: none;
-}
-
-.add-file-button {
-  display: block;
-  background-color: rgb(225, 244, 250);
-  font-size: 1.1rem;
-  color: rgb(17, 17, 148);
-  border-radius: 5px;
-  border: none;
-  padding: 5px;
-  margin: 0 auto;
-  pointer-events: none;
-}
-
-.dropzone-submit-button {
-  display: block;
-  background-color: rgb(225, 244, 250);
-  font-size: 1.1rem;
-  color: rgb(17, 17, 148);
-  border-radius: 5px;
-  border: none;
-  padding: 5px;
-  margin: 1rem auto 0 auto;
-  width: 75%;
-}
-.dropzone-submit-button:hover {
-  cursor: pointer;
-  filter: brightness(85%);
-}
-
-/* DropZone Component State Handling CSS*/
-.dropzone:hover {
-  border: 1px dotted black;
-  background-color: rgb(245, 245, 245);
-  cursor: pointer;
-}
-
-/* for input element: */
-.hidden {
-  visibility: none; /*  invisible input trigger to upload files */
-  pointer-events: none;
-}
-
-#file-valid-container {
-  background-color: rgb(206, 242, 253);
-  color: rgb(25, 74, 209);
-  border: 1px dotted black;
-}
-
-#file-valid-children {
-  pointer-events: none; /* prevents trigger setState when dragging */
-}
-
-#file-invalid-container {
-  border: 1px dotted rgb(90, 90, 90);
-  background-color: rgb(226, 158, 158);
-}
-
-#file-invalid-children {
-  pointer-events: none; /* prevents trigger setState when dragging */
-  font-size: 1.2rem;
-  text-align: center;
-  display: block;
-  color: #7c2e2e;
+  font-size: 1.5rem;
+  pointer-events: none; /* NEEDED! */
 }

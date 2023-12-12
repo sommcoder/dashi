@@ -1,6 +1,7 @@
 .route-wrapper {
   display: grid;
-  grid-template-rows: 50px 1fr;
+  /* first row must equal height of the HeaderBarMenu component = 6rem */
+  grid-template-rows: 6rem 1fr;
   height: 100%;
   width: 100%;
 }

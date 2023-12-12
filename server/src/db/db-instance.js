@@ -1,19 +1,16 @@
-const postgres = require("postgres");
 require("dotenv").config();
+const postgres = require("postgres");
 
-module.exports = sql = postgres({
-  host: process.env.DEV_DB_HOST,
-  port: process.env.DEV_DB_PORT,
-  database: process.env.DEV_DB,
-  username: process.env.DEV_DB_USERNAME,
-  password: process.env.DEV_DB_PASSWORD,
-  idle_timeout: 3,
+const USER = process.env.DEV_DB_USERNAME;
+const HOST = process.env.DEV_DB_HOST;
+const DB = process.env.DEV_DB_NAME;
+const PASS = process.env.DEV_DB_PASSWORD;
+const DB_PORT = process.env.DEV_DB_PORT;
+
+module.exports = postgres({
+  host: HOST,
+  port: DB_PORT,
+  database: DB,
+  username: USER,
+  password: PASS,
 });
-
-/*
-
-`postgres://${process.env.DEV_DB_USERNAME}:${process.env.DEV_DB_PASSWORD}@${process.env.DEV_DB_HOST}:${process.env.DEV_DB_PORT}/${process.env.DEV_DB}`
- 
-
- 
-*/

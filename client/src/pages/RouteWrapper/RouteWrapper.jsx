@@ -22,7 +22,7 @@ export default function RouteWrapper() {
         <Route path="/areas" element={<Page.Areas />} />
         <Route path="/depletions" element={<Page.Depletions />} />
         <Route path="/transfers" element={<Page.Transfers />} />
-        <Route path="/orders" element={<Page.Orders />} />
+        <Route path="/purchase-orders" element={<Page.PurchaseOrders />} />
         <Route path="/invoices" element={<Page.Invoices />} />
         <Route path="/reports" element={<Page.Reports />} />
         <Route path="/setup" element={<Page.Setup />} />

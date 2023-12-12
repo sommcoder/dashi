@@ -1,8 +1,11 @@
-﻿import './Transfers.css';
+﻿import "./Transfers.css";
+import Table from "../../components/Table/Table/Table";
 
 export default function Transfers() {
-    return (
-        <div>
-        </div>
-    );
+  const tableName = "Transfers";
+  return (
+    <div>
+      <Table tableName={tableName} />
+    </div>
+  );
 }

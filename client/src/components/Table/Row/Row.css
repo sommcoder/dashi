@@ -2,6 +2,7 @@
   display: grid;
   align-items: center;
   animation: fadeInAnimation ease 1.25s;
+  z-index: 1;
 }
 
 .table-row:nth-child(even) {

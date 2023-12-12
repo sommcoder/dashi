@@ -1,10 +1,13 @@
-﻿import "./Orders.css";
+﻿import "./PurchaseOrders.css";
 
-export default function Orders() {
+import Table from "../../components/Table/Table/Table";
+
+export default function PurchaseOrders() {
+  const tableName = "Purchase Orders";
   /*
  
 - User creates a requisition, user can select if they wish to have an auto-PO so that when the vendor confirms a PO is automatically sent.
-- User can add existing items OR they can just type out a general description. 
+- User can add existing items OR they can just type out a general description.
 - Users will be required to add an estimated price.
 - If vendor edits the price. Email will be sent for the user to confirm.
 - IF they have the auto-PO enabled then this means Dashi will create an item with what they've provided but ONLY if they've given a title, category and cost. If not, the PO will not be created and will require the user to add REAL Dashi items to the PO.
@@ -19,5 +22,9 @@ export default function Orders() {
  
 */
 
-  return <div></div>;
+  return (
+    <div>
+      <Table tableName={tableName} />
+    </div>
+  );
 }

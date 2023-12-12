@@ -1,8 +1,12 @@
-﻿import './Invoices.css';
+﻿import "./Invoices.css";
+
+import Table from "../../components/Table/Table/Table";
 
 export default function Invoices() {
-    return (
-        <div>
-        </div>
-    );
+  const tableName = "Invoices";
+  return (
+    <div>
+      <Table tableName={tableName} />
+    </div>
+  );
 }

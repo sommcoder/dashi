@@ -1,8 +1,11 @@
-﻿import './Inventories.css';
+﻿import "./Inventories.css";
+import Table from "../../components/Table/Table/Table";
 
 export default function Inventories() {
-    return (
-        <div>
-        </div>
-    );
+  const tableName = "Inventory Audit";
+  return (
+    <div>
+      <Table tableName={tableName} />
+    </div>
+  );
 }

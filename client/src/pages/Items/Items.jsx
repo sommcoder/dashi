@@ -19,7 +19,26 @@ async function fetchItems() {
   }
 }
 
+async function addItems(itemsObj) {
+  await fetch(`http://localhost:5000/api/v1/items`, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(itemsObj),
+  })
+    .then(function (res) {
+      console.log(res);
+    })
+    .catch(function (res) {
+      console.log(res);
+    });
+}
+
 export default function Items() {
+  const tableName = "Items";
   // we can then use destructuring on the Result object based on what we ned to use from it
   // should be called on render if nothing in cache
   useQuery({
@@ -28,8 +47,8 @@ export default function Items() {
   });
 
   return (
-    <div>
-      <Table />
+    <div className="item-page-container">
+      <Table tableName={tableName} />
     </div>
   );
 }

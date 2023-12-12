@@ -1,102 +1,85 @@
-// libraries:
-import { useState } from 'react';
+﻿import "./DropZone.css";
+import { useState } from "react";
 
-// styling:
-import { FaUpload } from 'react-icons/fa';
-import './DropZone.css';
-// components:
-
-const MAX_SIZE = 500000; // in bytes
-
-export default function DropZone({ setHeaders }) {
-  const [fileCount, addFile] = useState(0);
-
-  const containerState = {
-    default: 'dropzone-container',
-    valid: 'file-valid',
-    invalid: 'file-invalid',
-  };
-
-  const childrenState = {
-    default: 'dropzone-container',
-    valid: 'file-valid',
-    invalid: 'file-invalid',
-  };
-
-  const textState = [
-    'Accepts .csv, .xsl and .xlsx files',
-    'Drop file(s) to upload',
-    'file is not .csv, .xsl or .xlsx format',
-  ];
-
-  const { isLoading, switchLoading } = useState(true);
-
+export default function DropZone() {
   /*
-  1) File is Valid, File is NOT valid = determines CSS
-    File is valid
-    Blue Background, dark border, no drag clipping
+    - DropZone needs to get the information and then send it UP to the Table component.
+    - Otherwise the rerending of DropZone needs to be isolated in DropZone and not cause a rerending on the entire Table when a file is dragged
+    - DropZone controls client-side file validation. If the file(s) are valid,  setFileValid() state gets called
 
 
-  2) no action = default text/css
-  3) default text, invalid text, valid text
+    1) User drags file, client side validation is automatically performed. If valid user can drop. If invalid perhaps a popup will explain why file is invalid
 
+    2) 
+*/
+  // the color states can be switched on and off
 
-  ** dropzone should REMOVE duplicate Headers as part of it's validation process **
-   
-  */
+  let pageName = "items"; // will need to be passed down from page
 
   const [dragState, setDrag] = useState(false);
-  const [fileValid, setFileValid] = useState(false);
-  // on DragEnd => setFileValidity(null)
+  const [fileValid, setFileValid] = useState();
 
-  ///////////////////////////////
+  const validFileTypes = [
+    "text/csv",
+    "application/pdf",
+    "pdf",
+    "application/vnd.ms-excel",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  ];
 
-  const handleDragOver = ev => {
+  const handleDragOver = (ev) => {
     ev.preventDefault();
-    console.log('OVER:', ev);
     setDrag(true);
-    // for of works, ev.dataTransfer.items is an iterable object NOT an array
     for (const item of ev.dataTransfer.items) {
-      if (
-        item.type !== 'text/csv' &&
-        item.type !== 'pdf' &&
-        item.type !==
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      ) {
-        setFileValid(false);
-        setHeaders();
-      } else {
+      if (validFileTypes.includes(item.type)) {
         setFileValid(true);
+      } else {
+        setFileValid(false);
       }
     }
   };
 
-  const handleDragLeave = ev => {
+  const handleDragLeave = (ev) => {
     ev.preventDefault();
-    console.log('LEAVE:', ev);
     setDrag(false);
-    setFileValid(false); // if we throw no arguments, will the state set to the original empty state??
+    setFileValid("");
   };
 
-  const handleDrop = ev => {
-    ev.preventDefault();
-    console.log('ev:', ev);
+  const handleDrop = (ev) => {
+    ev.stopPropagation();
+    ev.preventDefault(); // prevents file from being opened in the browser
+    console.log("DROP ev:", ev);
+    console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
     setDrag(false);
   };
-
   return (
-    <div className="dropzone-container">
-      <div
-        className="dropzone"
-        onDragStart={handleDragOver}
-        onDragEnd={handleDragLeave}
-        onDrop={handleDrop}
-      >
-        <button className="add-file-button">Add files</button>
-        <input id="hidden" type="file" title=" " hidden />
-        <FaUpload className="upload-svg-icon" />
-      </div>
-      {/* <button className="dropzone-submit-button">Submit</button> */}
+    <div
+      className={`data-table-dropzone 
+      ${dragState ? `dragging ${fileValid ? "valid" : "invalid"}` : ""}`}
+      onDragOver={(ev) => handleDragOver(ev)}
+      onDragLeave={(ev) => handleDragLeave(ev)}
+      onDrop={(ev) => handleDrop(ev)}
+    >
+      <h5 className="dropzone-text">
+        {`
+         ${
+           dragState
+             ? `${
+                 fileValid
+                   ? `Drop file(s) to add to ${pageName}`
+                   : "file is not .csv, .xsl or .pdf format"
+               }`
+             : ""
+         }`}
+      </h5>
     </div>
   );
 }
+
+/*
+ 
+ ${dragState ? "dragging" : ""}
+  ${fileValid ? "valid" : ""}
+  ${fileInvalid ? "invalid" : ""}`}
+ 
+*/

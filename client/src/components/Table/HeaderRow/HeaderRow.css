@@ -8,6 +8,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   animation: headerRowBorderRadiusDelay ease-in-out;
+  z-index: 1;
 }
 
 /* .table-header-row:hover > div {

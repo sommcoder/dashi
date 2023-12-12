@@ -1,32 +1,8 @@
-.data-table-dropzone {
-  z-index: 1;
-  display: grid;
-  align-items: center;
-  text-align: center;
-  align-content: center;
-
-  width: 95%;
-  padding: 0.25rem;
-  margin-top: 20px;
+.data-table-wrapper {
+  margin: 2rem;
+  position: relative;
+  z-index: 0;
 }
-
-.data-table-dropzone > * {
-  pointer-events: none;
-}
-
-.dragging {
-  /* styling for dragging state of dropzone */
-  background-color: rgb(240, 234, 234);
-  border: 1px dotted rgb(117, 110, 110);
-  border-radius: 10px;
-}
-
-/* DropZone Component State Handling CSS*/
-/* .data-table-dropzone:hover {
-  border: 1px dotted black;
-  background-color: rgb(245, 245, 245);
-  cursor: pointer;
-} */
 
 .data-table {
   z-index: 2;
@@ -36,7 +12,7 @@
   align-self: baseline;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
-  margin: 5px 5px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+  margin: 10px 10px;
+  box-shadow: 0 1px 1px rgba(0, -0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
     0 4px 4px rgba(0, 0, 0, 0.16);
 }

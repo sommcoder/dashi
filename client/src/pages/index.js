@@ -7,7 +7,7 @@ export { default as Inventories } from "./Inventories/Inventories";
 export { default as Areas } from "./Areas/Areas";
 export { default as Transfers } from "./Transfers/Transfers";
 export { default as Depletions } from "./Depletions/Depletions";
-export { default as Orders } from "./Orders/Orders";
+export { default as PurchaseOrders } from "./PurchaseOrders/PurchaseOrders";
 export { default as Invoices } from "./Invoices/Invoices";
 export { default as Reports } from "./Reports/Reports";
 export { default as Setup } from "./Setup/SetupPage";

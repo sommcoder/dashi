@@ -52,7 +52,7 @@ export const navMenuList = [
     subMenus: [
       {
         subMenu: "Purchase Orders",
-        path: "/orders",
+        path: "/purchase-orders",
       },
       {
         subMenu: "Invoices",

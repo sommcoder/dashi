@@ -1,11 +1,33 @@
-const sql = require("./db-instance.js");
-require("dotenv").config();
+import sql from "../../db/db-instance.js";
 
-/*
- 
-This is where all of our SQL statements/transactions will go!
- 
-*/
+// QUERIES:
+export async function getReport(id) {
+  // server selects new
+  if (id) {
+    const report = await sql`
+      SELECT * FROM report
+      WHERE id = ${id};
+      `;
+  } else {
+    const report = await sql`
+      SELECT * FROM report
+      WHERE id = 0;
+      `;
+  }
+  return report;
+}
+
+export async function getReports() {
+  // user wants to view all of their reports in the Venue menu OR as a shortcut on a particular submenu page for editing purposes.
+  try {
+    const report = await sql`
+        SELECT * FROM report;
+        `;
+    return report;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+}
 
 /*
 - We're going to want a GENERAL database instance to collect data on all accounts
@@ -13,19 +35,19 @@ This is where all of our SQL statements/transactions will go!
     - Account Credit Card 
 */
 
-// TESTS
-// async function testConnection() {
-//   try {
-//     const check = await sql`SELECT NOW();`;
-//     console.log("database connection tested at:", check[0].now);
-//     sql.end();
-//   } catch (err) {
-//     console.log("postgres.js error:", err.message);
-//   }
-// }
-
-// ACCOUNT
-async function createAccount(name, accountId) {
+////////////////////////////////////////////
+// MUTATIONS:
+export async function createItem(id) {
+  try {
+    const item = await sql`
+        INSERT INTO dashi_item;
+        `;
+    return item;
+  } catch (err) {
+    console.log("error:", err.message);
+  }
+}
+export async function createAccount(name, accountId) {
   /**
    * Add new account via Google Cloud's Postgres
    *
@@ -187,27 +209,68 @@ async function createAccount(name, accountId) {
     console.log("error:", err.message);
   }
 }
-async function readAccount(id) {
-  try {
-    const item = await sql`
-        INSERT INTO dashi_item;
-        `;
-    return item;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
-async function updateAccount(id) {
-  try {
-    const item = await sql`
-        INSERT INTO dashi_item;
-        `;
-    return item;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
-async function deleteAccount(accountId) {
+
+// export async function addItem() {
+//   try {
+//     // will this populate the table?
+//     item_data_arr.forEach(({id, title, case_size, inventoriable, uom, cost, gl_code, description, created_by, added_on, avg_price, unit_size}) => {
+//       const newReport = await sql`INSERT INTO dashi_item
+//         (id, title, case_size, inventoriable, uom, cost, gl_code, description, created_by, added_on, avg_price, unit_size)
+//         VALUES (${id}, ${title}, ${case_size}, ${inventoriable}, ${uom}, ${cost}, ${gl_code}, ${description}, ${created_by}, ${added_on}, ${avg_price}, ${unit_size});
+//         `;
+//     });
+//     setTimeout(() => query.cancel(), 5000);
+//     return newReport;
+//   } catch (err) {
+//     console.log("error:", err.message);
+//   }
+// }
+
+// export async function updateReport(name, id) {
+//   try {
+//     const newTable = await sql.begin((sql) => [
+//       sql``,
+//       sql``,
+//       sql``,
+//       sql``,
+//       sql``,
+//       sql``,
+//     ]);
+//     setTimeout(() => query.cancel(), 5000);
+//     return newTable;
+//   } catch (err) {
+//     console.log("error:", err.message);
+//   }
+// }
+
+/*
+             
+
+           CREATE TABLE report (
+            report_id INT PRIMARY KEY,
+        
+            columns, groupings, filters, sort
+            also, should we persist the sequence of each of these object? We SHOULD if we want to make this an improvement.
+            There should be a default sequence for NEW reports, however, yes we should UPDATE the DB once the user closes the modal not while they're fiddling, fiddling should show dynamically on the client but only send MUTATION to server once done.
+
+        ,
+          );
+
+
+            - PO's can be "ONE ORDER -> outlet FOR ORDER"
+            - OR they can be "ONE ORDER -> outlet BY ITEM"
+            - IF "outlet BY ITEM", 
+             
+            */
+
+//  This will contain the junction of
+// CREATE TABLE orders_items (
+//   po_id INT REFERENCES purchase_orders(po_id),
+//   dashi_item_id INT REFERENCES dashi_item(dashi_item_id),
+
+// )
+
+export async function dropAccount(accountId) {
   try {
     const report = await sql`
           DROP DATABASE ${accountId};
@@ -218,69 +281,55 @@ async function deleteAccount(accountId) {
   return report;
 }
 
-// ITEM
-async function createItem(id) {
-  try {
-    const item = await sql`
-        INSERT INTO dashi_item;
-        `;
-    return item;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
-async function readAllItems(id) {
-  try {
-    const items = await sql`SELECT * FROM dashi_item;`;
-    console.log("items:", items);
-    // did we even get this from the DB?
-    return items;
-  } catch (err) {
-    console.log("postgres.js error:", err.message);
-  }
-}
-async function updateItem(id) {
-  try {
-    const item = await sql`
-        INSERT INTO dashi_item;
-        `;
-    return item;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
-async function deleteItem(id) {
-  try {
-    const item = await sql`
-        INSERT INTO dashi_item;
-        `;
-    return item;
-  } catch (err) {
-    console.log("error:", err.message);
-  }
-}
+// Resolvers are responsible for LINKING the schema field to the data source.
 
-module.exports = {
-  // testConnection,
-  createAccount,
-  readAccount,
-  updateAccount,
-  deleteAccount,
-  createItem,
-  readAllItems,
-  updateItem,
-  deleteItem,
-};
+// graphql requests are parsed and validated against the schema
+// graphql receives the request to determine WHAT the request even says because it's just a STRING essentially that requires a schema to be parsed and validated against.
+
+// middleware modifies the request and response objects, terminate the execution and pass execution to the NEXT middleware function in the stack.
+
+// then resolver functions are triggered which is like a controller
+// middleware is where we keep our postgres client functionality and where we are going to FETCH our data from our database
+// middleware functions split logic into chunks that handle SINGLE task and can be reused in the same project for different requests.
 
 /*
  
-1) Need to add data to PostgreSQL first before attempting to read anything... obvi
+- Authorization
+- Extraction and storage of metrics
+- Caching
+- Debugging
+- Fallback operations
+- Input Validation
+- Logging
+- Output Manipulation
+ 
+*/
 
+// in GraphQL there is only TWO requests. Query and Mutation.
+// Several graphQL servers have incorporated the concept of middleware to bne applied at the FIELD resolver level.
 
-OR
+// the JSON that GraphQL converts the request to will then be used to interact with the DB
 
-2) the actual DB name is 'postgres' not 'dashi-dev'.. 'dashi-dev' may be the db server name? 
+/*
+ 
+- with @directives, they provide a ONE-WAY execution flow
+- GraphQL provides some built-in @directives
+-
 
-Look into both of these!
+*/
+
+/*
+ 
+ Except they resolve all the way down. What does that mean? Well therefore, resolvers resolving a type, and a type has a field that's referring to another type, and then that type has a field that's referring to another type.
+
+You have to have a resolver for every single type all the way down, so it resolves all the way down depending on the query that came in. So if the query asks for those connections, I want this type that refers to this type, that refers to this type, then you have to have resolvers for every single level.
+ 
+*/
+
+/*
+ 
+1) Every query and mutations your schema has MUST have a resolver that returns the specified type.
+
+2) 
  
 */

@@ -2,13 +2,14 @@
 import Row from "../Row/Row";
 import HeaderRow from "../HeaderRow/HeaderRow";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
+import DropZone from "../DropZone/DropZone";
+
 import RouteLoader from "../../RouteLoader/RouteLoader";
 
 import { useEffect, useState, Suspense } from "react";
 
-export default function Table({ tableData, tableType, reportId }) {
-  // if error, ie. no prod server, fetch mock.json data to populate app.
-
+export default function Table({ tableName, tableData, reportId }) {
+  // NOTES:
   /*
   DATA FETCHING:
 - Trying to make Table component REUSABLE across Pages. 
@@ -18,15 +19,26 @@ export default function Table({ tableData, tableType, reportId }) {
 - ALSO the table could be a DISPLAY or a SETUP table
 - Either it fetches data from the API OR simply provides blank table data 
 - we must rely on the "tableType" prop to determine how the table will render
-*/
 
-  /*
+
+Table will need:
+1) Item Calls
+2) Sales Calls
+
+... then:
+3) Purchase Order Calls
+4) Invoice Calls
+
+... and eventually:
+5) Inventory Calls
++ other functionality
+
+
+  
 DATA INPUT / DRAG N DROP:
 - send data to server
 - can we parse CSV on the client?
-*/
 
-  /*
   1) File is Valid, File is NOT valid = determines CSS
     File is valid
     Blue Background, dark border, no drag clipping
@@ -40,62 +52,15 @@ DATA INPUT / DRAG N DROP:
    
   */
 
-  ////////////////// TABLE STATE //////////////////////////////
-
-  const containerState = {
-    default: "dropzone-container",
-    valid: "file-valid",
-    invalid: "file-invalid",
-  };
-
-  const childrenState = {
-    default: "dropzone-container",
-    valid: "file-valid",
-    invalid: "file-invalid",
-  };
-
-  const textState = [
-    "Accepts .csv, .xsl and .xlsx files",
-    "Drop file(s) to upload",
-    "file is not .csv, .xsl or .xlsx format",
-  ];
-  const { isLoading, switchLoading } = useState(true);
-  const [dragState, setDrag] = useState(false);
-  const [fileValid, setFileValid] = useState(null); // null = default,
-
-  const handleDragOver = (ev) => {
-    ev.preventDefault(); // NEEDED!
-    setDrag(true);
-  };
-
-  const handleDragLeave = (ev) => {
-    ev.preventDefault();
-    console.log("LEAVE:", ev);
-    setDrag(false);
-  };
-
-  const handleDrop = (ev) => {
-    ev.stopPropagation();
-    ev.preventDefault(); // prevents file from being opened in the browser
-    console.log("DROP ev:", ev);
-    console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
-
-    // add file to a Report
-    const { loading, error, data } = useQuery(gql.POST_FILE, {
-      variables: {
-        reportId: reportId,
-      },
-    });
-
-    setDrag(false);
-  };
-
   ////////////////////////////////////////////////////////////
   //////////////////// DYNAMIC STYLING ///////////////////////
   ////////////////////////////////////////////////////////////
   const colSizingSeqObj = {};
 
-  // setup table or display table?
+  // - setup table or display table?
+  // - Are setup tables just every table? user should just be able to drag and drop and then the table BECOMES a "display" table. Therefore we need not bother with controlling this.
+  // - There's tables YET to be populated and tables that are populated..
+  // PROs: this would help with be intuitive and require less overhead. It may require a turorial popup however
 
   let dataRow = [" ", " ", " "];
 
@@ -156,27 +121,17 @@ DATA INPUT / DRAG N DROP:
     gridTemplateRows: `3rem auto 0`,
   };
   // based on the sequence will determine which keys we access from our JSON data as we iterate through it
-
-  // tableName needs to be what's sent from the server OR default data
-  const tableName = "";
-
-  // console.log("tableType:", tableType);
   ////////////////////////////////////////////////////////////////
 
   return (
     <Suspense fallback={<RouteLoader />}>
-      <div
-        className={`data-table-dropzone ${dragState ? "dragging" : ""}`}
-        onDragOver={(ev) => handleDragOver(ev)}
-        onDragLeave={(ev) => handleDragLeave(ev)}
-        onDrop={(ev) => handleDrop(ev)}
-      >
-        <div style={rows} draggable={true} className="data-table">
+      <div className="data-table-wrapper" draggable={true}>
+        <DropZone tableName={tableName} />
+        <div style={rows} className="data-table">
           <SettingsHeader
             tableName={tableName}
             tableDisplay={tableDisplay}
             setTableDisplay={setTableDisplay}
-            tableType={tableType}
           />
           <HeaderRow
             tableDisplay={tableDisplay}

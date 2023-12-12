@@ -6,6 +6,7 @@
   font-size: 1.5rem;
   border-radius: 10px 10px 0px 0px;
   position: relative;
+  z-index: 1;
 }
 
 #table-header-grab-icon {
