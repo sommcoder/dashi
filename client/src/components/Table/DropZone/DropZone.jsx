@@ -1,45 +1,18 @@
 ﻿import "./DropZone.css";
 import { useState } from "react";
-import axios from "axios";
+import { addFiles } from "../../../api/files";
 
-import { useMutation } from "@tanstack/react-query";
-
-async function addItems(files) {
-  console.log("files:", files);
-  const formData = new FormData();
-
-  for (let i = 0; i < files.length; i++) {
-    // add each file to our formData
-    formData.append(files[i].name, files[i]);
-  }
-  console.log("formData:", formData);
-
-  axios
-    .post("http://localhost:5000/api/v1/items", formData)
-    .then((res) => console.log(res))
-    .catch((error) => console.log(error));
-  // await fetch(`http://localhost:5000/api/v1/items`, {
-  //   method: "POST",
-  //   mode: "no-cors",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: formData,
-  // })
-  //   .then(function (res) {
-  //     console.log(res);
-  //   })
-  //   .catch(function (res) {
-  //     console.log(res);
-  //   });
-}
+import { QueryCache, useMutation } from "@tanstack/react-query";
 
 export default function DropZone() {
   const mutation = useMutation({
-    queryKey: ["addItems"],
-    mutationFn: (fileArr) => addItems(fileArr),
+    queryKey: ["addFiles"],
+    mutationFn: (fileListArr) => addFiles(fileListArr),
+    onSuccess: () => {
+      console.log("React Query: Your file was successfully uploaded");
+    },
   });
+
   /*
     - DropZone needs to get the information and then send it UP to the Table component.
     - Otherwise the rerending of DropZone needs to be isolated in DropZone and not cause a rerending on the entire Table when a file is dragged
@@ -54,10 +27,11 @@ export default function DropZone() {
 
   let pageName = "items"; // will need to be passed down from page
 
+  const [progress, setProgress] = useState({ started: false, pc: 0 });
   const [dragState, setDrag] = useState(false);
   const [fileValid, setFileValid] = useState();
 
-  const validFileTypes = [
+  const VALID_FILES_ARR = [
     "text/csv",
     "application/pdf",
     "pdf",
@@ -71,7 +45,7 @@ export default function DropZone() {
 
     // validation:
     for (const item of ev.dataTransfer.items) {
-      if (validFileTypes.includes(item.type)) {
+      if (VALID_FILES_ARR.includes(item.type)) {
         setFileValid(true);
       } else {
         setFileValid(false);
@@ -85,26 +59,29 @@ export default function DropZone() {
     setFileValid("");
   };
 
-  // const fileUploadArr = [];
-
   const handleDrop = (ev) => {
     ev.stopPropagation();
-    ev.preventDefault(); // prevents file from being opened in the browser
-    console.log("DROP ev:", ev);
-    console.log("ev.dataTransfer.files:", ev.dataTransfer.files);
+    ev.preventDefault();
     setDrag(false);
     mutation.mutate(ev.dataTransfer.files);
   };
+
   return (
     <div
       className={`data-table-dropzone 
-      ${dragState ? `dragging ${fileValid ? "valid" : "invalid"}` : ""}`}
+      ${dragState ? `dragging ${fileValid ? "valid" : "invalid"}` : ""}
+      `}
       onDragOver={(ev) => handleDragOver(ev)}
       onDragLeave={(ev) => handleDragLeave(ev)}
       onDrop={(ev) => handleDrop(ev)}
     >
-      <h5 className="dropzone-text">
-        {`
+      {mutation.isLoading ? (
+        <div className="loading-progress-bar-container">
+          <div className="loading-progress-bar"></div>
+        </div>
+      ) : (
+        <h5 className="dropzone-text">
+          {`
          ${
            dragState
              ? `${
@@ -114,7 +91,8 @@ export default function DropZone() {
                }`
              : ""
          }`}
-      </h5>
+        </h5>
+      )}
     </div>
   );
 }

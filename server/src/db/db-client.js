@@ -219,8 +219,10 @@ async function deleteAccount(accountId) {
 }
 
 // ITEM
-async function createItem(itemObj) {
-  console.log("itemObj:", itemObj);
+async function createItems(itemsArr) {
+  // takes in an items array after having been processed on Document AI.
+  // We will iterate through the array to add each of the items to our DB
+  console.log("itemsArr:", itemsArr);
   try {
     const item = await sql`
         INSERT INTO dashi_item()
@@ -268,7 +270,7 @@ module.exports = {
   readAccount,
   updateAccount,
   deleteAccount,
-  createItem,
+  createItems,
   readAllItems,
   updateItem,
   deleteItem,

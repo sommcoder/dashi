@@ -13,6 +13,8 @@
   "author": "Brian Davies",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cors": "^8.4.2",
+    "@fastify/multipart": "^8.0.0",
     "@google-cloud/documentai": "^8.1.0",
     "@google-cloud/storage": "^7.1.0",
     "cors": "^2.8.5",

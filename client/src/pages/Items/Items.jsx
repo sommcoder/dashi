@@ -1,6 +1,7 @@
 ﻿import "./Items.css";
 import Table from "../../components/Table/Table/Table";
 // import { GetAllItems } from "../../hooks/query";
+import axios from "axios";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -25,9 +26,11 @@ export default function Items() {
   const tableName = "Items";
   // we can then use destructuring on the Result object based on what we ned to use from it
   // should be called on render if nothing in cache
+  // this will be automatic once we have our dev DB set up with data
   useQuery({
     queryKey: ["getAllItems"],
     queryFn: fetchItems(),
+    enabled: false,
   });
 
   return (
