@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { addFiles } from "../../../api/files";
 
-import { QueryCache, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 export default function DropZone() {
   const mutation = useMutation({
@@ -12,6 +12,14 @@ export default function DropZone() {
       console.log("React Query: Your file was successfully uploaded");
     },
   });
+
+  /*
+   
+  *** include Warn message to user: 
+
+  For most accurate OCR results from Document AI, document scans should be a minimum of 200 dpi (dots per inch). 300 dpi and higher will generally produce the best results.
+   
+  */
 
   /*
     - DropZone needs to get the information and then send it UP to the Table component.
@@ -27,7 +35,7 @@ export default function DropZone() {
 
   let pageName = "items"; // will need to be passed down from page
 
-  const [progress, setProgress] = useState({ started: false, pc: 0 });
+  // const [progress, setProgress] = useState({ started: false, pc: 0 });
   const [dragState, setDrag] = useState(false);
   const [fileValid, setFileValid] = useState();
 

@@ -12,9 +12,21 @@
   border-bottom: 1px solid rgb(21, 52, 63);
 }
 
+.nav-side-bar-icon {
+  color: white;
+  height: 1.5rem;
+  width: 1.5rem;
+  /* padding-left: 2rem; */
+  align-self: center;
+  justify-self: center;
+  z-index: 3;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+
 .menu-item {
   min-height: 3.5rem;
-  padding-left: 2rem;
+  padding-left: 1rem;
   align-self: center;
   z-index: 3;
   opacity: 1;
@@ -39,7 +51,7 @@
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   background-color: rgb(62, 91, 100);
-  grid-template-columns: 70% 30%; /* Link + => */
+  grid-template-columns: 25% 50% 25%; /* Link + => */
   border-top: 1px solid rgb(21, 52, 63);
 }
 

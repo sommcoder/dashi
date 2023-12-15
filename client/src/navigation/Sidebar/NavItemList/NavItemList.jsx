@@ -2,19 +2,18 @@
 import { useState } from "react";
 import NavMenuItem from "../NavMenuItem/NavMenuItem";
 
-// menu, submenus and their paths:
+// menu, submenus, their paths and icon components:
 import { navMenuList } from "../menu.js";
 
 export default function NavItemList() {
-  // console.log("navMenuList:", navMenuList);
+  console.log("navMenuList:", navMenuList);
 
-  // need new key/value here if we add more Menus in the future:
+  // Update if Menu item requires accordian menu functionality
   const [navBarObj, adjustNavBar] = useState({
     Sales: false,
-    Items: false,
-    Orders: false,
-    Reports: false,
-    Setup: false,
+    Product: false,
+    Expenses: false,
+    Ordering: false,
   });
 
   // the number of menu rows:
@@ -27,13 +26,14 @@ export default function NavItemList() {
 
   return (
     <div className="nav-side-bar-list" style={menuRows}>
-      {navMenuList.map(({ menu, subMenus }, i) => (
+      {navMenuList.map(({ menu, subMenus, menuIcon }, i) => (
         <NavMenuItem
           navBarObj={navBarObj}
           adjustNavBar={adjustNavBar}
           menu={menu}
           subMenus={subMenus}
           key={i}
+          menuIcon={menuIcon}
         />
       ))}
     </div>

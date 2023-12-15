@@ -3,21 +3,31 @@
   justify-items: right;
 }
 
-.header-save-btn {
-  width: 50px;
+.header-send-btn {
+  width: 6rem;
   border-radius: 5px;
   padding: 0.5rem;
   border: none;
-  min-width: 75px;
   font-weight: 500;
   font-size: 1.2rem;
 }
 
-.header-save-btn:hover {
-  cursor: pointer;
-  filter: brightness(95%);
+.header-send-btn-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  pointer-events: none;
 }
 
-.header-save-btn:last-child {
+.header-send-btn:hover {
+  cursor: pointer;
+  filter: brightness(95%);
+  /* will definitely need to fix this animation at some point */
+  transition: width 500ms ease-in-out;
+  transition: border-radius 500ms ease-in-out;
+  width: 3rem;
+  border-radius: 30px;
+}
+
+.header-send-btn:last-child {
   margin-right: 5rem;
 }

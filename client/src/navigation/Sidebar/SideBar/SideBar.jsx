@@ -9,7 +9,7 @@ export default function SideBar() {
     <nav className="nav-side-bar-container">
       <AppTitleArea />
       <NavItemList />
-      <div className="nav-side-bar-dividing-space"></div>
+      {/* <div className="nav-side-bar-dividing-space"></div> */}
       <SideBarFooter />
     </nav>
   );

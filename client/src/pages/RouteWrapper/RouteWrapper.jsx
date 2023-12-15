@@ -1,7 +1,6 @@
 ﻿import "./RouteWrapper.css";
 import * as Page from "../index.js";
 import HeaderBarMenu from "../../navigation/Header/HeaderBarMenu/HeaderBarMenu.jsx";
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 export default function RouteWrapper() {
@@ -24,6 +23,8 @@ export default function RouteWrapper() {
         <Route path="/transfers" element={<Page.Transfers />} />
         <Route path="/purchase-orders" element={<Page.PurchaseOrders />} />
         <Route path="/invoices" element={<Page.Invoices />} />
+        <Route path="/expenses" element={<Page.Expenses />} />
+        <Route path="/labour" element={<Page.Labour />} />
         <Route path="/reports" element={<Page.Reports />} />
         <Route path="/setup" element={<Page.Setup />} />
       </Routes>

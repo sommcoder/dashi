@@ -2,12 +2,15 @@
 import DropDownArrow from "../DropDownArrow/DropDownArrow";
 import NavItemSubMenu from "../NavSubmenuItem/NavSubmenuItem";
 import "./NavMenuItem.css";
+import React from "react";
+import { IconContext } from "react-icons";
 
 export default function NavMenuItem({
   menu,
   subMenus,
   adjustNavBar,
   navBarObj,
+  menuIcon,
 }) {
   function handleMenuClick(ev) {
     ev.preventDefault();
@@ -56,17 +59,20 @@ onClick :
   }, [subMenus]);
 
   // slice returns a growing slice of the array each time the interval processes
-  let subMenuList = subMenus.slice(0, count).map(({ path, subMenu }, i) => {
-    return (
-      <NavItemSubMenu
-        path={path}
-        key={`${subMenu}-${i}`}
-        subMenu={subMenu}
-        menu={menu}
-        navBarObj={navBarObj}
-      />
-    );
-  });
+  let subMenuList = subMenus
+    .slice(0, count)
+    .map(({ path, subMenu, subMenuIcon }, i) => {
+      return (
+        <NavItemSubMenu
+          path={path}
+          key={`${subMenu}-${i}`}
+          subMenu={subMenu}
+          menu={menu}
+          navBarObj={navBarObj}
+          subMenuIcon={subMenuIcon}
+        />
+      );
+    });
 
   return (
     <li className="nav-side-bar-menu-header-container">
@@ -75,6 +81,9 @@ onClick :
         onClick={(ev) => handleMenuClick(ev)}
         className="nav-side-bar-menu-container menu-item"
       >
+        <IconContext.Provider value={{ className: "nav-side-bar-icon" }}>
+          {menuIcon && React.createElement(menuIcon)}
+        </IconContext.Provider>
         <h5 className="nav-side-bar-menu-text">{menu}</h5>
         <DropDownArrow navBarObj={navBarObj} menu={menu} />
       </div>

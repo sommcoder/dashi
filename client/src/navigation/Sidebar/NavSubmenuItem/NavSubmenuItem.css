@@ -7,12 +7,14 @@
 }
 
 .submenu-item-row {
+  display: grid;
+  grid-template-columns: 30% 70%;
   opacity: 0;
   z-index: 1; /* needs to slide UNDER the Menus */
   color: rgb(231, 231, 231);
   display: grid;
   align-items: center;
-  padding-left: 4rem;
+  padding-left: 3rem;
   min-height: 3.5rem;
   min-width: 130px; /* this worked. Seems wrong though */
   /* overflow-x: hidden; */
