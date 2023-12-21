@@ -5,10 +5,10 @@ import NavMenuItem from "../NavMenuItem/NavMenuItem";
 // menu, submenus, their paths and icon components:
 import { navMenuList } from "../menu.js";
 
-export default function NavItemList() {
+export default function NavItemList({ navState }) {
   console.log("navMenuList:", navMenuList);
 
-  // Update if Menu item requires accordian menu functionality
+  // Accordian Menu state:
   const [navBarObj, adjustNavBar] = useState({
     Sales: false,
     Product: false,
@@ -28,6 +28,7 @@ export default function NavItemList() {
     <div className="nav-side-bar-list" style={menuRows}>
       {navMenuList.map(({ menu, subMenus, menuIcon }, i) => (
         <NavMenuItem
+          navState={navState}
           navBarObj={navBarObj}
           adjustNavBar={adjustNavBar}
           menu={menu}

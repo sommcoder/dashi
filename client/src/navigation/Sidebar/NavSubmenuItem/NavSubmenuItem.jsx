@@ -10,20 +10,43 @@ export default function NavSubmenuItem({
   navBarObj,
   menu,
   subMenuIcon,
+  navState,
 }) {
-  // console.log("subMenu:", subMenu);
-  // console.log("navBarObj:", navBarObj);
+  /*
+ 
+This is an individual submenu item
+ 
+*/
+
+  const sidebarOpen = {
+    gridTemplateColumns: "15% 20% 65%",
+    // minWidth: "130px" /* this worked. Seems wrong though */,
+  };
+  // will have to tinker with this.
+  // we don't want this to stretch the routewrapper page and therefore stretch the table component.... or do we???
+  const sidebarClosed = {
+    gridTemplateColumns: "1fr",
+    paddingLeft: "0rem",
+  };
+
   return (
-    <div className={`submenu-item-row ${navBarObj[menu] ? "active" : ""}`}>
+    <div
+      className={`submenu-item-row ${
+        navBarObj[menu] ? "submenu-active" : "submenu-inactive"
+      }`}
+      style={navState ? sidebarOpen : sidebarClosed}
+    >
+      <div></div>
       <IconContext.Provider value={{ className: "nav-side-bar-icon" }}>
         {subMenuIcon && React.createElement(subMenuIcon)}
       </IconContext.Provider>
-      <Link
-        to={path}
-        className={`link-label submenu-link ${navBarObj[menu] ? "active" : ""}`}
-      >
-        {subMenu}
-      </Link>
+      {navState ? (
+        <Link to={path} className={`link-label submenu-link`}>
+          {subMenu}
+        </Link>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

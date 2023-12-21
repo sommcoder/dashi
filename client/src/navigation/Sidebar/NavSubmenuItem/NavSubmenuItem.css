@@ -3,21 +3,18 @@
   color: rgb(231, 231, 231);
   font-size: 1.5rem;
   font-weight: 600;
+
   z-index: 1;
 }
 
 .submenu-item-row {
   display: grid;
-  grid-template-columns: 30% 70%;
-  opacity: 0;
-  z-index: 1; /* needs to slide UNDER the Menus */
+  grid-template-columns: 30% 70%; /* icon+link */
   color: rgb(231, 231, 231);
   display: grid;
   align-items: center;
-  padding-left: 3rem;
   min-height: 3.5rem;
-  min-width: 130px; /* this worked. Seems wrong though */
-  /* overflow-x: hidden; */
+  width: 100%;
 }
 
 .submenu-item-row:hover {
@@ -27,11 +24,16 @@
 
 .submenu-link {
   width: 100%;
-  z-index: 1; /* needs to slide UNDER the Menus */
-  opacity: 0;
 }
 
-.active {
+/* have each submenu item shift right and slowly/smoothly appear */
+.submenu-active {
+  justify-self: center;
   opacity: 1;
-  transition: opacity 1000ms 200ms ease-in-out;
+  transition: opacity 500ms ease-in-out;
+}
+
+.submenu-inactive {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
 }

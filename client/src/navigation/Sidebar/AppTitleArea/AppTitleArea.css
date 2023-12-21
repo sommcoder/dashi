@@ -8,13 +8,17 @@
   /* border-bottom: 1px solid gray; */
   width: 100%;
 }
+#link-logo {
+  display: grid;
+  align-items: center;
+  align-content: center;
+}
 
 .app-logo {
-  height: 6rem;
+  margin: 0 auto;
 }
 
 .app-title {
-  color: white;
   font-size: 2rem;
   width: auto;
   text-align: center;
@@ -22,4 +26,21 @@
 
 .app-title-container:hover {
   cursor: pointer;
+}
+
+.maximize-logo {
+  height: 6rem;
+}
+
+.minimize-logo {
+  height: 3.5rem;
+}
+
+.maximize-title {
+  color: white;
+}
+
+.minimize-title {
+  color: transparent;
+  height: 2rem;
 }

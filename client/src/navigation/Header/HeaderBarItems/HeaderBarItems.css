@@ -21,11 +21,12 @@
 .header-send-btn:hover {
   cursor: pointer;
   filter: brightness(95%);
+  border-radius: 30px;
+  width: 3rem;
   /* will definitely need to fix this animation at some point */
   transition: width 500ms ease-in-out;
   transition: border-radius 500ms ease-in-out;
-  width: 3rem;
-  border-radius: 30px;
+  transition: border-radius 500ms ease-in-out;
 }
 
 .header-send-btn:last-child {

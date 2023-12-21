@@ -4,7 +4,6 @@
   align-items: center;
   min-height: 3.5rem;
   z-index: 3;
-  /* padding-bottom: 0.5rem; */
 }
 
 /* gives bottom border to last child */
@@ -16,7 +15,6 @@
   color: white;
   height: 1.5rem;
   width: 1.5rem;
-  /* padding-left: 2rem; */
   align-self: center;
   justify-self: center;
   z-index: 3;
@@ -26,7 +24,6 @@
 
 .menu-item {
   min-height: 3.5rem;
-  padding-left: 1rem;
   align-self: center;
   z-index: 3;
   opacity: 1;
@@ -58,25 +55,25 @@
 /* SUB MENU: */
 .nav-side-bar-submenu-container {
   display: grid;
-  justify-content: left;
+  padding: "0rem";
   max-height: 0px; /* starts at 0px */
   z-index: 1;
+}
+
+.menu-active {
+  z-index: 5;
+  max-height: 200px; /* starts at 0px */
   transition: z-index 1000ms ease-in-out;
   transition: max-height 500ms ease-in-out;
 }
 
-.active {
-  z-index: 2;
-  max-height: 200px;
-  transition: z-index 1000ms ease-in-out;
+.menu-inactive {
+  z-index: 1;
+  max-height: 0px; /* starts at 0px */
+  transition: z-index 2000ms linear;
   transition: max-height 500ms ease-in-out;
 }
 
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.minimize-menu-item {
+  display: none;
 }

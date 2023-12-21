@@ -2,15 +2,28 @@
 import NavItemList from "../NavItemList/NavItemList";
 import SideBarFooter from "../SideBarFooter/SideBarFooter";
 
+import { useState } from "react";
+
 import "./SideBar.css";
 
 export default function SideBar() {
+  // will control the nav side bar menu.
+  const [navState, setNavState] = useState(true);
+
+  function adjustSideBarView(ev) {
+    ev.stopPropagation();
+    navState ? setNavState(false) : setNavState(true);
+  }
+
   return (
-    <nav className="nav-side-bar-container">
-      <AppTitleArea />
-      <NavItemList />
-      {/* <div className="nav-side-bar-dividing-space"></div> */}
-      <SideBarFooter />
+    <nav
+      onMouseLeave={(ev) => adjustSideBarView(ev)}
+      onMouseEnter={(ev) => adjustSideBarView(ev)}
+      className={`nav-side-bar-container ${navState ? "maximize" : "minimize"}`}
+    >
+      <AppTitleArea navState={navState} />
+      <NavItemList navState={navState} />
+      <SideBarFooter navState={navState} />
     </nav>
   );
 }

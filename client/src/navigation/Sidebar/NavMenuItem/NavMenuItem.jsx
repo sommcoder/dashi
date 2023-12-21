@@ -1,6 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import DropDownArrow from "../DropDownArrow/DropDownArrow";
-import NavItemSubMenu from "../NavSubmenuItem/NavSubmenuItem";
+import NavSubMenuItem from "../NavSubmenuItem/NavSubmenuItem";
 import "./NavMenuItem.css";
 import React from "react";
 import { IconContext } from "react-icons";
@@ -11,10 +11,10 @@ export default function NavMenuItem({
   adjustNavBar,
   navBarObj,
   menuIcon,
+  navState,
 }) {
   function handleMenuClick(ev) {
     ev.preventDefault();
-    // ev.stopPropagation();
     let targetMenu = ev.currentTarget.dataset.menu;
     const newNavBarObj = navBarObj;
     if (newNavBarObj[targetMenu]) {
@@ -39,6 +39,7 @@ onClick :
 */
   const subMenuRows = {
     gridTemplateRows: `repeat(${subMenus.length}, auto)`,
+    // justifyContent: `${navState ? "center" : "left"}`,
   };
 
   // Handle subMenu render animation logic
@@ -54,7 +55,7 @@ onClick :
         setCount((count) => count + 1);
         counter++; // local variable that this closure will see
       }
-    }, 500);
+    }, 750);
     return () => clearInterval(interval);
   }, [subMenus]);
 
@@ -63,16 +64,23 @@ onClick :
     .slice(0, count)
     .map(({ path, subMenu, subMenuIcon }, i) => {
       return (
-        <NavItemSubMenu
+        <NavSubMenuItem
           path={path}
           key={`${subMenu}-${i}`}
           subMenu={subMenu}
           menu={menu}
           navBarObj={navBarObj}
           subMenuIcon={subMenuIcon}
+          navState={navState}
         />
       );
     });
+
+  // will have to tinker with this.
+  // we don't want this to stretch the routewrapper page and therefore stretch the table component.... or do we???
+  const sidebarClosed = {
+    gridTemplateColumns: "1fr",
+  };
 
   return (
     <li className="nav-side-bar-menu-header-container">
@@ -80,16 +88,23 @@ onClick :
         data-menu={menu}
         onClick={(ev) => handleMenuClick(ev)}
         className="nav-side-bar-menu-container menu-item"
+        style={navState ? {} : sidebarClosed}
       >
         <IconContext.Provider value={{ className: "nav-side-bar-icon" }}>
           {menuIcon && React.createElement(menuIcon)}
         </IconContext.Provider>
-        <h5 className="nav-side-bar-menu-text">{menu}</h5>
-        <DropDownArrow navBarObj={navBarObj} menu={menu} />
+        <h5
+          className={`nav-side-bar-menu-text ${
+            navState ? "" : "minimize-menu-item"
+          }`}
+        >
+          {menu}
+        </h5>
+        {navState ? <DropDownArrow navBarObj={navBarObj} menu={menu} /> : ""}
       </div>
       <div
         className={`nav-side-bar-submenu-container ${
-          navBarObj[menu] ? "active" : ""
+          navBarObj[menu] ? "menu-active" : "menu-inactive"
         }`}
         style={subMenuRows}
       >

@@ -11,27 +11,9 @@ html {
 .app-container {
   height: 100vh;
   display: grid;
+  grid-template-columns: auto 8fr;
   justify-content: left;
   align-items: center;
   justify-items: center; /* what actually centers the windows */
   row-gap: 20px;
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
-  grid-template-columns: 1.5fr 8fr;
-  /* sideBarMenu and Page */
 }
-
-/* Smallest mobile: */
-/* @media screen and (min-width: 320px) {
-  .app-container {
-    grid-template-columns: 30% auto; /* SideNav / Dashboard area 
-    gap: 0.5rem;
-  }
-} */
-
-/* Smallest Desktop: */
-/* @media screen and (min-width: 900px) {
-  .app-container {
- 
-  }
-} */
