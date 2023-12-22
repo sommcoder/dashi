@@ -3,10 +3,6 @@ import "./DropDownArrow.css";
 
 export default function DropDownArrow({ navBarObj, menu }) {
   const [dropDown, toggleDropDown] = useState(false);
-  //   function handleDropDown() {
-  //     if (dropDown) toggleDropDown(false);
-  //     else toggleDropDown(true);
-  //   }
 
   return (
     <span

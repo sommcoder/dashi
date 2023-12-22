@@ -19,7 +19,7 @@ export default function SideBar() {
     <nav
       onMouseLeave={(ev) => adjustSideBarView(ev)}
       onMouseEnter={(ev) => adjustSideBarView(ev)}
-      className={`nav-side-bar-container ${navState ? "maximize" : "minimize"}`}
+      className={`nav-side-bar-container`}
     >
       <AppTitleArea navState={navState} />
       <NavItemList navState={navState} />

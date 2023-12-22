@@ -37,10 +37,6 @@ onClick :
 
 - We should have the ACTIVE menu CLOSE BEFORE we OPEN up the new ACTIVE menu. This would look WAYYYY more clean!
 */
-  const subMenuRows = {
-    gridTemplateRows: `repeat(${subMenus.length}, auto)`,
-    // justifyContent: `${navState ? "center" : "left"}`,
-  };
 
   // Handle subMenu render animation logic
   // revisit this in the future.. not working as desired
@@ -76,10 +72,8 @@ onClick :
       );
     });
 
-  // will have to tinker with this.
-  // we don't want this to stretch the routewrapper page and therefore stretch the table component.... or do we???
-  const sidebarClosed = {
-    gridTemplateColumns: "1fr",
+  const subMenuRows = {
+    gridTemplateRows: `repeat(${subMenus.length}, auto)`,
   };
 
   return (
@@ -88,19 +82,12 @@ onClick :
         data-menu={menu}
         onClick={(ev) => handleMenuClick(ev)}
         className="nav-side-bar-menu-container menu-item"
-        style={navState ? {} : sidebarClosed}
       >
         <IconContext.Provider value={{ className: "nav-side-bar-icon" }}>
           {menuIcon && React.createElement(menuIcon)}
         </IconContext.Provider>
-        <h5
-          className={`nav-side-bar-menu-text ${
-            navState ? "" : "minimize-menu-item"
-          }`}
-        >
-          {menu}
-        </h5>
-        {navState ? <DropDownArrow navBarObj={navBarObj} menu={menu} /> : ""}
+        <h5 className={"nav-side-bar-menu-text"}>{menu}</h5>
+        <DropDownArrow navBarObj={navBarObj} menu={menu} />
       </div>
       <div
         className={`nav-side-bar-submenu-container ${

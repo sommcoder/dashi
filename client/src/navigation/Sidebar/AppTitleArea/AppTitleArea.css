@@ -15,6 +15,7 @@
 }
 
 .app-logo {
+  height: 6rem;
   margin: 0 auto;
 }
 
@@ -26,21 +27,4 @@
 
 .app-title-container:hover {
   cursor: pointer;
-}
-
-.maximize-logo {
-  height: 6rem;
-}
-
-.minimize-logo {
-  height: 3.5rem;
-}
-
-.maximize-title {
-  color: white;
-}
-
-.minimize-title {
-  color: transparent;
-  height: 2rem;
 }

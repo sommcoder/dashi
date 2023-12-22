@@ -16,8 +16,7 @@ export default function NavItemList({ navState }) {
     Ordering: false,
   });
 
-  // the number of menu rows:
-  // submenus are generated on the NavMenuItem
+  // The number of menu rows:
   const menuRows = {
     gridTemplateRows: `repeat(${navMenuList.length}, auto`,
   };

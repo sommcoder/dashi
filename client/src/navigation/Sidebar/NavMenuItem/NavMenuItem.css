@@ -73,7 +73,3 @@
   transition: z-index 2000ms linear;
   transition: max-height 500ms ease-in-out;
 }
-
-.minimize-menu-item {
-  display: none;
-}

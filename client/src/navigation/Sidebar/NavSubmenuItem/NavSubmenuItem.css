@@ -9,7 +9,7 @@
 
 .submenu-item-row {
   display: grid;
-  grid-template-columns: 30% 70%; /* icon+link */
+  grid-template-columns: 15% 20% 60%; /* icon+link */
   color: rgb(231, 231, 231);
   display: grid;
   align-items: center;
