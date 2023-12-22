@@ -12,6 +12,6 @@
   box-shadow: 10px 0 5px -8px rgba(0, 0, 0, 0.12),
     10px 0 5px -8px rgba(0, 0, 0, 0.16), 10px 0 5px -6px rgba(0, 0, 0, 0.2);
   z-index: 4;
-  overflow-x: hidden;
+  overflow: hidden;
   width: 150px;
 }

@@ -2,6 +2,8 @@
 import NavItemList from "../NavItemList/NavItemList";
 import SideBarFooter from "../SideBarFooter/SideBarFooter";
 
+import { motion, useAnimate } from "framer-motion";
+
 import { useState } from "react";
 
 import "./SideBar.css";
@@ -9,6 +11,8 @@ import "./SideBar.css";
 export default function SideBar() {
   // will control the nav side bar menu.
   const [navState, setNavState] = useState(true);
+
+  const [scope, animate] = useAnimate();
 
   function adjustSideBarView(ev) {
     ev.stopPropagation();
