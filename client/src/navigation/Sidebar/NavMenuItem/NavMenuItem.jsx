@@ -38,39 +38,7 @@ onClick :
 - We should have the ACTIVE menu CLOSE BEFORE we OPEN up the new ACTIVE menu. This would look WAYYYY more clean!
 */
 
-  // Handle subMenu render animation logic
-  // revisit this in the future.. not working as desired
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let counter = count;
-    const interval = setInterval(() => {
-      if (counter >= subMenus.length) {
-        clearInterval(interval);
-      } else {
-        setCount((count) => count + 1);
-        counter++; // local variable that this closure will see
-      }
-    }, 750);
-    return () => clearInterval(interval);
-  }, [subMenus]);
-
-  // slice returns a growing slice of the array each time the interval processes
-  let subMenuList = subMenus
-    .slice(0, count)
-    .map(({ path, subMenu, subMenuIcon }, i) => {
-      return (
-        <NavSubMenuItem
-          path={path}
-          key={`${subMenu}-${i}`}
-          subMenu={subMenu}
-          menu={menu}
-          navBarObj={navBarObj}
-          subMenuIcon={subMenuIcon}
-          navState={navState}
-        />
-      );
-    });
+  // slice returns a growing slice of the array each time the interval
 
   const subMenuRows = {
     gridTemplateRows: `repeat(${subMenus.length}, auto)`,
@@ -95,7 +63,19 @@ onClick :
         }`}
         style={subMenuRows}
       >
-        {subMenuList}
+        {subMenus.map(({ path, subMenu, subMenuIcon }, i) => {
+          return (
+            <NavSubMenuItem
+              path={path}
+              key={`${subMenu}-${i}`}
+              subMenu={subMenu}
+              menu={menu}
+              navBarObj={navBarObj}
+              subMenuIcon={subMenuIcon}
+              navState={navState}
+            />
+          );
+        })}
       </div>
     </li>
   );

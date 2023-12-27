@@ -1,4 +1,6 @@
-const fs = require("fs").promises;
+const fs = require("node:fs").promises;
+const { Buffer } = require("node:buffer");
+
 const axios = require("axios");
 
 const { DocumentProcessorServiceClient } = require("@google-cloud/documentai");
@@ -10,11 +12,9 @@ const invoiceProcessorId = "b583473c7f1573e4"; // invoice parser
 
 const client = new DocumentProcessorServiceClient();
 
-async function documentRequest(imageFile, mimeType) {
+async function documentRequest(file, mimeType) {
   /*
-1) simple csv files will be handled on the client. These will be generally sales files and also item/inventory imports
-2) if another file type, User will need to indicate if the uploaded file is an invoice or expense.. this COULD be indicated by default based on the page the user is on
-3) 
+- FileType is determined by default based on the page or TableType the user dropped the file on. If sales, drop in sales table/page
  
 */
 
@@ -23,8 +23,10 @@ async function documentRequest(imageFile, mimeType) {
   // You must create new processors in the Cloud Console first
   const name = `projects/${projectId}/locations/${location}/processors/${invoiceProcessorId}`;
 
+  // we need to READ the file into memory
+
   // Convert the image data to a Buffer and base64 encode it.
-  const encodedImage = Buffer.from(imageFile).toString("base64");
+  const encodedImage = Buffer.from(file).toString("base64");
 
   // prepare the request to send to Document AI API
   const request = {
@@ -63,6 +65,7 @@ async function documentRequest(imageFile, mimeType) {
 
   // Read the text recognition output from the processor
   console.log("The document contains the following paragraphs:");
+  console.log("document.pages:", document.pages);
   const [page1] = document.pages;
   const { paragraphs } = page1;
 

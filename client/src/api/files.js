@@ -27,15 +27,11 @@ export const addFiles = async (fileListArr) => {
   // append files to formData to send to API
   const formData = new FormData();
   for (let i = 0; i < fileListArr.length; i++) {
-    // add each file to our formData
+    // add each file to our formData object
     console.log("files[i]:", fileListArr[i]);
     formData.append(fileListArr[i].name, fileListArr[i]);
   }
   console.log("formData:", formData);
-
-  for (let key of formData.keys()) {
-    console.log("object check", key, formData.get(key));
-  }
 
   // Post formData to API
   const res = await api.post("/files", formData, {
@@ -46,6 +42,9 @@ export const addFiles = async (fileListArr) => {
   });
   return res.data;
 };
+
+// multipart/form-data
+// application/x-www-form-urlencoded
 
 // export const updatefiles = async (item) => {
 //   const res = await api.patch(`/;${item.id}`, item);
