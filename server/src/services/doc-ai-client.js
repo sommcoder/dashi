@@ -1,5 +1,6 @@
 const fs = require("node:fs").promises;
 const { Buffer } = require("node:buffer");
+const path = require("node:path");
 
 const axios = require("axios");
 
@@ -15,6 +16,7 @@ const invoiceProcessorId = "b583473c7f1573e4"; // invoice parser
 
 const client = new DocumentProcessorServiceClient();
 
+// ! Can submit one FILE, with multiple pages
 async function documentRequest(filePath, mimeType) {
   /*
     - FileType is determined by default based on the page or TableType the user dropped the file on. If sales, drop in sales table/page
@@ -29,8 +31,8 @@ async function documentRequest(filePath, mimeType) {
     const name = `projects/${projectId}/locations/${location}/processors/${invoiceProcessorId}`;
 
     // Read the file into memory.
-    console.log("filePath:", filePath);
-    const imageFile = await fs.readFile(filePath);
+    console.log("path.resolve(filePath):", path.resolve(filePath));
+    const imageFile = await fs.readFile(path.resolve(filePath));
 
     // Convert the image data to a Buffer and base64 encode it.
     const encodedImage = Buffer.from(imageFile).toString("base64");

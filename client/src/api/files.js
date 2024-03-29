@@ -29,7 +29,7 @@ export const addFiles = async (fileListArr) => {
   for (let i = 0; i < fileListArr.length; i++) {
     // add each file to our formData object
     console.log("files[i]:", fileListArr[i]);
-    formData.append(fileListArr[i].name, fileListArr[i]);
+    formData.append("userFiles", fileListArr[i]);
   }
   console.log("formData:", formData);
 

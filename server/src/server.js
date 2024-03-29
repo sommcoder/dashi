@@ -1,10 +1,32 @@
 require("dotenv").config();
 // const test = require("../src/db/db-client.js").testConnection;
-
 const express = require("express");
 const cors = require("cors");
+
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination: "uploads/",
+});
+const fileFilter = (req, file, cb) => {
+  // TODO: need to add common csv types here!
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/png" ||
+    file.mimetype === "application/pdf"
+  ) {
+    cb(null, true);
+  } else {
+    cb(new Error("Unsupported file type"), false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5000000, // 5mb
+  },
+});
 // const db = require("../db/db-client.js");
 const fs = require("node:fs");
 const fse = require("fs-extra");
@@ -17,29 +39,34 @@ const DOMAIN = process.env.DOMAIN;
 const app = express();
 app.use(cors());
 
-app.post("/api/v1/files", upload.none(), (req, res) => {
+// handle single file upload:
+app.post("/api/v1/files", upload.single("userFiles"), uploadFiles);
+
+function uploadFiles(req, res) {
   try {
     // HOW DO WE DETERMINE IF THERE ARE MULTIPLE FILES IN THE REQ.BODY?? do we add another K/V in the req.body?
-    const data = req.body;
+    const data = req.file;
     console.log("data:", data);
+    console.log("data.buffer:", data.buffer);
+    console.log("data.destination:", data.destination);
+    console.log("data.filename:", data.filename);
+    console.log("data.path:", data.path);
 
-    const tempFilePath = `./uploads/${data.filename}`;
+    fs.access(data.path, fs.constants.R_OK | fs.constants.W_OK, (err) => {
+      documentRequest(data.path, data.mimetype)
+        .then((data) => {
+          console.log("data:", data);
+        })
+        .catch((err) => {
+          console.log("File does not exist or is not readable");
+        });
+    });
 
-    console.log("data.mimetype:", data.mimetype);
-    // Ensure the temp directory exists, otherwise it's created
-    fse.ensureDir("./uploads");
-
-    // Create a write stream to the temp file path
-    const writeStream = fs.createWriteStream(tempFilePath);
-
-    // Pipe the file stream to the write stream
-
-    // const response = await documentRequest(tempFilePath, data.mimetype);
-    res.sendStatus(200);
+    // res.status(200).json({ message: "Express: File uploaded successfully!" });
   } catch (err) {
-    console.log("error:", err.message);
+    console.log("UploadFiles error:", err.message);
   }
-});
+}
 
 app.listen(PORT, () => {
   console.log(`Express server is listening on port ${PORT}`);
